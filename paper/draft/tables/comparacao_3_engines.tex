@@ -2,20 +2,20 @@
 % DO NOT EDIT BY HAND — see paper/draft/tables/README.md
 % source experiment version (versao_experimento): 0.3.0
 % model_version(s) in traces: claude-haiku-4-5-20251001, gemini-3.5-flash-lite, gpt-5.6-luna
-% data aggregated (UTC, from results/comparacao_3_engines.csv header): 2026-08-12T19:45:28.838649+00:00
-% this .tex file generated (UTC): 2026-08-12T20:49:28.114901+00:00
+% data aggregated (UTC, from results/comparacao_3_engines.csv header): 2026-08-12T22:09:05.834808+00:00
+% this .tex file generated (UTC): 2026-08-12T22:19:46.872840+00:00
 
 % 54 linhas > MAX_LINHAS_FLOAT=40: emitida como longtable (quebra entre páginas).
 {\footnotesize\setlength{\tabcolsep}{2pt}
-\begin{longtable}{lllrrrrlr}
-\caption{Cross-engine comparison: relative improvement (Eq.~4) of the target source per technique and per engine, over the strictly paired query set (a query enters only if it is complete on every engine and the target source occupies the same position on all of them). Reported for both query sets: \texttt{baseline\_pos} (primary; queries whose target source has positive baseline visibility) and the full paired set (sensitivity) --- see \S\ref{sec:stats}. \textbf{Paper view:} rows restricted to \texttt{metrica=pwc}; 9 of 23 columns shown. The complete table is released in \texttt{results/comparacao\_3\_engines.csv}.}\label{tab:comparacao_3_engines}\\
+\begin{longtable}{lllrrrllr}
+\caption{Cross-engine comparison: relative improvement (Eq.~4) of the target source per technique and per engine, over the strictly paired query set (a query enters only if it is complete on every engine and the target source occupies the same position on all of them). Reported for both query sets: \texttt{baseline\_pos} (primary; queries whose target source has positive baseline visibility) and the full paired set (sensitivity) --- see \S\ref{sec:stats}. \textbf{Paper view:} rows restricted to \texttt{metrica=pwc}; 9 of 26 columns shown. The complete table is released in \texttt{results/comparacao\_3\_engines.csv}.}\label{tab:comparacao_3_engines}\\
 \toprule
-\textbf{set} & \textbf{technique} & \textbf{engine} & \textbf{n} & \textbf{median \%} & \textbf{CI lo} & \textbf{CI hi} & \textbf{CI excl.\ 0} & \textbf{\% zeroed} \\
+\textbf{set} & \textbf{technique} & \textbf{engine} & \textbf{median \%} & \textbf{CI lo} & \textbf{CI hi} & \textbf{CI excl.\ 0} & \textbf{sig.\ (Holm)} & \textbf{\% zeroed} \\
 \midrule
 \endfirsthead
 \multicolumn{9}{l}{\small\itshape Table \thetable\ -- continued from previous page}\\
 \toprule
-\textbf{set} & \textbf{technique} & \textbf{engine} & \textbf{n} & \textbf{median \%} & \textbf{CI lo} & \textbf{CI hi} & \textbf{CI excl.\ 0} & \textbf{\% zeroed} \\
+\textbf{set} & \textbf{technique} & \textbf{engine} & \textbf{median \%} & \textbf{CI lo} & \textbf{CI hi} & \textbf{CI excl.\ 0} & \textbf{sig.\ (Holm)} & \textbf{\% zeroed} \\
 \midrule
 \endhead
 \midrule
@@ -23,59 +23,59 @@
 \endfoot
 \bottomrule
 \endlastfoot
-pareado & cite\_sources & gemini-3.5-flash-lite & 500 & 1.740 & 0.2001 & 3.796 & yes ($+$) & 0.2012 \\
-pareado & cite\_sources & claude-haiku-4-5 & 500 & 0 & -2.604 & 0 & no & 6.697 \\
-pareado & cite\_sources & gpt-5.6-luna & 500 & -7.259 & -12.92 & -3.509 & yes ($-$) & 6.849 \\
-pareado & quotation\_addition & gemini-3.5-flash-lite & 500 & 0.5363 & -0.6521 & 2.132 & no & 0.2012 \\
-pareado & quotation\_addition & claude-haiku-4-5 & 500 & 0 & -2.361 & 0 & no & 5.774 \\
-pareado & quotation\_addition & gpt-5.6-luna & 500 & -3.974 & -8.520 & -0.5781 & yes ($-$) & 5.936 \\
-pareado & statistics\_addition & gemini-3.5-flash-lite & 500 & -1.324 & -3.114 & 0.5866 & no & 0 \\
-pareado & statistics\_addition & claude-haiku-4-5 & 500 & 0 & -3.469 & 0.0803 & no & 8.545 \\
-pareado & statistics\_addition & gpt-5.6-luna & 500 & -74.56 & -82.39 & -65.13 & yes ($-$) & 44.52 \\
-pareado & fluency\_optimization & gemini-3.5-flash-lite & 500 & 0.6499 & -0.3601 & 2.313 & no & 0.2012 \\
-pareado & fluency\_optimization & claude-haiku-4-5 & 500 & 5.041 & 0.8291 & 11.35 & yes ($+$) & 4.388 \\
-pareado & fluency\_optimization & gpt-5.6-luna & 500 & -3.927 & -6.257 & 0 & no & 2.283 \\
-pareado & easy\_to\_understand & gemini-3.5-flash-lite & 500 & -5.255 & -7.573 & -3.459 & yes ($-$) & 0.2012 \\
-pareado & easy\_to\_understand & claude-haiku-4-5 & 500 & -7.220 & -11.30 & -1.385 & yes ($-$) & 6.928 \\
-pareado & easy\_to\_understand & gpt-5.6-luna & 500 & -27.35 & -31.36 & -20.95 & yes ($-$) & 8.447 \\
-pareado & authoritative & gemini-3.5-flash-lite & 500 & -2.343 & -4.193 & 0 & yes ($-$) & 0.4024 \\
-pareado & authoritative & claude-haiku-4-5 & 500 & -3.846 & -8.229 & 0 & no & 7.621 \\
-pareado & authoritative & gpt-5.6-luna & 500 & -43.29 & -49.07 & -36.16 & yes ($-$) & 21.69 \\
-pareado & unique\_words & gemini-3.5-flash-lite & 500 & -2.062 & -4.230 & -0.2078 & yes ($-$) & 0.6036 \\
-pareado & unique\_words & claude-haiku-4-5 & 500 & -46.46 & -54.38 & -41.30 & yes ($-$) & 28.87 \\
-pareado & unique\_words & gpt-5.6-luna & 500 & -50.02 & -54.82 & -44.07 & yes ($-$) & 23.06 \\
-pareado & technical\_terms & gemini-3.5-flash-lite & 500 & 2.526 & 0.9487 & 4.084 & yes ($+$) & 0.2012 \\
-pareado & technical\_terms & claude-haiku-4-5 & 500 & -0.7657 & -5.769 & 0 & no & 7.621 \\
-pareado & technical\_terms & gpt-5.6-luna & 500 & -8.906 & -11.79 & -4.669 & yes ($-$) & 7.078 \\
-pareado & keyword\_stuffing & gemini-3.5-flash-lite & 500 & -9.751 & -11.66 & -5.590 & yes ($-$) & 0.2012 \\
-pareado & keyword\_stuffing & claude-haiku-4-5 & 500 & -25.24 & -30.06 & -19.62 & yes ($-$) & 18.01 \\
-pareado & keyword\_stuffing & gpt-5.6-luna & 500 & -40.71 & -44.44 & -33.19 & yes ($-$) & 17.12 \\
-baseline\_pos & cite\_sources & gemini-3.5-flash-lite & 402 & 0.4816 & -1.216 & 2.409 & no & 0 \\
-baseline\_pos & cite\_sources & claude-haiku-4-5 & 402 & -2.329 & -5.646 & 2.169 & no & 5.721 \\
-baseline\_pos & cite\_sources & gpt-5.6-luna & 402 & -12.08 & -17.13 & -7.526 & yes ($-$) & 5.721 \\
-baseline\_pos & quotation\_addition & gemini-3.5-flash-lite & 402 & 0.0055 & -1.485 & 1.591 & no & 0 \\
-baseline\_pos & quotation\_addition & claude-haiku-4-5 & 402 & -2.051 & -5.710 & 1.594 & no & 4.229 \\
-baseline\_pos & quotation\_addition & gpt-5.6-luna & 402 & -9.551 & -12.81 & -5.194 & yes ($-$) & 5.473 \\
-baseline\_pos & statistics\_addition & gemini-3.5-flash-lite & 402 & -1.449 & -3.560 & 0.5726 & no & 0 \\
-baseline\_pos & statistics\_addition & claude-haiku-4-5 & 402 & 0.5858 & -8.572 & 4.280 & no & 5.721 \\
-baseline\_pos & statistics\_addition & gpt-5.6-luna & 402 & -81.53 & -91.78 & -73.88 & yes ($-$) & 42.29 \\
-baseline\_pos & fluency\_optimization & gemini-3.5-flash-lite & 402 & 0.1682 & -1.377 & 1.632 & no & 0 \\
-baseline\_pos & fluency\_optimization & claude-haiku-4-5 & 402 & 7.886 & 2.014 & 13.18 & yes ($+$) & 3.731 \\
-baseline\_pos & fluency\_optimization & gpt-5.6-luna & 402 & -6.891 & -9.592 & -4.514 & yes ($-$) & 1.493 \\
-baseline\_pos & easy\_to\_understand & gemini-3.5-flash-lite & 402 & -5.447 & -7.600 & -3.683 & yes ($-$) & 0 \\
-baseline\_pos & easy\_to\_understand & claude-haiku-4-5 & 402 & -10.66 & -15.49 & -7.171 & yes ($-$) & 5.970 \\
-baseline\_pos & easy\_to\_understand & gpt-5.6-luna & 402 & -31.37 & -34.72 & -27.50 & yes ($-$) & 6.965 \\
-baseline\_pos & authoritative & gemini-3.5-flash-lite & 402 & -3.132 & -4.882 & -0.9540 & yes ($-$) & 0.2488 \\
-baseline\_pos & authoritative & claude-haiku-4-5 & 402 & -8.092 & -15.98 & -3.878 & yes ($-$) & 6.716 \\
-baseline\_pos & authoritative & gpt-5.6-luna & 402 & -48.68 & -55.75 & -43.39 & yes ($-$) & 19.65 \\
-baseline\_pos & unique\_words & gemini-3.5-flash-lite & 402 & -3.218 & -5.183 & -1.001 & yes ($-$) & 0 \\
-baseline\_pos & unique\_words & claude-haiku-4-5 & 402 & -54.12 & -65.80 & -46.73 & yes ($-$) & 26.12 \\
-baseline\_pos & unique\_words & gpt-5.6-luna & 402 & -55.37 & -60.05 & -51.26 & yes ($-$) & 20.65 \\
-baseline\_pos & technical\_terms & gemini-3.5-flash-lite & 402 & 1.920 & 0.0067 & 3.814 & yes ($+$) & 0 \\
-baseline\_pos & technical\_terms & claude-haiku-4-5 & 402 & -4.371 & -8.163 & -0.0948 & yes ($-$) & 5.473 \\
-baseline\_pos & technical\_terms & gpt-5.6-luna & 402 & -12.41 & -16.98 & -9.483 & yes ($-$) & 6.219 \\
-baseline\_pos & keyword\_stuffing & gemini-3.5-flash-lite & 402 & -9.103 & -11.53 & -5.459 & yes ($-$) & 0.2488 \\
-baseline\_pos & keyword\_stuffing & claude-haiku-4-5 & 402 & -28.62 & -34.36 & -23.13 & yes ($-$) & 15.17 \\
-baseline\_pos & keyword\_stuffing & gpt-5.6-luna & 402 & -45.31 & -50.11 & -41.07 & yes ($-$) & 15.67 \\
+pareado & cite\_sources & gemini-3.5-flash-lite & 1.740 & 0.2001 & 3.796 & yes ($+$) & expl. & 0.2012 \\
+pareado & cite\_sources & claude-haiku-4-5 & 0 & -2.604 & 0 & no & expl. & 6.697 \\
+pareado & cite\_sources & gpt-5.6-luna & -7.259 & -12.92 & -3.509 & yes ($-$) & expl. & 6.849 \\
+pareado & quotation\_addition & gemini-3.5-flash-lite & 0.5363 & -0.6521 & 2.132 & no & expl. & 0.2012 \\
+pareado & quotation\_addition & claude-haiku-4-5 & 0 & -2.361 & 0 & no & expl. & 5.774 \\
+pareado & quotation\_addition & gpt-5.6-luna & -3.974 & -8.520 & -0.5781 & yes ($-$) & expl. & 5.936 \\
+pareado & statistics\_addition & gemini-3.5-flash-lite & -1.324 & -3.114 & 0.5866 & no & expl. & 0 \\
+pareado & statistics\_addition & claude-haiku-4-5 & 0 & -3.469 & 0.0803 & no & expl. & 8.545 \\
+pareado & statistics\_addition & gpt-5.6-luna & -74.56 & -82.39 & -65.13 & yes ($-$) & expl. & 44.52 \\
+pareado & fluency\_optimization & gemini-3.5-flash-lite & 0.6499 & -0.3601 & 2.313 & no & expl. & 0.2012 \\
+pareado & fluency\_optimization & claude-haiku-4-5 & 5.041 & 0.8291 & 11.35 & yes ($+$) & expl. & 4.388 \\
+pareado & fluency\_optimization & gpt-5.6-luna & -3.927 & -6.257 & 0 & no & expl. & 2.283 \\
+pareado & easy\_to\_understand & gemini-3.5-flash-lite & -5.255 & -7.573 & -3.459 & yes ($-$) & expl. & 0.2012 \\
+pareado & easy\_to\_understand & claude-haiku-4-5 & -7.220 & -11.30 & -1.385 & yes ($-$) & expl. & 6.928 \\
+pareado & easy\_to\_understand & gpt-5.6-luna & -27.35 & -31.36 & -20.95 & yes ($-$) & expl. & 8.447 \\
+pareado & authoritative & gemini-3.5-flash-lite & -2.343 & -4.193 & 0 & yes ($-$) & expl. & 0.4024 \\
+pareado & authoritative & claude-haiku-4-5 & -3.846 & -8.229 & 0 & no & expl. & 7.621 \\
+pareado & authoritative & gpt-5.6-luna & -43.29 & -49.07 & -36.16 & yes ($-$) & expl. & 21.69 \\
+pareado & unique\_words & gemini-3.5-flash-lite & -2.062 & -4.230 & -0.2078 & yes ($-$) & expl. & 0.6036 \\
+pareado & unique\_words & claude-haiku-4-5 & -46.46 & -54.38 & -41.30 & yes ($-$) & expl. & 28.87 \\
+pareado & unique\_words & gpt-5.6-luna & -50.02 & -54.82 & -44.07 & yes ($-$) & expl. & 23.06 \\
+pareado & technical\_terms & gemini-3.5-flash-lite & 2.526 & 0.9487 & 4.084 & yes ($+$) & expl. & 0.2012 \\
+pareado & technical\_terms & claude-haiku-4-5 & -0.7657 & -5.769 & 0 & no & expl. & 7.621 \\
+pareado & technical\_terms & gpt-5.6-luna & -8.906 & -11.79 & -4.669 & yes ($-$) & expl. & 7.078 \\
+pareado & keyword\_stuffing & gemini-3.5-flash-lite & -9.751 & -11.66 & -5.590 & yes ($-$) & expl. & 0.2012 \\
+pareado & keyword\_stuffing & claude-haiku-4-5 & -25.24 & -30.06 & -19.62 & yes ($-$) & expl. & 18.01 \\
+pareado & keyword\_stuffing & gpt-5.6-luna & -40.71 & -44.44 & -33.19 & yes ($-$) & expl. & 17.12 \\
+baseline\_pos & cite\_sources & gemini-3.5-flash-lite & 0.4816 & -1.216 & 2.409 & no & no & 0 \\
+baseline\_pos & cite\_sources & claude-haiku-4-5 & -2.329 & -5.646 & 2.169 & no & no & 5.721 \\
+baseline\_pos & cite\_sources & gpt-5.6-luna & -12.08 & -17.13 & -7.526 & yes ($-$) & yes ($-$) & 5.721 \\
+baseline\_pos & quotation\_addition & gemini-3.5-flash-lite & 0.0055 & -1.485 & 1.591 & no & no & 0 \\
+baseline\_pos & quotation\_addition & claude-haiku-4-5 & -2.051 & -5.710 & 1.594 & no & no & 4.229 \\
+baseline\_pos & quotation\_addition & gpt-5.6-luna & -9.551 & -12.81 & -5.194 & yes ($-$) & yes ($-$) & 5.473 \\
+baseline\_pos & statistics\_addition & gemini-3.5-flash-lite & -1.449 & -3.560 & 0.5726 & no & no & 0 \\
+baseline\_pos & statistics\_addition & claude-haiku-4-5 & 0.5858 & -8.572 & 4.280 & no & no & 5.721 \\
+baseline\_pos & statistics\_addition & gpt-5.6-luna & -81.53 & -91.78 & -73.88 & yes ($-$) & yes ($-$) & 42.29 \\
+baseline\_pos & fluency\_optimization & gemini-3.5-flash-lite & 0.1682 & -1.377 & 1.632 & no & no & 0 \\
+baseline\_pos & fluency\_optimization & claude-haiku-4-5 & 7.886 & 2.014 & 13.18 & yes ($+$) & yes ($+$) & 3.731 \\
+baseline\_pos & fluency\_optimization & gpt-5.6-luna & -6.891 & -9.592 & -4.514 & yes ($-$) & yes ($-$) & 1.493 \\
+baseline\_pos & easy\_to\_understand & gemini-3.5-flash-lite & -5.447 & -7.600 & -3.683 & yes ($-$) & yes ($-$) & 0 \\
+baseline\_pos & easy\_to\_understand & claude-haiku-4-5 & -10.66 & -15.49 & -7.171 & yes ($-$) & yes ($-$) & 5.970 \\
+baseline\_pos & easy\_to\_understand & gpt-5.6-luna & -31.37 & -34.72 & -27.50 & yes ($-$) & yes ($-$) & 6.965 \\
+baseline\_pos & authoritative & gemini-3.5-flash-lite & -3.132 & -4.882 & -0.9540 & yes ($-$) & yes ($-$) & 0.2488 \\
+baseline\_pos & authoritative & claude-haiku-4-5 & -8.092 & -15.98 & -3.878 & yes ($-$) & yes ($-$) & 6.716 \\
+baseline\_pos & authoritative & gpt-5.6-luna & -48.68 & -55.75 & -43.39 & yes ($-$) & yes ($-$) & 19.65 \\
+baseline\_pos & unique\_words & gemini-3.5-flash-lite & -3.218 & -5.183 & -1.001 & yes ($-$) & yes ($-$) & 0 \\
+baseline\_pos & unique\_words & claude-haiku-4-5 & -54.12 & -65.80 & -46.73 & yes ($-$) & yes ($-$) & 26.12 \\
+baseline\_pos & unique\_words & gpt-5.6-luna & -55.37 & -60.05 & -51.26 & yes ($-$) & yes ($-$) & 20.65 \\
+baseline\_pos & technical\_terms & gemini-3.5-flash-lite & 1.920 & 0.0067 & 3.814 & yes ($+$) & no & 0 \\
+baseline\_pos & technical\_terms & claude-haiku-4-5 & -4.371 & -8.163 & -0.0948 & yes ($-$) & no & 5.473 \\
+baseline\_pos & technical\_terms & gpt-5.6-luna & -12.41 & -16.98 & -9.483 & yes ($-$) & yes ($-$) & 6.219 \\
+baseline\_pos & keyword\_stuffing & gemini-3.5-flash-lite & -9.103 & -11.53 & -5.459 & yes ($-$) & yes ($-$) & 0.2488 \\
+baseline\_pos & keyword\_stuffing & claude-haiku-4-5 & -28.62 & -34.36 & -23.13 & yes ($-$) & yes ($-$) & 15.17 \\
+baseline\_pos & keyword\_stuffing & gpt-5.6-luna & -45.31 & -50.11 & -41.07 & yes ($-$) & yes ($-$) & 15.67 \\
 \end{longtable}
 }

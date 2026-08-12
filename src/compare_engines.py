@@ -234,6 +234,10 @@ def build_comparacao(by_query_pareado, queries_meta, tecnicas, engines, metricas
                         (metrica, "pareado"),
                         cells[(conjunto, metrica, tecnica, engines[0])].get("n_queries", 0),
                     )
+    # Correção de multiplicidade sobre a família primária (9 técnicas x N
+    # engines, conjunto e métrica primários). Tem de rodar aqui, depois de
+    # TODAS as células: Holm é step-down, não dá para ajustar célula a célula.
+    aggregate.aplica_holm(rows)
     return rows, cells, n_conjunto
 
 

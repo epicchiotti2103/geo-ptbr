@@ -216,8 +216,13 @@ PAPER_VIEW = {
     # fica no .csv). Inclui a citação zerada, que é o mecanismo do achado.
     "comparacao_3_engines": {
         "filter": {"metrica": "pwc"},
-        "columns": ["conjunto", "tecnica", "engine"] + _CELL_ENXUTO
-                   + ["pct_citacao_zerada"],
+        # sem `n_queries`: a coluna de Holm entrou e a 10a coluna estourou a
+        # margem (longtable não tem \resizebox). O n por conjunto está no
+        # cabeçalho do .csv e na legenda, e é o mesmo em toda linha do
+        # conjunto — é a coluna mais barata de perder.
+        "columns": ["conjunto", "tecnica", "engine"]
+                   + [c for c in _CELL_ENXUTO if c != "n_queries"]
+                   + ["sig_holm", "pct_citacao_zerada"],
     },
     "comparacao_2_engines": {
         "filter": {"metrica": "pwc"},
@@ -283,6 +288,8 @@ _LABEL_COLUNA = {
     "melhoria_mediana_ci_lo": "CI lo", "melhoria_mediana_ci_hi": "CI hi",
     "sig_mediana": "CI excl.\\ 0", "pct_citacao_zerada": "\\% zeroed",
     "melhoria_media_pct": "mean \\%",
+    "sig_holm": "sig.\\ (Holm)", "p_boot_mediana": "$p$",
+    "p_holm_mediana": "$p$ (Holm)",
     "mesma_direcao": "agree", "tipo_divergencia": "divergence",
     "efeito_sig_em_todos": "sig.\\ all", "n_efetivo_min": "n eff.",
     "paper_valor_pct": "paper \\%", "direcao_replica_pos": "replicates",
@@ -324,6 +331,10 @@ _LABEL_VALOR = {
     "não distinguível de zero": "no",
     "não comparável": "n/a",
     "indefinido": "undef.",
+    # Rótulos da correção de multiplicidade. Sem estas entradas o valor sai em
+    # português e longo ("não primário (exploratório)"), estourando a margem da
+    # longtable — que não tem \resizebox para absorver.
+    "não (Holm)": "no", "não primário (exploratório)": "expl.",
     "inversao": "inversion", "atenuacao": "attenuation",
     "sim": "yes", "nao": "no", "não": "no", "NAO": "NO",
     "positivo": "$+$", "negativo": "$-$", "nulo": "0",

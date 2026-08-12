@@ -92,10 +92,10 @@ families, so that which engine answers is the only variable that changes.
 The effect of a GEO technique depends on who answers. The three engines
 agree on the direction of the effect for only four of nine techniques
 ($44.4\%$), and all four are techniques that \emph{hurt}: what transfers is
-which optimizations backfire, not which ones work. Technical Terms inverts
-outright --- $+1.9\%$ on one engine, $-4.4\%$ and $-12.4\%$ on the others,
-bootstrap intervals excluding zero on all three --- and the most reactive
-engine responds $5$--$17\times$ more strongly than the least. Against the
+which optimizations backfire, not which ones work. Under Holm correction over the primary
+family of 27 tests, Fluency Optimization inverts outright: $+7.9\%$ on one
+engine, $-6.9\%$ on another, both arms surviving. The most reactive engine
+responds $5$--$17\times$ more strongly than the least. Against the
 original English results, five of nine directions replicate but the level
 does not: its top techniques gain $+27$ to $+41\%$; our largest positive
 effect is $+2.6\%$. Rank correlations do not reach significance under an
@@ -852,47 +852,84 @@ of the kind originally planned for this study would therefore have reported
 substantially more agreement than three engines support --- which is an
 argument about the design of GEO evaluations, not only about our numbers.
 
-\paragraph{One genuine inversion.} Technical Terms is positive on gemini
-($+1.9\%$) and negative on haiku ($-4.4\%$) and luna ($-12.4\%$), with the
-bootstrap CI excluding zero \emph{on all three}. It is the only technique in
-the study for which a sign disagreement is supported on every engine
-involved: adding technical vocabulary to a source measurably helps it on one
-engine and measurably hurts it on the other two.
+\paragraph{Multiplicity, and what survives it.} Before naming any single
+technique as the study's inversion, the family of tests has to be accounted
+for. We pre-specify the primary family as the nine techniques on every
+engine, in the primary query set and primary metric --- $9 \times 3 = 27$
+tests --- and apply Holm--Bonferroni to it. Holm rather than Benjamini--%
+Hochberg because a single false positive in the main table is what would
+invert the paper's reading, so the quantity to control is the probability of
+\emph{any} false positive, not their proportion. The $p$ values come from the
+same bootstrap distribution that produced the intervals, so the corrected
+test and the interval are two views of one resampling, not two different
+tests. Breakdowns by sector and by position are declared exploratory and are
+\emph{not} corrected --- not because the family would grow, but because they
+were not pre-specified as confirmatory; every row of those tables carries
+that label in the released CSV.
 
-One asymmetry in that sentence deserves flagging here rather than only in
-\S\ref{sec:limitations}: the engine on which the technique helps is the same
-family that produced the transformed text. Self-preference is therefore a
-live alternative explanation \emph{for the positive arm specifically}, and
-this design cannot rule it out. It does not touch the negative arm --- haiku
-and luna had no hand in producing the text they penalize --- and the
-inversion as a finding survives either reading, since a technique whose
-apparent benefit is an artifact of who wrote the text is, if anything, a
-sharper warning against portable technique catalogues. What a reader should
-not take from this row is that adding technical terms reliably helps on
-Gemini.
+Eighteen of the 27 primary tests survive correction, against 20 before it.
+The two that fall are consequential, and we report the fall rather than the
+uncorrected reading.
 
-The two arms also differ in \emph{shape}, not only in sign, and this is
-measured rather than inferred. On gemini, Technical Terms removes the target
-source from the answer entirely in $0.00\%$ of queries; on haiku it does so
-in $5.5\%$ and on luna in $6.2\%$. The negative arm is therefore not a
-uniform shrinkage of the source's share --- it is partly a threshold effect,
-where on roughly one query in twenty the optimized source stops being cited
-at all. We report this as a description of the effect's shape and stop
-there. Why technical vocabulary should push two engines toward dropping a
-source and not the third is a question about the engines' internal
-preferences, which this design observes from the outside and cannot answer;
-it is the natural target of the frontier-tier and cross-transformation
-extensions discussed in \S\ref{sec:limitations}.
+\paragraph{The inversion that survives is Fluency Optimization, not Technical
+Terms.} At the uncorrected level, Technical Terms looks like this study's
+cleanest result: positive on gemini ($+1.9\%$), negative on haiku ($-4.4\%$)
+and luna ($-12.4\%$), every interval excluding zero. It does not survive.
+Its raw $p$ on gemini and haiku is $0.039$ and $0.043$ --- just inside the
+threshold --- and Holm carries both to $0.35$. Only the luna arm
+($p_{\text{Holm}} = 0.003$) remains. This is robust to how the family is
+drawn: correcting within each engine separately ($m = 9$), the most lenient
+defensible choice, still leaves gemini at $0.19$ and haiku at $0.17$. After
+correction, Technical Terms is a technique with one significant negative
+effect and two indeterminate ones --- an attenuation, not an inversion.
 
-We are deliberately strict here. Five techniques show a sign disagreement,
-but for four of them (Cite Sources, Quotation Addition, Statistics Addition,
-Fluency Optimization) at least one engine's CI crosses zero, so the flip
-cannot be distinguished from noise and we do not report it as an inversion.
-Statistics Addition illustrates why the distinction matters: its median is
-$-81.5\%$ on luna --- the largest single effect anywhere in this study ---
-while gemini ($-1.4\%$) and haiku ($+0.6\%$) are both indistinguishable
-from zero. The honest description is that one engine reacts catastrophically
-where the others show nothing, not that the engines disagree in direction.
+What does survive is Fluency Optimization, and it is a better example than
+the one it replaces. It is significantly \emph{positive} on haiku
+($+7.9\%$, $p_{\text{Holm}} = 0.031$) and significantly \emph{negative} on
+luna ($-6.9\%$, $p_{\text{Holm}} = 0.003$), with gemini indeterminate
+($+0.2\%$). Two engines, opposite signs, both arms surviving a correction
+applied across the whole primary grid. And the technique is the least
+exotic of the nine: it does not add statistics, fabricate citations or
+stuff keywords --- it rewrites the source to read better. That the mildest
+transformation in the catalogue helps one engine and hurts another, both
+distinguishably, is a sharper statement of engine-dependence than the
+inversion we would have reported without correcting.
+
+We flag one asymmetry that applies to whichever inversion is named: on
+gemini --- the engine whose family produced the transformed text ---
+self-preference is a live alternative explanation for any positive arm, and
+this design cannot rule it out. It does not touch the negative arms, since
+haiku and luna had no hand in producing the text they penalize. In the
+surviving inversion the positive arm is on haiku, which did not transform
+the text, so self-preference does not explain it.
+
+\paragraph{The shape of the effect, not only its sign.} The negative arms
+are partly threshold effects rather than uniform shrinkage, and this is
+measured. Technical Terms removes the target source from the answer entirely
+in $0.0\%$ of queries on gemini, $5.5\%$ on haiku and $6.2\%$ on luna; for
+Unique Words the same figure reaches $26.1\%$ on haiku and $20.6\%$ on luna
+against $0.0\%$ on gemini, and for Statistics Addition $42.3\%$ on luna. On a substantial minority of queries the optimized
+source is not cited less --- it stops being cited. This suggests the effect
+decomposes into two stages, the probability that a source is cited at all
+and its share of the answer given that it is cited, which a percentage
+change in share conflates. We report the zeroing rate alongside the median
+so the two are visible separately, but we do not fit the two-stage model
+here; \S\ref{sec:limitations} records it as the analysis this dataset most
+obviously supports and this paper does not perform.
+
+Why fluent prose should raise one engine's use of a source and lower
+another's is a question about the engines' internal preferences, which this
+design observes from the outside and cannot answer.
+
+We are deliberately strict throughout. Five techniques show a sign
+disagreement in the medians; most do not survive as inversions once
+significance --- corrected significance --- is demanded on both arms.
+Statistics Addition illustrates the distinction: its median is $-81.5\%$ on
+luna, the largest single effect anywhere in this study and comfortably
+surviving correction, while gemini ($-1.4\%$) and haiku ($+0.6\%$) are
+indeterminate. The honest description is that one engine reacts
+catastrophically where the others show nothing, not that the engines
+disagree in direction.
 
 \paragraph{Magnitude, and the mechanism behind it.} Effect sizes are not
 comparable in scale across engines: on the techniques where all three agree,
@@ -1288,6 +1325,43 @@ not as an afterthought.
   techniques that require only a stylistic pass (e.g., Fluency
   Optimization).
 
+\item \textbf{The two-stage decomposition this dataset supports, and that we
+  do not fit.} A percentage change in citation share conflates two things:
+  whether the source is cited at all, and how much of the answer it gets
+  once cited. The zeroing rates we report make the first stage visible ---
+  Unique Words removes the source entirely from $26.1\%$ of answers on haiku
+  and $20.6\%$ on luna, against $0.0\%$ on gemini --- but the headline
+  estimand remains the pooled one, for comparability with the original
+  paper's Eq.~4. A cleaner analysis would model
+  $P(\text{cited}) \times E[\text{share} \mid \text{cited}]$ as two
+  endpoints. The released traces contain everything needed to do it, and we
+  flag it as the most obvious analysis this dataset supports and this paper
+  does not perform.
+
+\item \textbf{The metric rewards content, and some techniques add content.}
+  Visibility is a share of the generated answer attributable to a source, so
+  a transformation that makes a source carry more usable material can raise
+  it without the engine having judged the source more credible. This is
+  sharpest for Statistics Addition, Quotation Addition and Cite Sources,
+  whose instructions add quantitative claims, attributed quotes and
+  references --- these are \emph{content} transformations, not purely
+  stylistic ones, and in the limit a transformed source can answer something
+  the original did not. Our pitfall control detects the extreme form of this
+  (\S\ref{sec:results-pitfall}), but the metric cannot separate ``cited
+  more because it reads as more authoritative'' from ``cited more because it
+  now contains more of the answer.''
+
+\item \textbf{The pitfall sources are unanswerable by construction, not by
+  independent adjudication.} The 25 control queries were designed so that no
+  provided source answers them, and the design is verifiable from the data
+  --- each carries an explicit marker, and baseline visibility on them is
+  exactly zero on all three engines, which is three independent judges
+  behaving as if the sources do not answer. That is convergent evidence, not
+  validation: we did not run human annotators, blind to condition, rating
+  whether each source suffices to answer, with an inter-rater statistic. For
+  a finding we ourselves frame as a safety result, that check is cheap and
+  should exist; it does not yet.
+
 \item \textbf{Everything here is measured at the economy tier, and stops
   there.} All three engines are their providers' small/economy models. That
   was a budget decision (\S\ref{sec:results-cost}), and it bounds the claim:
@@ -1320,9 +1394,13 @@ Our headline result is not a technique but a boundary condition: \textbf{the
 effect of a GEO technique depends on which engine answers}. Over identical
 queries and identical optimized sources, the three engines agree on the
 direction of the effect for only four of nine techniques, and all four are
-techniques that reduce visibility. Technical Terms inverts outright ---
-positive on one engine, negative on the other two, with confidence intervals
-excluding zero on all three. Agreement itself falls from $66.7\%$ with two
+techniques that reduce visibility. Fluency Optimization --- the mildest
+transformation in the catalogue, which only rewrites the source to read
+better --- inverts outright: significantly positive on one engine and
+significantly negative on another, both arms surviving Holm correction over
+the primary family. The larger-looking inversion of Technical Terms does not
+survive that correction, and we report it as the attenuation it becomes
+rather than the inversion it first appeared to be. Agreement itself falls from $66.7\%$ with two
 engines to $44.4\%$ with three, so a two-engine cross-validation would have
 overstated how far these results travel.
 

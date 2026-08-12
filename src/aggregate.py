@@ -344,6 +344,51 @@ def _percentile_ci(vals, alpha=ALPHA):
     return (s[lo_idx], s[hi_idx])
 
 
+def _p_bootstrap(boot):
+    """p bicaudal por inversão do bootstrap: 2 x a menor cauda em torno de 0.
+
+    É o p que corresponde ao IC percentil já reportado — o IC exclui zero a 5%
+    exatamente quando este p < 0,05 — de modo que a correção de multiplicidade
+    opera sobre a MESMA distribuição, e não sobre um segundo teste com outra
+    definição de significância.
+
+    Piso de 1/n_boot: com 10.000 reamostragens, nenhuma cauda observada como
+    vazia autoriza escrever p = 0. Reportar zero seria afirmar precisão que a
+    reamostragem não tem.
+    """
+    if not boot:
+        return None
+    n = len(boot)
+    abaixo = sum(1 for v in boot if v <= 0)
+    acima = sum(1 for v in boot if v >= 0)
+    p = 2.0 * min(abaixo, acima) / n
+    return max(min(p, 1.0), 1.0 / n)
+
+
+def holm(ps):
+    """Correção de Holm-Bonferroni (step-down). Devolve os p ajustados na
+    ordem de entrada; None passa como None e NÃO conta no tamanho da família.
+
+    Holm em vez de Bonferroni puro por ser uniformemente mais potente sem
+    custo de premissa, e em vez de Benjamini-Hochberg porque aqui se quer
+    controlar a probabilidade de QUALQUER falso positivo entre os achados
+    primários (FWER), não a proporção deles: um único efeito falso na tabela
+    principal é o que inverteria a leitura do paper.
+    """
+    idx = [i for i, v in enumerate(ps) if v is not None]
+    m = len(idx)
+    if m == 0:
+        return list(ps)
+    ordem = sorted(idx, key=lambda i: ps[i])
+    ajust = list(ps)
+    corrente = 0.0
+    for k, i in enumerate(ordem):
+        v = (m - k) * ps[i]
+        corrente = max(corrente, v)          # monotonicidade (step-down)
+        ajust[i] = min(corrente, 1.0)
+    return ajust
+
+
 def compute_cell(pairs, n_boot=N_BOOT, seed=BOOTSTRAP_SEED):
     """Bootstrap por query, pareado: cada reamostragem sorteia queries (com
     reposição) e calcula, DA MESMA reamostragem, a média baseline, a média
@@ -405,9 +450,17 @@ def compute_cell(pairs, n_boot=N_BOOT, seed=BOOTSTRAP_SEED):
     if len(boot_melhoria_media) >= MIN_BOOT_EFFETIVO:
         result["melhoria_media_ci"] = _percentile_ci(boot_melhoria_media)
         result["melhoria_mediana_ci"] = _percentile_ci(boot_melhoria_mediana)
+        # p bicaudal do bootstrap, para a correção de multiplicidade (Holm).
+        # "IC exclui zero" é um teste a 5% por célula; com dezenas de células
+        # algumas excluem zero por acaso. Holm precisa de p, não de IC, então
+        # o p sai da MESMA distribuição bootstrap que gerou o IC.
+        result["p_boot_mediana"] = _p_bootstrap(boot_melhoria_mediana)
+        result["p_boot_media"] = _p_bootstrap(boot_melhoria_media)
     else:
         result["melhoria_media_ci"] = (None, None)
         result["melhoria_mediana_ci"] = (None, None)
+        result["p_boot_mediana"] = None
+        result["p_boot_media"] = None
     return result
 
 
@@ -573,6 +626,8 @@ def _cell_to_row(extra, cell):
             "melhoria_media_pct": None, "melhoria_media_ci_lo": None, "melhoria_media_ci_hi": None,
             "melhoria_mediana_pct": None, "melhoria_mediana_ci_lo": None, "melhoria_mediana_ci_hi": None,
             "sig_media": "n insuficiente", "sig_mediana": "n insuficiente",
+            "p_boot_mediana": None, "p_holm_mediana": None,
+            "sig_holm": "n insuficiente",
         })
         return row
     b_lo, b_hi = cell["baseline_ci"]
@@ -591,8 +646,63 @@ def _cell_to_row(extra, cell):
         "melhoria_mediana_ci_lo": md_lo, "melhoria_mediana_ci_hi": md_hi,
         "sig_media": _sig_from_ci((mm_lo, mm_hi)),
         "sig_mediana": _sig_from_ci((md_lo, md_hi)),
+        # p bruto agora; p_holm/sig_holm ficam pendentes até `aplica_holm()`
+        # rodar sobre a FAMÍLIA inteira — não dá para ajustar uma célula
+        # olhando só para ela.
+        "p_boot_mediana": cell.get("p_boot_mediana"),
+        "p_holm_mediana": None,
+        "sig_holm": "pendente",
     })
     return row
+
+
+# Família primária: as 9 técnicas x os engines, no conjunto e na métrica
+# primários. Sector e posição NÃO entram — são exploratórias, e declará-las
+# como tal é mais honesto do que corrigir um número enorme de testes e não
+# sobrar nada.
+FAMILIA_PRIMARIA = ("baseline_pos", "pwc")
+
+
+def marca_exploratorio(rows):
+    """Marca toda linha como exploratória, sem corrigir p nenhum. Usado nas
+    quebras por setor e por posição: a distinção que importa não é o tamanho
+    da família, é que estas análises não foram pré-especificadas como
+    confirmatórias — corrigi-las daria a impressão errada de que foram."""
+    for r in rows:
+        r["p_holm_mediana"] = None
+        r["sig_holm"] = "não primário (exploratório)"
+    return rows
+
+
+def aplica_holm(rows, chave_familia=lambda r: (r.get("conjunto"), r.get("metrica"))):
+    """Preenche p_holm_mediana e sig_holm nas linhas, por família.
+
+    Só a família primária é corrigida; as demais linhas ficam com
+    `sig_holm = "não primário (exploratório)"`. Isso é a distinção
+    confirmatório vs exploratório escrita no dado, e não só na prosa: quem ler
+    o .csv vê qual linha foi pré-especificada como teste primário.
+    """
+    grupos = {}
+    for r in rows:
+        grupos.setdefault(chave_familia(r), []).append(r)
+    for chave, linhas in grupos.items():
+        if chave != FAMILIA_PRIMARIA:
+            for r in linhas:
+                r["p_holm_mediana"] = None
+                r["sig_holm"] = "não primário (exploratório)"
+            continue
+        ps = [r.get("p_boot_mediana") for r in linhas]
+        for r, a in zip(linhas, holm(ps)):
+            r["p_holm_mediana"] = a
+            if a is None:
+                r["sig_holm"] = "n insuficiente"
+            elif a < ALPHA:
+                mediana = r.get("melhoria_mediana_pct")
+                r["sig_holm"] = ("sim (efeito positivo)" if (mediana or 0) > 0
+                                 else "sim (efeito negativo)")
+            else:
+                r["sig_holm"] = "não (Holm)"
+    return rows
 
 
 COLS_PRINCIPAL_EXTRA = []  # preenchido por chamador (tecnica/metrica, ou +setor, ou +target_pos)
@@ -615,6 +725,9 @@ COLS_CELL = [
     ("melhoria_mediana_ci_hi", "IC95 hi %", "pct"),
     ("sig_media", "sig. (média)", "str"),
     ("sig_mediana", "sig. (mediana)", "str"),
+    ("p_boot_mediana", "p bootstrap (mediana)", "float4"),
+    ("p_holm_mediana", "p ajustado (Holm)", "float4"),
+    ("sig_holm", "sig. após Holm", "str"),
 ]
 
 
@@ -632,6 +745,10 @@ def build_tabela_principal(by_query, queries_meta, tecnicas):
                 rows.append(_cell_to_row(
                     {"conjunto": conjunto, "tecnica": tecnica, "metrica": metrica}, cell
                 ))
+    # Família primária de UM engine: as 9 técnicas no conjunto e métrica
+    # primários (m=9). No compare_engines.py a família é maior (9 x engines),
+    # porque lá a afirmação é sobre o conjunto dos engines.
+    aplica_holm(rows)
     return rows
 
 
@@ -658,6 +775,11 @@ def build_quebra_setor(by_query, queries_meta, tecnicas):
                         {"conjunto": conjunto, "setor": setor,
                          "tecnica": tecnica, "metrica": metrica}, cell
                     ))
+    # Quebra por setor é EXPLORATÓRIA: 3 setores x 9 técnicas multiplicaria a
+    # família por três e não sobraria quase nada, mas o problema não é esse —
+    # é que estas análises não foram pré-especificadas como confirmatórias.
+    # `aplica_holm` marca a linha em vez de corrigi-la, e a marca vai no .csv.
+    marca_exploratorio(rows)
     return rows
 
 
@@ -706,6 +828,8 @@ def build_quebra_posicao(by_query, queries_meta, tecnicas):
                         row["paper_valor_pct"] = None
                         row["direcao_replica_pos"] = "não comparável"
                     rows.append(row)
+    # Quebra por posição: exploratória, pelo mesmo motivo do setor.
+    marca_exploratorio(rows)
     return rows
 
 
