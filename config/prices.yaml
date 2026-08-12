@@ -1,0 +1,39 @@
+# Preços de API por 1M de tokens (USD) — constantes usadas pelos scripts de custo.
+# Verificados em 2026-08-07. Atualizar aqui (e só aqui) se mudarem.
+modelos:
+  gemini-3.5-flash-lite:
+    input_por_1m: 0.30
+    output_por_1m: 2.50
+    batch_desconto: 0.5
+  gemini-3.1-flash-lite:
+    input_por_1m: 0.25
+    output_por_1m: 1.50
+    batch_desconto: 0.5
+  gemini-3.6-flash:
+    input_por_1m: 1.50
+    output_por_1m: 7.50
+    batch_desconto: 0.5
+    free_tier: true
+  gemini-2.5-flash:
+    input_por_1m: 0.30
+    output_por_1m: 2.50
+    batch_desconto: 0.5      # modo batch = 50% dos preços acima
+    free_tier: true          # fases 1-2 rodam no free tier (custo 0, limites RPM/RPD)
+  claude-sonnet-5:
+    # preço padrão 3.00/15.00; introdutório 2.00/10.00 até 2026-08-31 (usamos o
+    # padrão para estimativa conservadora de custo)
+    input_por_1m: 3.00
+    output_por_1m: 15.00
+    batch_desconto: 0.5
+  gpt-5-nano:
+    input_por_1m: 0.05
+    output_por_1m: 0.40
+    batch_desconto: 0.5
+  claude-haiku-4-5:
+    input_por_1m: 1.00
+    output_por_1m: 5.00
+    batch_desconto: 0.5
+  gpt-5.6-luna:
+    input_por_1m: 0.20
+    output_por_1m: 1.20
+    batch_desconto: 0.5

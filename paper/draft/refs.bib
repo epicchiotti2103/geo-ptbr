@@ -1,0 +1,118 @@
+% refs.bib — GEO-PTBR paper
+%
+% Entradas confirmadas contra fonte primária (a 1a página de
+% paper/geo_original.pdf foi lida diretamente para esta entrada) ou contra
+% múltiplas fontes independentes corroborantes (ver csesobench abaixo). Nunca
+% inventar um campo incerto — deixar um comentário TODO ao lado em vez disso.
+
+% -----------------------------------------------------------------------
+% Paper original replicado por este trabalho.
+% Confirmado lendo a página 1 de paper/geo_original.pdf: título, lista de
+% autores completa, venue (KDD '24, Barcelona), DOI e arXiv ID batem com o
+% PDF baixado localmente.
+% -----------------------------------------------------------------------
+@inproceedings{aggarwal2024geo,
+  author    = {Aggarwal, Pranjal and Murahari, Vishvak and Rajpurohit, Tanmay
+               and Kalyan, Ashwin and Narasimhan, Karthik and Deshpande, Ameet},
+  title     = {{GEO}: Generative Engine Optimization},
+  booktitle = {Proceedings of the 30th ACM SIGKDD Conference on Knowledge
+               Discovery and Data Mining (KDD '24)},
+  year      = {2024},
+  address   = {Barcelona, Spain},
+  publisher = {ACM},
+  pages     = {12},
+  doi       = {10.1145/3637528.3671900},
+  eprint    = {2311.09735},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  note      = {arXiv:2311.09735v3},
+}
+
+% -----------------------------------------------------------------------
+% C-SEO Bench — segundo pilar do contexto científico (PROMPT_GEO_PTBR.md,
+% linha 6: "incorporando as lições do C-SEO Bench"). Autores, arXiv ID e
+% venue confirmados por busca web (WebSearch) contra 5+ fontes independentes
+% corroborantes na data de escrita deste .bib: página do arXiv
+% (arxiv.org/abs/2506.11097), OpenReview, a página de proceedings do NeurIPS
+% (proceedings.neurips.cc), a página do paper no Hugging Face, e o repo
+% oficial do código (github.com/parameterlab/c-seo-bench). Não foi possível
+% confirmar o número de página / volume exato do proceedings do NeurIPS no
+% momento da escrita — ver TODO abaixo.
+% -----------------------------------------------------------------------
+@inproceedings{puerto2025cseo,
+  author    = {Puerto, Haritz and Gubri, Martin and Green, Tommaso
+               and Oh, Seong Joon and Yun, Sangdoo},
+  title     = {{C-SEO} Bench: Does Conversational {SEO} Work?},
+  booktitle = {Advances in Neural Information Processing Systems 38 (NeurIPS
+               2025), Datasets and Benchmarks Track},
+  year      = {2025},
+  eprint    = {2506.11097},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  note      = {arXiv:2506.11097},
+}
+% NOTE: the exact NeurIPS camera-ready proceedings page/volume number is not
+% yet confirmed (TODO above the entry) --- do not add it to the `note` field
+% above without re-verifying; the arXiv ID and author list ARE confirmed.
+
+% -----------------------------------------------------------------------
+% TODO — placeholders para referências adicionais a preencher durante a
+% escrita da Fase 5. Deliberadamente NÃO instanciadas como entradas de
+% bibliografia vazias/incompletas (BibTeX escaneia o arquivo inteiro em busca
+% do caractere que introduz uma entrada, mesmo dentro de comentários "%" — um
+% marcador de entrada incompleto quebra a compilação do bibtex; testado e
+% confirmado nesta versão do arquivo). Ficam aqui como lembrete em comentário
+% até serem resolvidas e virarem entradas reais.
+%
+%   - TODO: referência para a metodologia G-Eval / LLM-as-judge citada pelo
+%     paper original para a métrica "Subjective Impression" (ver
+%     paper/KEY_FACTS.md §1.3) — só necessária se o GEO-PTBR também usar
+%     avaliação subjetiva (no momento desta versão do esqueleto, o desenho
+%     do estudo usa só Imp_wc / Imp_pwc, métricas objetivas — ver
+%     config/study.yaml e src/metrics.py).
+%   - TODO: dado/estudo de mercado sobre adoção de motores de busca
+%     generativos no Brasil, se encontrado, para reforçar a motivação da
+%     Introdução (relevância do PT-BR).
+%   - TODO: trabalho relacionado adicional sobre otimização adversarial de
+%     recomendação por LLM (Kumar & Lakkaraju, citado como contraste pelo
+%     próprio paper original — KEY_FACTS.md §6) — avaliar se vale citar
+%     diretamente ou só mencionar via aggarwal2024geo.
+% -----------------------------------------------------------------------
+
+@misc{martinez2026survey,
+  author    = {Martinez, Olivier},
+  title     = {Optimizing Visibility in Generative Engines: A Critical Survey
+               of Generative Engine Optimization (2023--2026)},
+  year      = {2026},
+  eprint    = {2607.14035},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.IR},
+  note      = {arXiv:2607.14035, submitted 15 July 2026; critical survey of 45
+               GEO studies},
+}
+
+@inproceedings{wu2026autogeo,
+  author    = {Wu, Yujiang and Zhong, Shanshan and Kim, Yubin and
+               Xiong, Chenyan},
+  title     = {What Generative Search Engines Like and How to Optimize Web
+               Content Cooperatively},
+  booktitle = {Proceedings of the International Conference on Learning
+               Representations (ICLR)},
+  year      = {2026},
+  eprint    = {2510.11438},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.IR},
+  note      = {AutoGEO; arXiv:2510.11438},
+}
+
+@misc{yuan2026agenticgeo,
+  author    = {Yuan, Jiaqi and Wang, Jialu and Wang, Zihan and Sun, Qingyun
+               and Wang, Ruijie and Li, Jianxin},
+  title     = {{AgenticGEO}: A Self-Evolving Agentic System for Generative
+               Engine Optimization},
+  year      = {2026},
+  eprint    = {2603.20213},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.IR},
+  note      = {arXiv:2603.20213, submitted 2 March 2026},
+}

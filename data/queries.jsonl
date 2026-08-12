@@ -1,0 +1,525 @@
+{"id": "s001", "setor": "saude", "query": "Quanto custa em média uma rinoplastia em São Paulo?", "tipo": "normal"}
+{"id": "s002", "setor": "saude", "query": "Qual o preço médio de um check-up completo particular no Brasil?", "tipo": "normal"}
+{"id": "s003", "setor": "saude", "query": "Quanto se paga por uma consulta com dermatologista particular?", "tipo": "normal"}
+{"id": "s004", "setor": "saude", "query": "Vale a pena fazer cirurgia refrativa a laser ou é melhor continuar de óculos?", "tipo": "normal"}
+{"id": "s005", "setor": "saude", "query": "Quanto custa um tratamento de canal no dentista particular?", "tipo": "normal"}
+{"id": "s006", "setor": "saude", "query": "Qual o valor médio de uma cesárea particular no Rio de Janeiro?", "tipo": "normal"}
+{"id": "s007", "setor": "saude", "query": "Quanto sai em média um exame de ressonância magnética sem convênio?", "tipo": "normal"}
+{"id": "s008", "setor": "saude", "query": "Qual o preço de uma limpeza de pele profissional em clínica de estética?", "tipo": "normal"}
+{"id": "s009", "setor": "saude", "query": "Quanto custa aproximadamente um aparelho ortodôntico completo?", "tipo": "normal"}
+{"id": "s010", "setor": "saude", "query": "Qual a faixa de preço de um implante dentário unitário no Brasil?", "tipo": "normal"}
+{"id": "s011", "setor": "saude", "query": "Quanto custa fazer uma endoscopia digestiva particular?", "tipo": "normal"}
+{"id": "s012", "setor": "saude", "query": "Qual o valor médio de uma consulta com psiquiatra particular por sessão?", "tipo": "normal"}
+{"id": "s013", "setor": "saude", "query": "Quanto se gasta em média com fertilização in vitro no Brasil?", "tipo": "normal"}
+{"id": "s014", "setor": "saude", "query": "Qual o preço de um exame de tomografia computadorizada particular?", "tipo": "normal"}
+{"id": "s015", "setor": "saude", "query": "Quanto custa uma cirurgia de herniade disco na coluna particular?", "tipo": "normal"}
+{"id": "s016", "setor": "saude", "query": "Vale a pena pagar particular por um exame de mamografia ou o SUS resolve?", "tipo": "normal"}
+{"id": "s017", "setor": "saude", "query": "Quanto custa em média a colocação de um DIU em clínica particular?", "tipo": "normal"}
+{"id": "s018", "setor": "saude", "query": "Qual o valor de uma sessão de fisioterapia particular no Brasil?", "tipo": "normal"}
+{"id": "s019", "setor": "saude", "query": "Quanto sai uma cirurgia de vasectomia particular?", "tipo": "normal"}
+{"id": "s020", "setor": "saude", "query": "Qual o preço médio de um ultrassom morfológico particular?", "tipo": "normal"}
+{"id": "s021", "setor": "saude", "query": "Quanto custa um tratamento completo de clareamento dental?", "tipo": "normal"}
+{"id": "s022", "setor": "saude", "query": "Qual a faixa de preço de uma blefaroplastia (cirurgia das pálpebras)?", "tipo": "normal"}
+{"id": "s023", "setor": "saude", "query": "Quanto se paga por uma colonoscopia particular em clínica de ponta?", "tipo": "normal"}
+{"id": "s024", "setor": "saude", "query": "Qual o custo médio de um parto normal particular no Brasil?", "tipo": "normal"}
+{"id": "s025", "setor": "saude", "query": "Quanto custa aproximadamente uma lipoaspiração de pequeno porte?", "tipo": "normal"}
+{"id": "s026", "setor": "saude", "query": "Como escolher uma boa clínica de fertilização no Brasil?", "tipo": "normal"}
+{"id": "s027", "setor": "saude", "query": "O que devo olhar no currículo de um cirurgião plástico antes de operar?", "tipo": "normal"}
+{"id": "s028", "setor": "saude", "query": "Como saber se um dentista é bom para fazer implantes?", "tipo": "normal"}
+{"id": "s029", "setor": "saude", "query": "Vale a pena ir a um hospital de referência ou uma clínica menor resolve?", "tipo": "normal"}
+{"id": "s030", "setor": "saude", "query": "Como escolher um bom ginecologista para o pré-natal?", "tipo": "normal"}
+{"id": "s031", "setor": "saude", "query": "Quais perguntas fazer na primeira consulta com um ortopedista?", "tipo": "normal"}
+{"id": "s032", "setor": "saude", "query": "Como avaliar se uma clínica de estética é confiável e segura?", "tipo": "normal"}
+{"id": "s033", "setor": "saude", "query": "O que observar na visita a uma clínica de hemodiálise antes de escolher?", "tipo": "normal"}
+{"id": "s034", "setor": "saude", "query": "Como escolher um bom oftalmologista para cirurgia de catarata?", "tipo": "normal"}
+{"id": "s035", "setor": "saude", "query": "Vale a pena buscar segunda opinião médica antes de uma cirurgia eletiva?", "tipo": "normal"}
+{"id": "s036", "setor": "saude", "query": "Como saber se um dermatologista é especializado em câncer de pele?", "tipo": "normal"}
+{"id": "s037", "setor": "saude", "query": "O que verificar no CRM e no RQE de um médico antes da consulta?", "tipo": "normal"}
+{"id": "s038", "setor": "saude", "query": "Como escolher um bom pediatra para o meu bebê recém-nascido?", "tipo": "normal"}
+{"id": "s039", "setor": "saude", "query": "Quais critérios usar para escolher uma maternidade particular?", "tipo": "normal"}
+{"id": "s040", "setor": "saude", "query": "Como avaliar a qualidade de um laboratório de análises clínicas?", "tipo": "normal"}
+{"id": "s041", "setor": "saude", "query": "O que perguntar ao nutricionista na primeira consulta?", "tipo": "normal"}
+{"id": "s042", "setor": "saude", "query": "Como escolher um bom fonoaudiólogo para tratamento de gagueira?", "tipo": "normal"}
+{"id": "s043", "setor": "saude", "query": "Vale a pena ir a um centro de excelência em oncologia ou hospital geral?", "tipo": "normal"}
+{"id": "s044", "setor": "saude", "query": "Como escolher uma boa clínica de reabilitação após AVC?", "tipo": "normal"}
+{"id": "s045", "setor": "saude", "query": "O que olhar nas avaliações online de um hospital antes de internar?", "tipo": "normal"}
+{"id": "s046", "setor": "saude", "query": "Como saber se uma clínica de saúde mental tem equipe multiprofissional?", "tipo": "normal"}
+{"id": "s047", "setor": "saude", "query": "Quais sinais de alerta mostram que um médico está pedindo exames desnecessários?", "tipo": "normal"}
+{"id": "s048", "setor": "saude", "query": "Como escolher um bom urologista para tratamento de próstata?", "tipo": "normal"}
+{"id": "s049", "setor": "saude", "query": "O que verificar antes de contratar um plano de home care?", "tipo": "normal"}
+{"id": "s050", "setor": "saude", "query": "Como escolher entre um cardiologista clínico e um hemodinamicista?", "tipo": "normal"}
+{"id": "s051", "setor": "saude", "query": "O que esperar no dia da cirurgia de rinoplastia e na recuperação imediata?", "tipo": "normal"}
+{"id": "s052", "setor": "saude", "query": "Como é o preparo para uma colonoscopia e o que posso comer depois?", "tipo": "normal"}
+{"id": "s053", "setor": "saude", "query": "Quanto tempo demora a recuperação de uma artroscopia de joelho?", "tipo": "normal"}
+{"id": "s054", "setor": "saude", "query": "O que acontece durante uma sessão de quimioterapia e quais os efeitos?", "tipo": "normal"}
+{"id": "s055", "setor": "saude", "query": "Como funciona o procedimento de biópsia de mama e dói muito?", "tipo": "normal"}
+{"id": "s056", "setor": "saude", "query": "O que esperar de uma consulta com reumatologista na primeira visita?", "tipo": "normal"}
+{"id": "s057", "setor": "saude", "query": "Como é o pós-operatório de uma abdominoplastia na prática?", "tipo": "normal"}
+{"id": "s058", "setor": "saude", "query": "Quanto tempo fico afastado do trabalho após uma cirurgia de hérnia inguinal?", "tipo": "normal"}
+{"id": "s059", "setor": "saude", "query": "O que sinto durante um exame de cateterismo cardíaco?", "tipo": "normal"}
+{"id": "s060", "setor": "saude", "query": "Como funciona o processo de doação de medula óssea no Brasil?", "tipo": "normal"}
+{"id": "s061", "setor": "saude", "query": "O que esperar de um tratamento ortodôntico com alinhadores invisíveis?", "tipo": "normal"}
+{"id": "s062", "setor": "saude", "query": "Como é a recuperação após a retirada da vesícula por videolaparoscopia?", "tipo": "normal"}
+{"id": "s063", "setor": "saude", "query": "O que acontece em uma sessão de radioterapia e quanto tempo dura?", "tipo": "normal"}
+{"id": "s064", "setor": "saude", "query": "Como funciona o exame de densitometria óssea e para quem é indicado?", "tipo": "normal"}
+{"id": "s065", "setor": "saude", "query": "O que esperar de um parto humanizado em hospital particular?", "tipo": "normal"}
+{"id": "s066", "setor": "saude", "query": "Como é o procedimento de angioplastia e qual o tempo de internação?", "tipo": "normal"}
+{"id": "s067", "setor": "saude", "query": "O que sinto durante uma ressonância magnética e tem contraindicações?", "tipo": "normal"}
+{"id": "s068", "setor": "saude", "query": "Como funciona a sedação em endoscopia e posso dirigir depois?", "tipo": "normal"}
+{"id": "s069", "setor": "saude", "query": "O que esperar de um tratamento de acupuntura para dor crônica?", "tipo": "normal"}
+{"id": "s070", "setor": "saude", "query": "Como é o pós-operatório de uma mastopexia com prótese de silicone?", "tipo": "normal"}
+{"id": "s071", "setor": "saude", "query": "Quanto tempo leva para o resultado de uma biópsia de pele ficar pronto?", "tipo": "normal"}
+{"id": "s072", "setor": "saude", "query": "O que acontece em uma consulta de avaliação pré-anestésica?", "tipo": "normal"}
+{"id": "s073", "setor": "saude", "query": "Como funciona o procedimento de crioterapia para lesões de pele?", "tipo": "normal"}
+{"id": "s074", "setor": "saude", "query": "O que esperar de um exame de polissonografia em laboratório do sono?", "tipo": "normal"}
+{"id": "s075", "setor": "saude", "query": "Como é a recuperação após uma cirurgia de correção de joanete?", "tipo": "normal"}
+{"id": "s076", "setor": "saude", "query": "Quais são os principais riscos de uma lipoaspiração e como minimizá-los?", "tipo": "normal"}
+{"id": "s077", "setor": "saude", "query": "A cirurgia bariátrica é segura para quem tem mais de 50 anos?", "tipo": "normal"}
+{"id": "s078", "setor": "saude", "query": "Quais efeitos colaterais comuns do uso prolongado de corticoides?", "tipo": "normal"}
+{"id": "s079", "setor": "saude", "query": "É arriscado fazer laser de depilação em pele negra ou morena?", "tipo": "normal"}
+{"id": "s080", "setor": "saude", "query": "Quais complicações podem ocorrer após a colocação de prótese de silicone?", "tipo": "normal"}
+{"id": "s081", "setor": "saude", "query": "O uso de isotretinoína para acne tem riscos graves que eu deva saber?", "tipo": "normal"}
+{"id": "s082", "setor": "saude", "query": "Quais os riscos de uma cesárea eletiva sem indicação médica?", "tipo": "normal"}
+{"id": "s083", "setor": "saude", "query": "É seguro fazer check-up de rotina com exames de imagem com radiação?", "tipo": "normal"}
+{"id": "s084", "setor": "saude", "query": "Quais cuidados tomar para evitar infecção após uma cirurgia ortopédica?", "tipo": "normal"}
+{"id": "s085", "setor": "saude", "query": "A anestesia geral em idosos tem riscos maiores do que em jovens?", "tipo": "normal"}
+{"id": "s086", "setor": "saude", "query": "Quais sinais de alerta após uma cirurgia de apendicite exigem ida ao pronto-socorro?", "tipo": "normal"}
+{"id": "s087", "setor": "saude", "query": "O tratamento hormonal na menopausa aumenta o risco de câncer?", "tipo": "normal"}
+{"id": "s088", "setor": "saude", "query": "Quais riscos existem no uso de canetas de emagrecimento como Ozempic?", "tipo": "normal"}
+{"id": "s089", "setor": "saude", "query": "É perigoso interromper um antidepressivo sem orientação médica?", "tipo": "normal"}
+{"id": "s090", "setor": "saude", "query": "Quais complicações da varicela em adultos merecem atenção hospitalar?", "tipo": "normal"}
+{"id": "s091", "setor": "saude", "query": "A vacina de HPV tem efeitos colaterais sérios em adolescentes?", "tipo": "normal"}
+{"id": "s092", "setor": "saude", "query": "Quais riscos de um parto domiciliar planejado versus hospitalar?", "tipo": "normal"}
+{"id": "s093", "setor": "saude", "query": "É seguro fazer exercício intenso logo após uma infecção viral?", "tipo": "normal"}
+{"id": "s094", "setor": "saude", "query": "Quais os riscos de recusar a hemotransfusão em uma cirurgia de grande porte?", "tipo": "normal"}
+{"id": "s095", "setor": "saude", "query": "O uso de anti-inflamatórios por conta própria pode prejudicar o rim?", "tipo": "normal"}
+{"id": "s096", "setor": "saude", "query": "Como escolher um plano de saúde individual com boa cobertura hospitalar?", "tipo": "normal"}
+{"id": "s097", "setor": "saude", "query": "Vale a pena manter plano de saúde caro só pela cobertura de partos?", "tipo": "normal"}
+{"id": "s098", "setor": "saude", "query": "O que o plano de saúde é obrigado a cobrir em tratamentos de câncer?", "tipo": "normal"}
+{"id": "s099", "setor": "saude", "query": "Como funciona a carência de planos de saúde para procedimentos eletivos?", "tipo": "normal"}
+{"id": "s100", "setor": "saude", "query": "Posso usar o plano de saúde em qualquer hospital da rede credenciada?", "tipo": "normal"}
+{"id": "s101", "setor": "saude", "query": "Qual a diferença entre plano ambulatorial e hospitalar com obstetrícia?", "tipo": "normal"}
+{"id": "s102", "setor": "saude", "query": "O plano de saúde cobre tratamento ortodôntico e implantes dentários?", "tipo": "normal"}
+{"id": "s103", "setor": "saude", "query": "Como reembolsar uma consulta particular se meu plano tem coparticipação?", "tipo": "normal"}
+{"id": "s104", "setor": "saude", "query": "Vale a pena plano de saúde regional ou nacional para quem viaja muito?", "tipo": "normal"}
+{"id": "s105", "setor": "saude", "query": "O que fazer quando o plano nega cobertura de um exame pedido pelo médico?", "tipo": "normal"}
+{"id": "s106", "setor": "saude", "query": "Como funciona a portabilidade de carências entre planos de saúde?", "tipo": "normal"}
+{"id": "s107", "setor": "saude", "query": "Planos de saúde cobrem terapia com psicólogo e quantas sessões?", "tipo": "normal"}
+{"id": "s108", "setor": "saude", "query": "Qual a diferença de custo-benefício entre Unimed, Bradesco e SulAmérica?", "tipo": "normal"}
+{"id": "s109", "setor": "saude", "query": "O plano de saúde cobre cirurgia plástica reparadora após mastectomia?", "tipo": "normal"}
+{"id": "s110", "setor": "saude", "query": "Como escolher plano de saúde para idoso sem estourar o orçamento?", "tipo": "normal"}
+{"id": "s111", "setor": "saude", "query": "Vale a pena plano odontológico separado ou o médico já inclui dentista?", "tipo": "normal"}
+{"id": "s112", "setor": "saude", "query": "O que é coparticipação no plano de saúde e como isso afeta o bolso?", "tipo": "normal"}
+{"id": "s113", "setor": "saude", "query": "Planos de saúde cobrem fertilização in vitro ou apenas a investigação?", "tipo": "normal"}
+{"id": "s114", "setor": "saude", "query": "Como funciona a cobertura de home care pelo plano de saúde no Brasil?", "tipo": "normal"}
+{"id": "s115", "setor": "saude", "query": "Posso incluir dependentes no plano empresarial e quais as regras?", "tipo": "normal"}
+{"id": "s116", "setor": "saude", "query": "Quando devo fazer exame de PSA e o que um resultado alterado significa?", "tipo": "normal"}
+{"id": "s117", "setor": "saude", "query": "Com que frequência uma mulher deve fazer papanicolau e mamografia?", "tipo": "normal"}
+{"id": "s118", "setor": "saude", "query": "O hemograma completo detecta quais tipos de problema de saúde?", "tipo": "normal"}
+{"id": "s119", "setor": "saude", "query": "Qual a diferença entre ultrassom, tomografia e ressonância na prática?", "tipo": "normal"}
+{"id": "s120", "setor": "saude", "query": "Quando um pediatra pede exame de sangue de rotina em criança saudável?", "tipo": "normal"}
+{"id": "s121", "setor": "saude", "query": "O que o exame de tireoide TSH e T4 livre avalia exatamente?", "tipo": "normal"}
+{"id": "s122", "setor": "saude", "query": "Preciso de jejum para todos os exames de sangue ou só para alguns?", "tipo": "normal"}
+{"id": "s123", "setor": "saude", "query": "Como interpretar o resultado de uma espirometria no consultório?", "tipo": "normal"}
+{"id": "s124", "setor": "saude", "query": "Quando vale a pena fazer um mapeamento genético de predisposição a câncer?", "tipo": "normal"}
+{"id": "s125", "setor": "saude", "query": "Qual a diferença entre teste de COVID de antígeno e PCR?", "tipo": "normal"}
+{"id": "s126", "setor": "saude", "query": "O exame de fezes parasitológico precisa de mais de uma amostra?", "tipo": "normal"}
+{"id": "s127", "setor": "saude", "query": "Quando o médico pede holter de 24 horas e o que ele mostra?", "tipo": "normal"}
+{"id": "s128", "setor": "saude", "query": "Como se preparar para um teste ergométrico de esforço cardíaco?", "tipo": "normal"}
+{"id": "s129", "setor": "saude", "query": "O que significa um resultado reativo no exame de hepatite B?", "tipo": "normal"}
+{"id": "s130", "setor": "saude", "query": "Quando fazer densitometria óssea e o que a osteopenia implica?", "tipo": "normal"}
+{"id": "s131", "setor": "saude", "query": "Qual a diferença entre neurologista e neurocirurgião na hora de procurar ajuda?", "tipo": "normal"}
+{"id": "s132", "setor": "saude", "query": "Quando devo procurar um reumatologista em vez de um clínico geral?", "tipo": "normal"}
+{"id": "s133", "setor": "saude", "query": "O que um endocrinologista trata além de diabetes e tireoide?", "tipo": "normal"}
+{"id": "s134", "setor": "saude", "query": "Como saber se a minha dor de cabeça exige avaliação de um neurologista?", "tipo": "normal"}
+{"id": "s135", "setor": "saude", "query": "Vale a pena ir a um geriatra a partir de que idade?", "tipo": "normal"}
+{"id": "s136", "setor": "saude", "query": "Qual a diferença entre psicólogo e psiquiatra para tratar ansiedade?", "tipo": "normal"}
+{"id": "s137", "setor": "saude", "query": "Quando a azia frequente pede consulta com gastroenterologista?", "tipo": "normal"}
+{"id": "s138", "setor": "saude", "query": "O que um pneumologista avalia em quem tem tosse crônica há meses?", "tipo": "normal"}
+{"id": "s139", "setor": "saude", "query": "Como um alergista investiga se tenho intolerância alimentar ou alergia?", "tipo": "normal"}
+{"id": "s140", "setor": "saude", "query": "Quando levar a criança ao otorrino em vez de só ao pediatra?", "tipo": "normal"}
+{"id": "s141", "setor": "saude", "query": "O que um proctologista trata e quando a consulta é urgente?", "tipo": "normal"}
+{"id": "s142", "setor": "saude", "query": "Qual a diferença entre ortopedista e reumatologista para dor no joelho?", "tipo": "normal"}
+{"id": "s143", "setor": "saude", "query": "Quando procurar um infectologista em vez do clínico da família?", "tipo": "normal"}
+{"id": "s144", "setor": "saude", "query": "O que um mastologista faz diferente do ginecologista no acompanhamento?", "tipo": "normal"}
+{"id": "s145", "setor": "saude", "query": "Vale a pena consultar um médico do esporte se treino de forma amadora?", "tipo": "normal"}
+{"id": "s146", "setor": "saude", "query": "Quais exames o médico costuma pedir antes de uma cirurgia eletiva?", "tipo": "normal"}
+{"id": "s147", "setor": "saude", "query": "Posso tomar meu remédio de pressão no dia da cirurgia com anestesia?", "tipo": "normal"}
+{"id": "s148", "setor": "saude", "query": "Como me preparar psicologicamente para uma cirurgia bariátrica?", "tipo": "normal"}
+{"id": "s149", "setor": "saude", "query": "O que levar na mala da maternidade para o parto no hospital?", "tipo": "normal"}
+{"id": "s150", "setor": "saude", "query": "Quanto tempo devo ficar sem dirigir após uma cirurgia de catarata?", "tipo": "normal"}
+{"id": "s151", "setor": "saude", "query": "Posso amamentar se estiver em tratamento com antibiótico?", "tipo": "normal"}
+{"id": "s152", "setor": "saude", "query": "Como aliviar o desconforto após uma extração do siso em casa?", "tipo": "normal"}
+{"id": "s153", "setor": "saude", "query": "Quais cuidados com a cicatriz nos primeiros 30 dias após abdominoplastia?", "tipo": "normal"}
+{"id": "s154", "setor": "saude", "query": "Posso fazer academia enquanto uso aparelho ortodôntico fixo?", "tipo": "normal"}
+{"id": "s155", "setor": "saude", "query": "O que mudar na dieta nas primeiras semanas após cirurgia de vesícula?", "tipo": "normal"}
+{"id": "s156", "setor": "saude", "query": "Como saber se a infecção de ouvido do meu filho precisa de antibiótico?", "tipo": "normal"}
+{"id": "s157", "setor": "saude", "query": "Vale a pena fazer check-up anual completo mesmo sem sintomas?", "tipo": "normal"}
+{"id": "s158", "setor": "saude", "query": "Como escolher entre genérico e remédio de marca com o mesmo princípio ativo?", "tipo": "normal"}
+{"id": "s159", "setor": "saude", "query": "O que perguntar ao médico antes de aceitar um tratamento experimental?", "tipo": "normal"}
+{"id": "s160", "setor": "saude", "query": "Como organizar o estoque de remédios de uso contínuo em casa com segurança?", "tipo": "normal"}
+{"id": "s161", "setor": "saude", "query": "Quando a telemedicina resolve e quando é melhor ir presencialmente?", "tipo": "normal"}
+{"id": "s162", "setor": "saude", "query": "Como acompanhar a pressão arterial em casa de forma confiável?", "tipo": "normal"}
+{"id": "s163", "setor": "saude", "query": "O que fazer se esqueci de tomar a dose da vacina de reforço no prazo?", "tipo": "normal"}
+{"id": "s164", "setor": "saude", "query": "Como conversar com o médico se discordo da conduta que ele propôs?", "tipo": "normal"}
+{"id": "s165", "setor": "saude", "query": "Vale a pena pagar por um laudo de segunda opinião em exame de imagem?", "tipo": "normal"}
+{"id": "s166", "setor": "saude", "query": "Como montar um kit de primeiros socorros completo para a casa?", "tipo": "normal"}
+{"id": "s167", "setor": "saude", "query": "Quais dúvidas levar por escrito na consulta para não esquecer nada?", "tipo": "normal"}
+{"id": "j001", "setor": "juridico", "query": "posso ser demitido por justa causa se faltar ao trabalho por problemas de saúde sem atestado?", "tipo": "normal"}
+{"id": "j002", "setor": "juridico", "query": "empresa atrasou meu salário já faz dois meses, o que eu faço agora?", "tipo": "normal"}
+{"id": "j003", "setor": "juridico", "query": "tenho direito a horas extras se trabalho de casa e fico online depois do horário?", "tipo": "normal"}
+{"id": "j004", "setor": "juridico", "query": "meu chefe me humilha na frente da equipe, isso configura assédio moral?", "tipo": "normal"}
+{"id": "j005", "setor": "juridico", "query": "fui demitido sem justa causa e a empresa não pagou as verbas rescisórias, qual o prazo para processar?", "tipo": "normal"}
+{"id": "j006", "setor": "juridico", "query": "quanto tempo demora um processo trabalhista na justiça do trabalho em média?", "tipo": "normal"}
+{"id": "j007", "setor": "juridico", "query": "vale a pena processar a empresa por não depositar FGTS se o valor for pequeno?", "tipo": "normal"}
+{"id": "j008", "setor": "juridico", "query": "trabalhei sem carteira assinada por três anos, consigo reconhecer o vínculo agora?", "tipo": "normal"}
+{"id": "j009", "setor": "juridico", "query": "posso pedir demissão e ainda assim receber seguro-desemprego?", "tipo": "normal"}
+{"id": "j010", "setor": "juridico", "query": "a empresa pode me transferir de cidade sem o meu consentimento?", "tipo": "normal"}
+{"id": "j011", "setor": "juridico", "query": "estou grávida e a empresa quer me demitir, isso é permitido?", "tipo": "normal"}
+{"id": "j012", "setor": "juridico", "query": "meu contrato de experiência acabou e me mandaram embora no mesmo dia, tenho algum direito a mais?", "tipo": "normal"}
+{"id": "j013", "setor": "juridico", "query": "trabalho como PJ mas tenho horário fixo e chefe, posso ser reconhecido como CLT?", "tipo": "normal"}
+{"id": "j014", "setor": "juridico", "query": "a empresa pode descontar do meu salário o valor de um produto que danifiquei?", "tipo": "normal"}
+{"id": "j015", "setor": "juridico", "query": "fui demitido por justa causa por uso do celular no trabalho, a punição é proporcional?", "tipo": "normal"}
+{"id": "j016", "setor": "juridico", "query": "quanto custa em média contratar um advogado trabalhista no Brasil?", "tipo": "normal"}
+{"id": "j017", "setor": "juridico", "query": "o que devo levar na primeira consulta com um advogado trabalhista?", "tipo": "normal"}
+{"id": "j018", "setor": "juridico", "query": "empresa me colocou de férias forçadas sem avisar com 30 dias, é legal?", "tipo": "normal"}
+{"id": "j019", "setor": "juridico", "query": "tenho direito a intervalo de almoço se trabalho seis horas por dia?", "tipo": "normal"}
+{"id": "j020", "setor": "juridico", "query": "posso processar a empresa se ela me demitiu logo depois que eu pedi aumento?", "tipo": "normal"}
+{"id": "j021", "setor": "juridico", "query": "comprei um celular online e veio com defeito, a loja se recusa a trocar, o que faço?", "tipo": "normal"}
+{"id": "j022", "setor": "juridico", "query": "o banco cobrou uma tarifa que eu não autorizei, como contestar?", "tipo": "normal"}
+{"id": "j023", "setor": "juridico", "query": "companhia aérea cancelou meu voo e não quer reembolsar, tenho direito a indenização?", "tipo": "normal"}
+{"id": "j024", "setor": "juridico", "query": "contratei um serviço de internet e a empresa não entrega a velocidade prometida, posso cancelar sem multa?", "tipo": "normal"}
+{"id": "j025", "setor": "juridico", "query": "me negativaram indevidamente no Serasa, quanto tempo leva para limpar o nome e posso pedir indenização?", "tipo": "normal"}
+{"id": "j026", "setor": "juridico", "query": "comprei um carro usado e descobri que o odômetro foi adulterado, o que posso exigir do vendedor?", "tipo": "normal"}
+{"id": "j027", "setor": "juridico", "query": "plano de saúde negou cobertura de um exame que o médico pediu, isso é abusivo?", "tipo": "normal"}
+{"id": "j028", "setor": "juridico", "query": "escola particular aumentou a mensalidade no meio do ano sem avisar, pode fazer isso?", "tipo": "normal"}
+{"id": "j029", "setor": "juridico", "query": "app de delivery cobrou duas vezes a mesma compra, como recuperar o dinheiro?", "tipo": "normal"}
+{"id": "j030", "setor": "juridico", "query": "financiamento de moto com juros abusivos, dá para revisar o contrato na justiça?", "tipo": "normal"}
+{"id": "j031", "setor": "juridico", "query": "comprei ingresso para show e o artista cancelou, o site só oferece crédito, posso exigir reembolso em dinheiro?", "tipo": "normal"}
+{"id": "j032", "setor": "juridico", "query": "construtora atrasou a entrega do imóvel em mais de um ano, quais são meus direitos?", "tipo": "normal"}
+{"id": "j033", "setor": "juridico", "query": "clínica estética fez procedimento errado e fiquei com cicatriz, posso processar?", "tipo": "normal"}
+{"id": "j034", "setor": "juridico", "query": "empresa de energia cortou a luz sem aviso prévio, é permitido?", "tipo": "normal"}
+{"id": "j035", "setor": "juridico", "query": "aluguei um carro por app e cobraram avaria que não causei, como contestar?", "tipo": "normal"}
+{"id": "j036", "setor": "juridico", "query": "assinatura de streaming continua cobrando depois que cancelei, o que fazer?", "tipo": "normal"}
+{"id": "j037", "setor": "juridico", "query": "loja se recusou a aceitar devolução dentro do prazo de arrependimento da compra online, está certo?", "tipo": "normal"}
+{"id": "j038", "setor": "juridico", "query": "banco bloqueou minha conta sem explicar o motivo, tenho como reverter?", "tipo": "normal"}
+{"id": "j039", "setor": "juridico", "query": "telefone celular veio com vício oculto depois de 90 dias, ainda tenho garantia?", "tipo": "normal"}
+{"id": "j040", "setor": "juridico", "query": "empresa de turismo faliu e não vou mais na viagem, como recuperar o valor pago?", "tipo": "normal"}
+{"id": "j041", "setor": "juridico", "query": "me venderam um curso online e o conteúdo é completamente diferente do anunciado, posso pedir reembolso?", "tipo": "normal"}
+{"id": "j042", "setor": "juridico", "query": "operadora de celular me transferiu de plano sem autorização, isso é legal?", "tipo": "normal"}
+{"id": "j043", "setor": "juridico", "query": "quanto custa um divórcio consensual no Brasil hoje em dia?", "tipo": "normal"}
+{"id": "j044", "setor": "juridico", "query": "preciso de advogado para fazer um divórcio de comum acordo ou dá para fazer sozinho?", "tipo": "normal"}
+{"id": "j045", "setor": "juridico", "query": "meu ex não está pagando pensão alimentícia, o que posso fazer?", "tipo": "normal"}
+{"id": "j046", "setor": "juridico", "query": "como funciona a guarda compartilhada na prática quando os pais moram em cidades diferentes?", "tipo": "normal"}
+{"id": "j047", "setor": "juridico", "query": "posso pedir pensão alimentícia para o filho maior de 18 anos que ainda estuda?", "tipo": "normal"}
+{"id": "j048", "setor": "juridico", "query": "quanto tempo demora um processo de divórcio litigioso?", "tipo": "normal"}
+{"id": "j049", "setor": "juridico", "query": "tenho direito a parte dos bens se moramos juntos sem casar por muitos anos?", "tipo": "normal"}
+{"id": "j050", "setor": "juridico", "query": "como regularizar a união estável para ter direitos patrimoniais?", "tipo": "normal"}
+{"id": "j051", "setor": "juridico", "query": "pai não reconheceu a paternidade, como faço o exame de DNA pela justiça?", "tipo": "normal"}
+{"id": "j052", "setor": "juridico", "query": "posso mudar o sobrenome dos filhos depois do divórcio?", "tipo": "normal"}
+{"id": "j053", "setor": "juridico", "query": "minha esposa quer me divorciar e eu não concordo, o que acontece?", "tipo": "normal"}
+{"id": "j054", "setor": "juridico", "query": "como calcular o valor da pensão alimentícia de forma justa?", "tipo": "normal"}
+{"id": "j055", "setor": "juridico", "query": "vale a pena processar por danos morais após um casamento com violência psicológica?", "tipo": "normal"}
+{"id": "j056", "setor": "juridico", "query": "adotei informalmente o filho da minha companheira, consigo adotar legalmente?", "tipo": "normal"}
+{"id": "j057", "setor": "juridico", "query": "preciso de inventário para vender um imóvel que herdei dos meus pais?", "tipo": "normal"}
+{"id": "j058", "setor": "juridico", "query": "irmão sumiu e precisamos inventariar os bens do pai falecido, o que fazer?", "tipo": "normal"}
+{"id": "j059", "setor": "juridico", "query": "como funciona a partilha de bens em casamento com comunhão parcial?", "tipo": "normal"}
+{"id": "j060", "setor": "juridico", "query": "posso impedir que meu ex leve as crianças para morar em outro estado?", "tipo": "normal"}
+{"id": "j061", "setor": "juridico", "query": "quanto custa em média um advogado de família para um divórcio com filhos?", "tipo": "normal"}
+{"id": "j062", "setor": "juridico", "query": "o que devo levar na consulta com advogado de família na primeira vez?", "tipo": "normal"}
+{"id": "j063", "setor": "juridico", "query": "tutela de urgência para afastar o agressor de casa, como pedir?", "tipo": "normal"}
+{"id": "j064", "setor": "juridico", "query": "namorado morreu sem testamento e eu dependia dele financeiramente, tenho algum direito?", "tipo": "normal"}
+{"id": "j065", "setor": "juridico", "query": "quero fazer um testamento, preciso de advogado e cartório ou só um deles?", "tipo": "normal"}
+{"id": "j066", "setor": "juridico", "query": "mãe idosa está sendo manipulada por um cuidador, como proteger o patrimônio dela?", "tipo": "normal"}
+{"id": "j067", "setor": "juridico", "query": "comprei um imóvel na planta e a construtora mudou o projeto sem me avisar, posso recusar?", "tipo": "normal"}
+{"id": "j068", "setor": "juridico", "query": "o corretor omitiu que o apartamento tem ação judicial, posso anular a compra?", "tipo": "normal"}
+{"id": "j069", "setor": "juridico", "query": "vizinho fez obra irregular que invade meu terreno, o que faço?", "tipo": "normal"}
+{"id": "j070", "setor": "juridico", "query": "aluguei meu apartamento e o inquilino parou de pagar, qual o caminho para despejo?", "tipo": "normal"}
+{"id": "j071", "setor": "juridico", "query": "contrato de aluguel sem fiador e sem seguro fiança, o locador pode exigir caução de quantos meses?", "tipo": "normal"}
+{"id": "j072", "setor": "juridico", "query": "quero comprar um terreno de particular, quais documentos devo exigir antes de assinar?", "tipo": "normal"}
+{"id": "j073", "setor": "juridico", "query": "imóvel financiado pelo Minha Casa Minha Vida, posso vender antes de quitar?", "tipo": "normal"}
+{"id": "j074", "setor": "juridico", "query": "descobrir que o imóvel que comprei tem usucapião de terceiro, o que acontece?", "tipo": "normal"}
+{"id": "j075", "setor": "juridico", "query": "síndico não presta contas e gasta do condomínio sem autorização, condômino pode processar?", "tipo": "normal"}
+{"id": "j076", "setor": "juridico", "query": "barulho excessivo do vizinho, quando a justiça intervém de verdade?", "tipo": "normal"}
+{"id": "j077", "setor": "juridico", "query": "quero fazer usucapião de um terreno que ocupo há quinze anos, quais os requisitos?", "tipo": "normal"}
+{"id": "j078", "setor": "juridico", "query": "compra e venda de imóvel rural, precisa de advogado ou o cartório resolve?", "tipo": "normal"}
+{"id": "j079", "setor": "juridico", "query": "promessa de compra e venda sem registro, o vendedor pode revender para outra pessoa?", "tipo": "normal"}
+{"id": "j080", "setor": "juridico", "query": "imobiliária reteve o valor da caução sem motivo ao final do aluguel, como recuperar?", "tipo": "normal"}
+{"id": "j081", "setor": "juridico", "query": "herdei um imóvel com dívidas de IPTU e condomínio, sou obrigado a pagar tudo?", "tipo": "normal"}
+{"id": "j082", "setor": "juridico", "query": "posso desistir da compra de imóvel na planta e recuperar o que já paguei?", "tipo": "normal"}
+{"id": "j083", "setor": "juridico", "query": "vizinho plantou árvore cujo galho invade meu quintal e causa risco, posso cortar?", "tipo": "normal"}
+{"id": "j084", "setor": "juridico", "query": "escritura de imóvel com erro no nome, como corrigir no cartório?", "tipo": "normal"}
+{"id": "j085", "setor": "juridico", "query": "quantas contribuições preciso ter para pedir aposentadoria por idade no INSS?", "tipo": "normal"}
+{"id": "j086", "setor": "juridico", "query": "meu pedido de auxílio-doença foi negado, vale a pena entrar com recurso ou ir direto na justiça?", "tipo": "normal"}
+{"id": "j087", "setor": "juridico", "query": "como funciona a aposentadoria especial para quem trabalhou em ambiente insalubre?", "tipo": "normal"}
+{"id": "j088", "setor": "juridico", "query": "posso somar tempo de trabalho rural e urbano para me aposentar?", "tipo": "normal"}
+{"id": "j089", "setor": "juridico", "query": "quanto tempo o INSS demora em média para analisar um pedido de BPC Loas?", "tipo": "normal"}
+{"id": "j090", "setor": "juridico", "query": "viúva tem direito a pensão por morte se o casamento foi recente?", "tipo": "normal"}
+{"id": "j091", "setor": "juridico", "query": "meu benefício foi cortado sem aviso, o que devo fazer primeiro?", "tipo": "normal"}
+{"id": "j092", "setor": "juridico", "query": "trabalhei como autônomo e não paguei INSS, consigo contribuir em atraso agora?", "tipo": "normal"}
+{"id": "j093", "setor": "juridico", "query": "aposentadoria por invalidez e continua trabalhando, o INSS pode cancelar?", "tipo": "normal"}
+{"id": "j094", "setor": "juridico", "query": "como calcular se compensa mais se aposentar agora ou esperar mais alguns anos?", "tipo": "normal"}
+{"id": "j095", "setor": "juridico", "query": "tenho direito a salário-maternidade mesmo sendo MEI?", "tipo": "normal"}
+{"id": "j096", "setor": "juridico", "query": "perito do INSS me considerou apto mas o médico particular discorda, o que fazer?", "tipo": "normal"}
+{"id": "j097", "setor": "juridico", "query": "posso receber dois benefícios do INSS ao mesmo tempo em algum caso?", "tipo": "normal"}
+{"id": "j098", "setor": "juridico", "query": "revisão da vida toda ainda vale a pena pedir?", "tipo": "normal"}
+{"id": "j099", "setor": "juridico", "query": "contribuí como doméstica sem carteira, consigo provar tempo para aposentadoria?", "tipo": "normal"}
+{"id": "j100", "setor": "juridico", "query": "pai idoso precisa de cuidador e a aposentadoria não cobre, existe benefício extra?", "tipo": "normal"}
+{"id": "j101", "setor": "juridico", "query": "auxílio-acidente após acidente de trabalho, quem paga e por quanto tempo?", "tipo": "normal"}
+{"id": "j102", "setor": "juridico", "query": "meu nome foi usado em empresa sem eu saber e agora tenho dívida trabalhista, o que faço?", "tipo": "normal"}
+{"id": "j103", "setor": "juridico", "query": "fui assediado sexualmente no trabalho, como denunciar sem perder o emprego?", "tipo": "normal"}
+{"id": "j104", "setor": "juridico", "query": "empresa me obrigou a pedir demissão sob ameaça, isso conta como demissão forçada?", "tipo": "normal"}
+{"id": "j105", "setor": "juridico", "query": "trabalho em escala 12x36 e nunca recebo adicional noturno correto, como conferir?", "tipo": "normal"}
+{"id": "j106", "setor": "juridico", "query": "estagiário pode ser demitido sem aviso e sem direitos, é sempre assim?", "tipo": "normal"}
+{"id": "j107", "setor": "juridico", "query": "aprendiz tem estabilidade no emprego ou a empresa pode dispensar a qualquer momento?", "tipo": "normal"}
+{"id": "j108", "setor": "juridico", "query": "home office sem reembolso de internet e luz, a empresa é obrigada a pagar?", "tipo": "normal"}
+{"id": "j109", "setor": "juridico", "query": "fui colocado em cargo de confiança só para não pagar horas extras, isso é golpe?", "tipo": "normal"}
+{"id": "j110", "setor": "juridico", "query": "rescisão indireta por atraso de salário, como funciona e quais os riscos?", "tipo": "normal"}
+{"id": "j111", "setor": "juridico", "query": "empresa pagou meu FGTS errado por anos, como calcular a diferença e cobrar?", "tipo": "normal"}
+{"id": "j112", "setor": "juridico", "query": "posso gravar o chefe sem ele saber para usar como prova na justiça do trabalho?", "tipo": "normal"}
+{"id": "j113", "setor": "juridico", "query": "acordo extrajudicial trabalhista no sindicato, depois posso processar por outros direitos?", "tipo": "normal"}
+{"id": "j114", "setor": "juridico", "query": "multa de 40% do FGTS na demissão sem justa causa, quando a empresa não precisa pagar?", "tipo": "normal"}
+{"id": "j115", "setor": "juridico", "query": "comprei móveis planejados e a loja atrasou a instalação em meses, posso cancelar e ser indenizado?", "tipo": "normal"}
+{"id": "j116", "setor": "juridico", "query": "clínica cobrou por cirurgia e o plano de saúde depois reembolsou só parte, quem deve a diferença?", "tipo": "normal"}
+{"id": "j117", "setor": "juridico", "query": "seguro de carro se recusou a cobrir sinistro alegando mau uso, como contestar?", "tipo": "normal"}
+{"id": "j118", "setor": "juridico", "query": "consórcio de imóvel demorou anos e o valor da carta não cobre mais o bem, o que fazer?", "tipo": "normal"}
+{"id": "j119", "setor": "juridico", "query": "me ligaram oferecendo empréstimo consignado que eu não pedi e descontaram do benefício, como cancelar?", "tipo": "normal"}
+{"id": "j120", "setor": "juridico", "query": "loja de departamentos vendeu produto recondicionado como novo, isso é crime ou só civil?", "tipo": "normal"}
+{"id": "j121", "setor": "juridico", "query": "transporte por aplicativo cobrou taxa de cancelamento abusiva, dá para reclamar no Procon?", "tipo": "normal"}
+{"id": "j122", "setor": "juridico", "query": "escola me cobrou multa rescisória de 50% ao transferir o filho, o valor é legal?", "tipo": "normal"}
+{"id": "j123", "setor": "juridico", "query": "plano odontológico negou tratamento que estava no contrato, como forçar a cobertura?", "tipo": "normal"}
+{"id": "j124", "setor": "juridico", "query": "comprei passagem de ônibus interestadual e a empresa cancelou a linha, tenho direito a o quê?", "tipo": "normal"}
+{"id": "j125", "setor": "juridico", "query": "site de compras internacionais reteve meu produto na alfândega e não resolve, o que faço no Brasil?", "tipo": "normal"}
+{"id": "j126", "setor": "juridico", "query": "franquia de academia faliu e ainda me cobram mensalidade no cartão, como parar e reaver o dinheiro?", "tipo": "normal"}
+{"id": "j127", "setor": "juridico", "query": "como escolher um bom advogado trabalhista sem cair em promessa milagrosa?", "tipo": "normal"}
+{"id": "j128", "setor": "juridico", "query": "advogado pode cobrar honorários só se eu ganhar a causa, isso é comum no Brasil?", "tipo": "normal"}
+{"id": "j129", "setor": "juridico", "query": "diferença entre Procon, Juizado Especial e processo comum para reclamar de empresa?", "tipo": "normal"}
+{"id": "j130", "setor": "juridico", "query": "vale a pena processar por dano moral se o valor da causa for baixo e demorar anos?", "tipo": "normal"}
+{"id": "j131", "setor": "juridico", "query": "o que é tutela de urgência e quando faz sentido pedir no começo do processo?", "tipo": "normal"}
+{"id": "j132", "setor": "juridico", "query": "posso processar sem advogado no Juizado Especial Cível até que valor?", "tipo": "normal"}
+{"id": "j133", "setor": "juridico", "query": "risco de eu ter que pagar as custas da outra parte se perder o processo?", "tipo": "normal"}
+{"id": "j134", "setor": "juridico", "query": "como funciona a mediação antes de processar em conflitos de família?", "tipo": "normal"}
+{"id": "j135", "setor": "juridico", "query": "minha empresa me ofereceu acordo de demissão com valor abaixo do devido, assino ou nego?", "tipo": "normal"}
+{"id": "j136", "setor": "juridico", "query": "trabalhei em dois empregos e um deles não quer homologar a rescisão, o que faço?", "tipo": "normal"}
+{"id": "j137", "setor": "juridico", "query": "fui demitido durante o aviso prévio trabalhado, ainda tenho direito aos dias restantes?", "tipo": "normal"}
+{"id": "j138", "setor": "juridico", "query": "adicional de insalubridade e periculosidade juntos, a empresa pode pagar só um?", "tipo": "normal"}
+{"id": "j139", "setor": "juridico", "query": "mulher tem direito a estabilidade após aborto espontâneo no emprego?", "tipo": "normal"}
+{"id": "j140", "setor": "juridico", "query": "pai adotivo tem licença-paternidade estendida igual à mãe em algum caso?", "tipo": "normal"}
+{"id": "j141", "setor": "juridico", "query": "empresa monitora minhas mensagens no computador do trabalho, isso é legal?", "tipo": "normal"}
+{"id": "j142", "setor": "juridico", "query": "posso ser demitido por postar crítica à empresa nas redes sociais?", "tipo": "normal"}
+{"id": "j143", "setor": "juridico", "query": "terceirizado tem os mesmos direitos de quem é contratado direto pela tomadora?", "tipo": "normal"}
+{"id": "j144", "setor": "juridico", "query": "trabalho intermitente e fiquei meses sem ser chamado, tenho algum direito a mais?", "tipo": "normal"}
+{"id": "j145", "setor": "juridico", "query": "como provar horas extras se a empresa não deixa bater ponto corretamente?", "tipo": "normal"}
+{"id": "j146", "setor": "juridico", "query": "fui assaltado a caminho do trabalho, isso pode ser considerado acidente de trabalho?", "tipo": "normal"}
+{"id": "j147", "setor": "juridico", "query": "divorciada que voltou a morar com o ex, a pensão alimentícia entre cônjuges acaba?", "tipo": "normal"}
+{"id": "j148", "setor": "juridico", "query": "posso pedir pensão para mim mesma após o divórcio se nunca trabalhei fora?", "tipo": "normal"}
+{"id": "j149", "setor": "juridico", "query": "como fica a divisão de dívidas do casal no divórcio com comunhão parcial de bens?", "tipo": "normal"}
+{"id": "j150", "setor": "juridico", "query": "filho maior que mora comigo mas não estuda nem trabalha, o pai ainda deve pensão?", "tipo": "normal"}
+{"id": "j151", "setor": "juridico", "query": "quero alterar o regime de bens do casamento depois de casado, é possível?", "tipo": "normal"}
+{"id": "j152", "setor": "juridico", "query": "guarda unilateral em caso de alienação parental, o juiz costuma aceitar?", "tipo": "normal"}
+{"id": "j153", "setor": "juridico", "query": "namoro com convivência não é união estável, como provar a diferença na justiça?", "tipo": "normal"}
+{"id": "j154", "setor": "juridico", "query": "posso incluir o companheiro como dependente no plano de saúde sem união estável registrada?", "tipo": "normal"}
+{"id": "j155", "setor": "juridico", "query": "inventário extrajudicial com herdeiro menor de idade, dá para fazer em cartório?", "tipo": "normal"}
+{"id": "j156", "setor": "juridico", "query": "imóvel em nome de só um cônjuge mas comprado na constância do casamento, quem herda?", "tipo": "normal"}
+{"id": "j157", "setor": "juridico", "query": "vizinho construiu muro no limite errado e tomou parte do meu lote, como medir e processar?", "tipo": "normal"}
+{"id": "j158", "setor": "juridico", "query": "compra de imóvel com matrícula irregular, quais riscos e como regularizar antes?", "tipo": "normal"}
+{"id": "j159", "setor": "juridico", "query": "inquilino morreu e a família não desocupa o imóvel, contra quem entro com despejo?", "tipo": "normal"}
+{"id": "j160", "setor": "juridico", "query": "quero rescindir aluguel comercial antes do prazo, a multa de três aluguéis é abusiva?", "tipo": "normal"}
+{"id": "j161", "setor": "juridico", "query": "financiamento imobiliário com taxa que sobe todo ano, dá para revisar na justiça?", "tipo": "normal"}
+{"id": "j162", "setor": "juridico", "query": "condomínio cobrou obra extraordinária sem assembleia, sou obrigado a pagar?", "tipo": "normal"}
+{"id": "j163", "setor": "juridico", "query": "usucapião de imóvel urbano com menos de cinco anos de posse, existe alguma modalidade?", "tipo": "normal"}
+{"id": "j164", "setor": "juridico", "query": "comprei terreno em leilão judicial e descobri ocupante, como retomar a posse?", "tipo": "normal"}
+{"id": "j165", "setor": "juridico", "query": "INSS demorou mais de 90 dias para analisar meu benefício, posso pedir indenização por demora?", "tipo": "normal"}
+{"id": "j166", "setor": "juridico", "query": "aposentado que volta a trabalhar como CLT, perde a aposentadoria ou só alguns direitos?", "tipo": "normal"}
+{"id": "j167", "setor": "juridico", "query": "como saber se o advogado que me atendeu está regular na OAB antes de assinar contrato?", "tipo": "normal"}
+{"id": "i001", "setor": "imobiliario", "query": "vale a pena comprar um imóvel na planta hoje em dia?", "tipo": "normal"}
+{"id": "i002", "setor": "imobiliario", "query": "o que é ITBI e quem paga na compra de um imóvel?", "tipo": "normal"}
+{"id": "i003", "setor": "imobiliario", "query": "posso sair do aluguel antes do contrato acabar?", "tipo": "normal"}
+{"id": "i004", "setor": "imobiliario", "query": "como funciona o financiamento pelo Minha Casa Minha Vida?", "tipo": "normal"}
+{"id": "i005", "setor": "imobiliario", "query": "qual a diferença entre amortização SAC e Price no financiamento?", "tipo": "normal"}
+{"id": "i006", "setor": "imobiliario", "query": "posso usar o FGTS para dar entrada no imóvel?", "tipo": "normal"}
+{"id": "i007", "setor": "imobiliario", "query": "o que acontece se eu atrasar o condomínio vários meses?", "tipo": "normal"}
+{"id": "i008", "setor": "imobiliario", "query": "preciso de fiador para alugar um apartamento ou o seguro-fiança resolve?", "tipo": "normal"}
+{"id": "i009", "setor": "imobiliario", "query": "como é feito o reajuste do aluguel pelo IGP-M?", "tipo": "normal"}
+{"id": "i010", "setor": "imobiliario", "query": "qual a diferença entre escritura e registro do imóvel?", "tipo": "normal"}
+{"id": "i011", "setor": "imobiliario", "query": "vale a pena comprar imóvel em leilão judicial?", "tipo": "normal"}
+{"id": "i012", "setor": "imobiliario", "query": "o que devo checar na vistoria de entrada do aluguel?", "tipo": "normal"}
+{"id": "i013", "setor": "imobiliario", "query": "como funciona o consórcio de imóveis e se compensa?", "tipo": "normal"}
+{"id": "i014", "setor": "imobiliario", "query": "quanto tempo demora para registrar a compra no cartório?", "tipo": "normal"}
+{"id": "i015", "setor": "imobiliario", "query": "posso alugar um imóvel sem fiador e sem seguro-fiança?", "tipo": "normal"}
+{"id": "i016", "setor": "imobiliario", "query": "o que é habite-se e por que o imóvel precisa ter?", "tipo": "normal"}
+{"id": "i017", "setor": "imobiliario", "query": "como calcular o valor do IPTU do meu apartamento?", "tipo": "normal"}
+{"id": "i018", "setor": "imobiliario", "query": "o corretor cobra comissão de quem na venda do imóvel?", "tipo": "normal"}
+{"id": "i019", "setor": "imobiliario", "query": "posso usar o FGTS para amortizar o financiamento habitacional?", "tipo": "normal"}
+{"id": "i020", "setor": "imobiliario", "query": "o que é caução no aluguel e quando o dono devolve?", "tipo": "normal"}
+{"id": "i021", "setor": "imobiliario", "query": "como funciona a permuta de imóveis na prática?", "tipo": "normal"}
+{"id": "i022", "setor": "imobiliario", "query": "quais documentos preciso para financiar um imóvel usado?", "tipo": "normal"}
+{"id": "i023", "setor": "imobiliario", "query": "o que fazer se o inquilino não pagar o aluguel?", "tipo": "normal"}
+{"id": "i024", "setor": "imobiliario", "query": "qual a multa por rescindir o contrato de aluguel antes do prazo?", "tipo": "normal"}
+{"id": "i025", "setor": "imobiliario", "query": "como saber se o bairro é bom para morar antes de comprar?", "tipo": "normal"}
+{"id": "i026", "setor": "imobiliario", "query": "o que é usucapião e em quanto tempo posso pedir?", "tipo": "normal"}
+{"id": "i027", "setor": "imobiliario", "query": "como dividir um imóvel em inventário entre herdeiros?", "tipo": "normal"}
+{"id": "i028", "setor": "imobiliario", "query": "vale a pena quitar o financiamento com o 13º salário?", "tipo": "normal"}
+{"id": "i029", "setor": "imobiliario", "query": "o que é matrícula do imóvel e onde consigo uma cópia?", "tipo": "normal"}
+{"id": "i030", "setor": "imobiliario", "query": "posso descontar do aluguel se o proprietário não consertar nada?", "tipo": "normal"}
+{"id": "i031", "setor": "imobiliario", "query": "como funciona o SFH e quem tem direito a esse financiamento?", "tipo": "normal"}
+{"id": "i032", "setor": "imobiliario", "query": "o que muda se o reajuste do aluguel for pelo IPCA em vez do IGP-M?", "tipo": "normal"}
+{"id": "i033", "setor": "imobiliario", "query": "quais certidões preciso pedir antes de comprar um imóvel?", "tipo": "normal"}
+{"id": "i034", "setor": "imobiliario", "query": "como funciona a assembleia de condomínio e quem pode votar?", "tipo": "normal"}
+{"id": "i035", "setor": "imobiliario", "query": "posso comprar imóvel com nome sujo no SPC?", "tipo": "normal"}
+{"id": "i036", "setor": "imobiliario", "query": "o que é distrato de imóvel na planta e quanto recebo de volta?", "tipo": "normal"}
+{"id": "i037", "setor": "imobiliario", "query": "como avaliar se o preço pedido pelo imóvel está justo?", "tipo": "normal"}
+{"id": "i038", "setor": "imobiliario", "query": "o proprietário pode entrar no apartamento alugado sem avisar?", "tipo": "normal"}
+{"id": "i039", "setor": "imobiliario", "query": "qual a diferença entre aluguel residencial e comercial na lei?", "tipo": "normal"}
+{"id": "i040", "setor": "imobiliario", "query": "como funciona o seguro habitacional no financiamento imobiliário?", "tipo": "normal"}
+{"id": "i041", "setor": "imobiliario", "query": "posso financiar 100% do valor do imóvel ou sempre precisa de entrada?", "tipo": "normal"}
+{"id": "i042", "setor": "imobiliario", "query": "o que acontece se eu atrasar a parcela do financiamento da casa?", "tipo": "normal"}
+{"id": "i043", "setor": "imobiliario", "query": "vale a pena comprar casa ou continuar pagando aluguel?", "tipo": "normal"}
+{"id": "i044", "setor": "imobiliario", "query": "como transferir o financiamento imobiliário para outra pessoa?", "tipo": "normal"}
+{"id": "i045", "setor": "imobiliario", "query": "o que é alienação fiduciária no contrato de compra do imóvel?", "tipo": "normal"}
+{"id": "i046", "setor": "imobiliario", "query": "posso ter dois financiamentos habitacionais ao mesmo tempo?", "tipo": "normal"}
+{"id": "i047", "setor": "imobiliario", "query": "como funciona o processo de despejo por falta de pagamento?", "tipo": "normal"}
+{"id": "i048", "setor": "imobiliario", "query": "o síndico pode proibir animais de estimação no condomínio?", "tipo": "normal"}
+{"id": "i049", "setor": "imobiliario", "query": "quais taxas além do preço entram na compra de um imóvel?", "tipo": "normal"}
+{"id": "i050", "setor": "imobiliario", "query": "como saber se o imóvel tem alguma pendência na justiça?", "tipo": "normal"}
+{"id": "i051", "setor": "imobiliario", "query": "o que é tabela Price e por que a parcela parece mais alta no começo?", "tipo": "normal"}
+{"id": "i052", "setor": "imobiliario", "query": "posso alugar um quarto da minha casa sem autorizar o condomínio?", "tipo": "normal"}
+{"id": "i053", "setor": "imobiliario", "query": "como funciona a compra de imóvel com financiamento da Caixa?", "tipo": "normal"}
+{"id": "i054", "setor": "imobiliario", "query": "o que fazer se a construtora atrasar a entrega do prédio?", "tipo": "normal"}
+{"id": "i055", "setor": "imobiliario", "query": "quanto custa em média a comissão de corretagem na venda?", "tipo": "normal"}
+{"id": "i056", "setor": "imobiliario", "query": "posso usar o FGTS para comprar imóvel comercial?", "tipo": "normal"}
+{"id": "i057", "setor": "imobiliario", "query": "o que é laudo de avaliação do banco no financiamento?", "tipo": "normal"}
+{"id": "i058", "setor": "imobiliario", "query": "como negociar o valor do aluguel com o proprietário?", "tipo": "normal"}
+{"id": "i059", "setor": "imobiliario", "query": "o inquilino é obrigado a pintar o imóvel na saída?", "tipo": "normal"}
+{"id": "i060", "setor": "imobiliario", "query": "qual a diferença entre imóvel quitado e imóvel alienado?", "tipo": "normal"}
+{"id": "i061", "setor": "imobiliario", "query": "como funciona o financiamento de terreno para construir?", "tipo": "normal"}
+{"id": "i062", "setor": "imobiliario", "query": "o que é taxa de condomínio e o que ela costuma cobrir?", "tipo": "normal"}
+{"id": "i063", "setor": "imobiliario", "query": "posso comprar imóvel em nome de pessoa jurídica?", "tipo": "normal"}
+{"id": "i064", "setor": "imobiliario", "query": "como funciona a vistoria de saída e se posso contestar danos?", "tipo": "normal"}
+{"id": "i065", "setor": "imobiliario", "query": "o que significa imóvel com ônus reais na matrícula?", "tipo": "normal"}
+{"id": "i066", "setor": "imobiliario", "query": "vale a pena investir em imóvel para alugar e viver de renda?", "tipo": "normal"}
+{"id": "i067", "setor": "imobiliario", "query": "como calcular a renda mínima exigida para o financiamento?", "tipo": "normal"}
+{"id": "i068", "setor": "imobiliario", "query": "o proprietário pode recusar renovar o contrato de aluguel?", "tipo": "normal"}
+{"id": "i069", "setor": "imobiliario", "query": "o que é escritura pública e quando ela é obrigatória?", "tipo": "normal"}
+{"id": "i070", "setor": "imobiliario", "query": "posso financiar um imóvel que ainda está na planta?", "tipo": "normal"}
+{"id": "i071", "setor": "imobiliario", "query": "como funciona a portabilidade do crédito imobiliário?", "tipo": "normal"}
+{"id": "i072", "setor": "imobiliario", "query": "o que fazer se o vizinho de cima tem infiltração que danifica meu teto?", "tipo": "normal"}
+{"id": "i073", "setor": "imobiliario", "query": "quais regras o condomínio pode impor sobre obras no apartamento?", "tipo": "normal"}
+{"id": "i074", "setor": "imobiliario", "query": "como saber se o valor do IPTU está correto ou se posso contestar?", "tipo": "normal"}
+{"id": "i075", "setor": "imobiliario", "query": "o que é contrato de gaveta e quais os riscos desse tipo de compra?", "tipo": "normal"}
+{"id": "i076", "setor": "imobiliario", "query": "posso incluir o cônjuge no financiamento depois de casar?", "tipo": "normal"}
+{"id": "i077", "setor": "imobiliario", "query": "como funciona o aluguel por temporada e quais impostos pagamos?", "tipo": "normal"}
+{"id": "i078", "setor": "imobiliario", "query": "o que é área privativa e área comum no memorial do apartamento?", "tipo": "normal"}
+{"id": "i079", "setor": "imobiliario", "query": "vale a pena comprar imóvel na periferia esperando valorização?", "tipo": "normal"}
+{"id": "i080", "setor": "imobiliario", "query": "como funciona a garantia locatícia com título de capitalização?", "tipo": "normal"}
+{"id": "i081", "setor": "imobiliario", "query": "o que acontece com o imóvel financiado se a pessoa falecer?", "tipo": "normal"}
+{"id": "i082", "setor": "imobiliario", "query": "posso alugar meu imóvel se ainda estou pagando o financiamento?", "tipo": "normal"}
+{"id": "i083", "setor": "imobiliario", "query": "como pedir a isenção ou desconto de IPTU para aposentado?", "tipo": "normal"}
+{"id": "i084", "setor": "imobiliario", "query": "o que é convenção de condomínio e por que devo ler antes de comprar?", "tipo": "normal"}
+{"id": "i085", "setor": "imobiliario", "query": "quais documentos o vendedor deve apresentar na hora da compra?", "tipo": "normal"}
+{"id": "i086", "setor": "imobiliario", "query": "como funciona o leilão extrajudicial de imóvel com alienação fiduciária?", "tipo": "normal"}
+{"id": "i087", "setor": "imobiliario", "query": "o inquilino pode sublocar o apartamento sem autorização?", "tipo": "normal"}
+{"id": "i088", "setor": "imobiliario", "query": "o que é taxa de juros efetiva no financiamento imobiliário?", "tipo": "normal"}
+{"id": "i089", "setor": "imobiliario", "query": "como calcular o custo efetivo total do crédito habitacional?", "tipo": "normal"}
+{"id": "i090", "setor": "imobiliario", "query": "posso comprar um imóvel rural com financiamento bancário?", "tipo": "normal"}
+{"id": "i091", "setor": "imobiliario", "query": "o que fazer se a imobiliária não devolver a caução na saída?", "tipo": "normal"}
+{"id": "i092", "setor": "imobiliario", "query": "como funciona a usucapião urbana de imóvel residencial?", "tipo": "normal"}
+{"id": "i093", "setor": "imobiliario", "query": "vale a pena reformar antes de vender ou vender no estado?", "tipo": "normal"}
+{"id": "i094", "setor": "imobiliario", "query": "o que é fundo de reserva do condomínio e quem controla?", "tipo": "normal"}
+{"id": "i095", "setor": "imobiliario", "query": "posso financiar a compra de um imóvel com alguém que não é parente?", "tipo": "normal"}
+{"id": "i096", "setor": "imobiliario", "query": "como saber se o bairro tem risco de alagamento antes de comprar?", "tipo": "normal"}
+{"id": "i097", "setor": "imobiliario", "query": "o que é contrato de locação com prazo determinado e indeterminado?", "tipo": "normal"}
+{"id": "i098", "setor": "imobiliario", "query": "como funciona a compra de imóvel em inventário ainda não finalizado?", "tipo": "normal"}
+{"id": "i099", "setor": "imobiliario", "query": "o síndico pode multar morador por barulho excessivo?", "tipo": "normal"}
+{"id": "i100", "setor": "imobiliario", "query": "quais bancos costumam ter as menores taxas de juros imobiliárias?", "tipo": "normal"}
+{"id": "i101", "setor": "imobiliario", "query": "posso usar o FGTS se já tive um financiamento habitacional antes?", "tipo": "normal"}
+{"id": "i102", "setor": "imobiliario", "query": "o que é promessa de compra e venda e ela me protege?", "tipo": "normal"}
+{"id": "i103", "setor": "imobiliario", "query": "como funciona a avaliação de imóvel para inventário e partilha?", "tipo": "normal"}
+{"id": "i104", "setor": "imobiliario", "query": "o proprietário pode aumentar o aluguel no meio do contrato?", "tipo": "normal"}
+{"id": "i105", "setor": "imobiliario", "query": "o que fazer se o apartamento na planta tiver metragem menor que o prometido?", "tipo": "normal"}
+{"id": "i106", "setor": "imobiliario", "query": "como declarar a compra de imóvel no imposto de renda?", "tipo": "normal"}
+{"id": "i107", "setor": "imobiliario", "query": "posso desistir da compra depois de assinar o compromisso de venda?", "tipo": "normal"}
+{"id": "i108", "setor": "imobiliario", "query": "o que é certidão de ônus reais e por que ela é importante?", "tipo": "normal"}
+{"id": "i109", "setor": "imobiliario", "query": "como funciona o seguro-fiança e quanto costuma custar por ano?", "tipo": "normal"}
+{"id": "i110", "setor": "imobiliario", "query": "vale a pena comprar casa geminada ou sobrado em condomínio fechado?", "tipo": "normal"}
+{"id": "i111", "setor": "imobiliario", "query": "o que acontece se o condomínio for a leilão por dívida coletiva?", "tipo": "normal"}
+{"id": "i112", "setor": "imobiliario", "query": "posso morar no imóvel financiado se ele estiver no nome do banco?", "tipo": "normal"}
+{"id": "i113", "setor": "imobiliario", "query": "como negociar a comissão do corretor para baixo na venda?", "tipo": "normal"}
+{"id": "i114", "setor": "imobiliario", "query": "o que é ITBI e como se calcula o valor a pagar no cartório?", "tipo": "normal"}
+{"id": "i115", "setor": "imobiliario", "query": "quais cuidados tomar ao alugar para um desconhecido pela internet?", "tipo": "normal"}
+{"id": "i116", "setor": "imobiliario", "query": "como funciona a amortização extraordinária do financiamento?", "tipo": "normal"}
+{"id": "i117", "setor": "imobiliario", "query": "o inquilino tem direito de preferência se o dono for vender o imóvel?", "tipo": "normal"}
+{"id": "i118", "setor": "imobiliario", "query": "o que é uso exclusivo de área comum e se o síndico pode liberar?", "tipo": "normal"}
+{"id": "i119", "setor": "imobiliario", "query": "posso comprar um imóvel com recurso de herança ainda não inventariada?", "tipo": "normal"}
+{"id": "i120", "setor": "imobiliario", "query": "como saber se o preço do metro quadrado do bairro está caro?", "tipo": "normal"}
+{"id": "i121", "setor": "imobiliario", "query": "o que fazer se descobrir vício oculto no imóvel depois da compra?", "tipo": "normal"}
+{"id": "i122", "setor": "imobiliario", "query": "como funciona a locação por plataforma tipo Airbnb em condomínio?", "tipo": "normal"}
+{"id": "i123", "setor": "imobiliario", "query": "qual a diferença entre corretor autônomo e imobiliária na hora de vender?", "tipo": "normal"}
+{"id": "i124", "setor": "imobiliario", "query": "posso financiar um imóvel que está em nome de empresa?", "tipo": "normal"}
+{"id": "i125", "setor": "imobiliario", "query": "o que é laudemio e quando se paga na compra do imóvel?", "tipo": "normal"}
+{"id": "i126", "setor": "imobiliario", "query": "como funciona a revisão do valor do aluguel na justiça?", "tipo": "normal"}
+{"id": "i127", "setor": "imobiliario", "query": "o que é patrimônio de afetação e como protege quem compra na planta?", "tipo": "normal"}
+{"id": "i128", "setor": "imobiliario", "query": "posso usar parte do FGTS e financiar o restante no mesmo imóvel?", "tipo": "normal"}
+{"id": "i129", "setor": "imobiliario", "query": "como regularizar um imóvel que só tem contrato de gaveta antigo?", "tipo": "normal"}
+{"id": "i130", "setor": "imobiliario", "query": "o que fazer se o síndico não presta contas das despesas do prédio?", "tipo": "normal"}
+{"id": "i131", "setor": "imobiliario", "query": "vale a pena comprar apartamento studio para investir em aluguel?", "tipo": "normal"}
+{"id": "i132", "setor": "imobiliario", "query": "como funciona o programa Casa Verde e Amarela ou Minha Casa Minha Vida hoje?", "tipo": "normal"}
+{"id": "i133", "setor": "imobiliario", "query": "o proprietário pode pedir o imóvel de volta para uso próprio?", "tipo": "normal"}
+{"id": "i134", "setor": "imobiliario", "query": "quais são os custos de cartório na transferência de um imóvel?", "tipo": "normal"}
+{"id": "i135", "setor": "imobiliario", "query": "o que é taxa de administração da imobiliária no aluguel?", "tipo": "normal"}
+{"id": "i136", "setor": "imobiliario", "query": "posso incluir móveis e eletrodomésticos no contrato de aluguel?", "tipo": "normal"}
+{"id": "i137", "setor": "imobiliario", "query": "como saber se a construtora é confiável antes de comprar na planta?", "tipo": "normal"}
+{"id": "i138", "setor": "imobiliario", "query": "o que é CRI e como ele se relaciona com o crédito imobiliário?", "tipo": "normal"}
+{"id": "i139", "setor": "imobiliario", "query": "posso recusar a vistoria se a imobiliária marcar em horário ruim?", "tipo": "normal"}
+{"id": "i140", "setor": "imobiliario", "query": "como funciona a partilha de imóvel em caso de divórcio?", "tipo": "normal"}
+{"id": "i141", "setor": "imobiliario", "query": "o que é índice de liquidez do imóvel e por que importa na venda?", "tipo": "normal"}
+{"id": "i142", "setor": "imobiliario", "query": "vale a pena fazer consórcio ou é melhor guardar e comprar à vista?", "tipo": "normal"}
+{"id": "i143", "setor": "imobiliario", "query": "como contestar multas indevidas aplicadas pelo condomínio?", "tipo": "normal"}
+{"id": "i144", "setor": "imobiliario", "query": "o que fazer se o comprador desistir depois de assinar o contrato?", "tipo": "normal"}
+{"id": "i145", "setor": "imobiliario", "query": "posso financiar um segundo imóvel se o primeiro ainda está financiado?", "tipo": "normal"}
+{"id": "i146", "setor": "imobiliario", "query": "como funciona o reajuste anual do IPTU na prefeitura?", "tipo": "normal"}
+{"id": "i147", "setor": "imobiliario", "query": "o que é área construída e área de terreno na documentação?", "tipo": "normal"}
+{"id": "i148", "setor": "imobiliario", "query": "posso morar de aluguel e ainda usar o FGTS para comprar outro imóvel?", "tipo": "normal"}
+{"id": "i149", "setor": "imobiliario", "query": "como saber se o imóvel tem débito de água, luz ou IPTU atrasado?", "tipo": "normal"}
+{"id": "i150", "setor": "imobiliario", "query": "o que é usucapião familiar e quem tem direito a pedir?", "tipo": "normal"}
+{"id": "i151", "setor": "imobiliario", "query": "como funciona a compra de imóvel com financiamento do banco privado?", "tipo": "normal"}
+{"id": "i152", "setor": "imobiliario", "query": "o inquilino precisa autorizar visita de interessados na venda?", "tipo": "normal"}
+{"id": "i153", "setor": "imobiliario", "query": "o que é taxa de corretagem embutida no preço do imóvel na planta?", "tipo": "normal"}
+{"id": "i154", "setor": "imobiliario", "query": "vale a pena comprar casa em condomínio de casas ou rua aberta?", "tipo": "normal"}
+{"id": "i155", "setor": "imobiliario", "query": "como calcular o retorno do aluguel em relação ao preço do imóvel?", "tipo": "normal"}
+{"id": "i156", "setor": "imobiliario", "query": "o que fazer se o cartório recusar o registro da escritura?", "tipo": "normal"}
+{"id": "i157", "setor": "imobiliario", "query": "posso alugar um imóvel comercial com contrato residencial?", "tipo": "normal"}
+{"id": "i158", "setor": "imobiliario", "query": "como funciona a garantia com fiador e quais documentos ele precisa?", "tipo": "normal"}
+{"id": "i159", "setor": "imobiliario", "query": "o que é averbação na matrícula e quando ela é necessária?", "tipo": "normal"}
+{"id": "i160", "setor": "imobiliario", "query": "posso comprar imóvel de leilão com financiamento bancário?", "tipo": "normal"}
+{"id": "i161", "setor": "imobiliario", "query": "como evitar cair em golpe na hora de alugar ou comprar imóvel?", "tipo": "normal"}
+{"id": "i162", "setor": "imobiliario", "query": "o que é taxa de evolução de obra no financiamento na planta?", "tipo": "normal"}
+{"id": "i163", "setor": "imobiliario", "query": "posso pedir indenização se o condomínio não resolver problemas estruturais?", "tipo": "normal"}
+{"id": "i164", "setor": "imobiliario", "query": "como funciona a compra de imóvel com recursos do consórcio contemplado?", "tipo": "normal"}
+{"id": "i165", "setor": "imobiliario", "query": "o que considerar ao escolher entre apartamento térreo e cobertura?", "tipo": "normal"}
+{"id": "i166", "setor": "imobiliario", "query": "qual a diferença prática entre comprar à vista e financiar a longo prazo?", "tipo": "normal"}
+{"id": "p001", "setor": "saude", "query": "Qual o telefone da Clínica São Marcos de Ribeirão Preto?", "tipo": "pegadinha"}
+{"id": "p002", "setor": "saude", "query": "Quanto o Dr. Fernando Almeida cobra pela consulta de retina em Curitiba?", "tipo": "pegadinha"}
+{"id": "p003", "setor": "saude", "query": "A dentista Camila Ribeiro atende no consultório Odontovida de Londrina aos sábados?", "tipo": "pegadinha"}
+{"id": "p004", "setor": "saude", "query": "Qual o horário de funcionamento do laboratório LabMais em Campina Grande neste feriado?", "tipo": "pegadinha"}
+{"id": "p005", "setor": "saude", "query": "Quantas vagas o Hospital Regional de Maringá abriu para técnico de enfermagem em março de 2025?", "tipo": "pegadinha"}
+{"id": "p006", "setor": "saude", "query": "O fisioterapeuta André Moura da Clínica Movimente em Florianópolis tem agenda livre na próxima terça?", "tipo": "pegadinha"}
+{"id": "p007", "setor": "saude", "query": "Qual o endereço exato da farmácia FarmaBem no bairro Jardim América em Goiânia?", "tipo": "pegadinha"}
+{"id": "p008", "setor": "saude", "query": "A pediatra Dra. Helena Costa do Instituto Criança Viva em Belém aceita o plano SaúdeTotal Gold?", "tipo": "pegadinha"}
+{"id": "p009", "setor": "saude", "query": "Quanto custa a ressonância de joelho na Clínica Diagnóstico Avançado de Uberlândia sem convênio?", "tipo": "pegadinha"}
+{"id": "p010", "setor": "juridico", "query": "Quantos processos o escritório Vieira & Castro ganhou em 2024?", "tipo": "pegadinha"}
+{"id": "p011", "setor": "juridico", "query": "Qual o valor da hora de consultoria do advogado Dr. Ricardo Nunes em direito tributário em Brasília?", "tipo": "pegadinha"}
+{"id": "p012", "setor": "juridico", "query": "O escritório Mendes Advogados Associados de Porto Alegre atende causas trabalhistas de domésticas?", "tipo": "pegadinha"}
+{"id": "p013", "setor": "juridico", "query": "Qual o telefone da Dra. Patricia Lima, especialista em direito de família em Salvador?", "tipo": "pegadinha"}
+{"id": "p014", "setor": "juridico", "query": "Quantas audiências o juiz substituto Dr. Otávio Barros presidiu na 3ª Vara Cível de Campinas em 2023?", "tipo": "pegadinha"}
+{"id": "p015", "setor": "juridico", "query": "A advogada Juliana Prado do escritório Prado & Souza em Fortaleza cobra honorários fixos em inventário?", "tipo": "pegadinha"}
+{"id": "p016", "setor": "juridico", "query": "Qual o horário de atendimento do plantão do cartório do 2º Ofício de Notas de Juiz de Fora?", "tipo": "pegadinha"}
+{"id": "p017", "setor": "juridico", "query": "O escritório Almeida Legal em Recife tem vaga aberta para estagiário de direito penal neste semestre?", "tipo": "pegadinha"}
+{"id": "p018", "setor": "imobiliario", "query": "Qual o valor do condomínio do Edifício Solar das Palmeiras em Moema?", "tipo": "pegadinha"}
+{"id": "p019", "setor": "imobiliario", "query": "Qual o telefone da imobiliária Horizonte Azul no bairro Boa Viagem em Recife?", "tipo": "pegadinha"}
+{"id": "p020", "setor": "imobiliario", "query": "Quanto custa o aluguel do apartamento 302 do Condomínio Vista Mar em Jurerê Internacional, Florianópolis?", "tipo": "pegadinha"}
+{"id": "p021", "setor": "imobiliario", "query": "A corretora Márcia Ventura da Imóvel Certo em Belo Horizonte atende visitas aos domingos?", "tipo": "pegadinha"}
+{"id": "p022", "setor": "imobiliario", "query": "Qual a taxa de administração cobrada pela administradora Condor Gestão no Residencial Parque das Águas em Campinas?", "tipo": "pegadinha"}
+{"id": "p023", "setor": "imobiliario", "query": "O Edifício Torre Verde na avenida Beira-Mar de Fortaleza ainda tem vagas de garagem à venda?", "tipo": "pegadinha"}
+{"id": "p024", "setor": "imobiliario", "query": "Qual o IPTU anual do terreno na Rua das Acácias, 412, em Londrina, registrado sob a matrícula 58.774?", "tipo": "pegadinha"}
+{"id": "p025", "setor": "imobiliario", "query": "A construtora Nova Terra em Curitiba entrega as chaves do Residencial Alto da Serra em qual mês de 2026?", "tipo": "pegadinha"}

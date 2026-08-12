@@ -1,0 +1,59 @@
+# Parâmetros do estudo GEO-PTBR — fonte: PROMPT_GEO_PTBR.md + TASK.md
+# Mudou parâmetro => mudou a versão do experimento.
+versao_experimento: "0.3.0"
+
+queries:
+  total: 500
+  pegadinhas: 25            # ~5%, não-respondíveis pelas fontes dadas
+  setores:
+    - nome: saude
+      alvo: 167
+      nota: "YMYL — reportar diferenças de comportamento é achado-alvo"
+    - nome: juridico
+      alvo: 167
+    - nome: imobiliario
+      alvo: 166
+
+fontes:
+  por_query: 5
+  palavras_min: 150
+  palavras_max: 400
+  idioma: pt-BR
+
+tecnicas:                    # as 9 do paper original (Aggarwal et al.)
+  - cite_sources
+  - quotation_addition
+  - statistics_addition
+  - fluency_optimization
+  - easy_to_understand
+  - authoritative
+  - unique_words
+  - technical_terms
+  - keyword_stuffing
+
+engine:
+  principal:
+    modelo: gemini-3.5-flash-lite
+    via: api_direta          # NUNCA CLI/chat de plano pessoal
+    temperatura: 0.7
+    reps_por_celula: 3
+  validacao_cruzada:
+    modelo: claude-sonnet-5
+    n_queries: 50
+
+fases:
+  fase_1_2: free_tier        # síncrono, com backoff em RPM/RPD
+  fase_3: batch_pago         # obrigatório; janela alvo <= 72h; versão de modelo única
+
+custo:
+  # Teto elevado de 40 -> 60 em 2026-08-11 (decisão do Du): o estudo passou de
+  # 1 engine + validação cruzada de 50 queries para 3 engines com as 525 queries
+  # completas (gemini-3.5-flash-lite, gpt-5.6-luna, claude-haiku-4-5). O teto é
+  # a soma de todos os ledgers. Ajustado 60 -> 70 após medição real do haiku
+  # (respostas mais longas que o estimado: US$ ~42 em vez de ~34).
+  teto_usd: 70.0
+  alerta_pct: 80             # pausar e reportar
+  esperado_usd: [12, 20]
+
+fonte_alvo:
+  rotacao_posicao: true      # rotacionar posição da fonte-alvo entre cenários
