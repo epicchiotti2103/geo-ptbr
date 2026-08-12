@@ -871,6 +871,19 @@ sharper warning against portable technique catalogues. What a reader should
 not take from this row is that adding technical terms reliably helps on
 Gemini.
 
+The two arms also differ in \emph{shape}, not only in sign, and this is
+measured rather than inferred. On gemini, Technical Terms removes the target
+source from the answer entirely in $0.00\%$ of queries; on haiku it does so
+in $5.5\%$ and on luna in $6.2\%$. The negative arm is therefore not a
+uniform shrinkage of the source's share --- it is partly a threshold effect,
+where on roughly one query in twenty the optimized source stops being cited
+at all. We report this as a description of the effect's shape and stop
+there. Why technical vocabulary should push two engines toward dropping a
+source and not the third is a question about the engines' internal
+preferences, which this design observes from the outside and cannot answer;
+it is the natural target of the frontier-tier and cross-transformation
+extensions discussed in \S\ref{sec:limitations}.
+
 We are deliberately strict here. Five techniques show a sign disagreement,
 but for four of them (Cite Sources, Quotation Addition, Statistics Addition,
 Fluency Optimization) at least one engine's CI crosses zero, so the flip
@@ -1336,7 +1349,17 @@ nine of the twenty-five pitfall queries are health questions, so the
 techniques that most reliably induce a citation of a source that cannot
 answer are inducing it, in a third of cases, on YMYL content.
 
-Two boundaries keep that result from being read as more than it is. All
+Stated at the precision the design actually supports, the boundary condition
+reads: the effect of a GEO technique \emph{as executed by one transforming
+model} depends on which engine answers. The transformation step is held
+fixed by construction, which is what makes the comparison internally valid
+--- all three engines read the identical text --- and is also what the
+result is conditional on. Whether a technique executed by a different
+transforming model would produce the same disagreement is a separate
+experiment, and the released harness runs it by changing one configuration
+value.
+
+Two further boundaries keep that result from being read as more than it is. All
 three engines are economy-tier, so what we demonstrate is engine-dependence
 \emph{within} that tier; whether frontier models are steadier is untested
 here, and assuming they are is as unsupported as assuming they are not. And
