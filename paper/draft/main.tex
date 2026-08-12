@@ -86,8 +86,8 @@ Brazilian Portuguese, and turns cross-engine agreement from a robustness
 check into the measurement itself. Holding retrieval fixed, we apply each
 technique to one of five already-retrieved PT-BR sources over 525 queries in
 three sectors, and run the \emph{same} queries and the \emph{same}
-transformed sources against three engines from three model families, so that
-which engine answers is the only variable that changes.
+transformed sources against three economy-tier engines from three model
+families, so that which engine answers is the only variable that changes.
 
 The effect of a GEO technique depends on who answers. The three engines
 agree on the direction of the effect for only four of nine techniques
@@ -859,6 +859,18 @@ the study for which a sign disagreement is supported on every engine
 involved: adding technical vocabulary to a source measurably helps it on one
 engine and measurably hurts it on the other two.
 
+One asymmetry in that sentence deserves flagging here rather than only in
+\S\ref{sec:limitations}: the engine on which the technique helps is the same
+family that produced the transformed text. Self-preference is therefore a
+live alternative explanation \emph{for the positive arm specifically}, and
+this design cannot rule it out. It does not touch the negative arm --- haiku
+and luna had no hand in producing the text they penalize --- and the
+inversion as a finding survives either reading, since a technique whose
+apparent benefit is an artifact of who wrote the text is, if anything, a
+sharper warning against portable technique catalogues. What a reader should
+not take from this row is that adding technical terms reliably helps on
+Gemini.
+
 We are deliberately strict here. Five techniques show a sign disagreement,
 but for four of them (Cite Sources, Quotation Addition, Statistics Addition,
 Fluency Optimization) at least one engine's CI crosses zero, so the flip
@@ -1263,6 +1275,22 @@ not as an afterthought.
   techniques that require only a stylistic pass (e.g., Fluency
   Optimization).
 
+\item \textbf{Everything here is measured at the economy tier, and stops
+  there.} All three engines are their providers' small/economy models. That
+  was a budget decision (\S\ref{sec:results-cost}), and it bounds the claim:
+  what this study demonstrates is that the effect of a fixed GEO technique
+  is engine-dependent \emph{among economy-tier engines}, on three of them,
+  in PT-BR. Whether frontier-tier models exhibit the same instability is not
+  measured here and should not be inferred from these results in either
+  direction. Two opposite hypotheses are equally consistent with what we
+  report and equally untested by it: that larger models follow citation
+  behavior more stably, so the disagreement we measure would shrink; or that
+  the disagreement reflects genuinely different learned preferences over
+  source text, in which case tier would not remove it. Settling this needs a
+  frontier-tier run, which is a straightforward extension of the released
+  harness --- the engine is a configuration value --- and the reason we did
+  not do it is cost, not design.
+
 \end{enumerate}
 
 % =============================================================================
@@ -1307,6 +1335,15 @@ queries would not have seen. It is worth naming where that failure lands:
 nine of the twenty-five pitfall queries are health questions, so the
 techniques that most reliably induce a citation of a source that cannot
 answer are inducing it, in a third of cases, on YMYL content.
+
+Two boundaries keep that result from being read as more than it is. All
+three engines are economy-tier, so what we demonstrate is engine-dependence
+\emph{within} that tier; whether frontier models are steadier is untested
+here, and assuming they are is as unsupported as assuming they are not. And
+the sources are optimized text, not live web pages. Neither boundary rescues
+the fixed-catalogue approach --- a technique catalogue that does not survive
+three engines of one tier in one language has not earned the word
+``portable'' --- but both mark where the evidence stops.
 
 The practical implication is that ``optimizing for AI search'' is not a
 single, portable target: a content strategy validated on one generative
