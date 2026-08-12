@@ -70,9 +70,11 @@
 %     avaliação subjetiva (no momento desta versão do esqueleto, o desenho
 %     do estudo usa só Imp_wc / Imp_pwc, métricas objetivas — ver
 %     config/study.yaml e src/metrics.py).
-%   - TODO: dado/estudo de mercado sobre adoção de motores de busca
-%     generativos no Brasil, se encontrado, para reforçar a motivação da
-%     Introdução (relevância do PT-BR).
+%   - RESOLVIDO (2026-08-12): dado de mercado sobre adoção no Brasil ->
+%     entrada `dnr2026` abaixo (Reuters Institute, Digital News Report 2026,
+%     página do Brasil: 13% de uso semanal de chatbots de IA para notícias,
+%     contra 10% da média global). Preferido a levantamentos de agências de
+%     SEO, que circulam número sem metodologia publicada.
 %   - TODO: trabalho relacionado adicional sobre otimização adversarial de
 %     recomendação por LLM (Kumar & Lakkaraju, citado como contraste pelo
 %     próprio paper original — KEY_FACTS.md §6) — avaliar se vale citar
@@ -155,4 +157,17 @@
                FENAJ, IDEC e Artigo 19. Decisão unânime; o Tribunal
                caracterizou as ferramentas de opt-out existentes como
                ``falsa escolha''},
+}
+
+@techreport{dnr2026,
+  author      = {Egan, Jim and Ross Arguedas, Amy and Robertson, Craig T.
+                 and Newman, Nic and Fletcher, Richard and
+                 Nielsen, Rasmus Kleis},
+  title       = {Digital News Report 2026},
+  institution = {Reuters Institute for the Study of Journalism,
+                 University of Oxford},
+  year        = {2026},
+  note        = {Brazil country page: weekly use of AI chatbots for news at
+                 13\%, against a 10\% global average},
+  url         = {https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/brazil},
 }

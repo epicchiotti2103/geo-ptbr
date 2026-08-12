@@ -75,60 +75,34 @@
 \maketitle
 
 \begin{abstract}
-Generative engines --- AI-mediated search systems that answer user queries by
-synthesizing and citing a small set of retrieved sources --- are displacing
-traditional link-list search results, and with them the mechanics by which
-content creators earn visibility. \citet{aggarwal2024geo} introduced
-\emph{Generative Engine Optimization} (GEO): a framework and a set of nine
-content-side transformations (e.g., adding citations, adding quotations,
-adding statistics, improving fluency) that a source's owner can apply to
-increase how prominently that source is cited in a generative engine's
-answer, and showed gains of up to 40\% on English-language benchmarks with
-\texttt{gpt3.5-turbo}. Whether these findings hold outside English, and
-outside GEO's original single-source-optimization setting, is largely
-untested: \citet{puerto2025cseo} recently showed that many
-``conversational-SEO'' techniques are ineffective or actively harmful once
-multiple actors adopt them competitively, underscoring that GEO-style
-findings should not be assumed to generalize across languages, domains, or
-competitive settings without direct measurement.
-This paper reports GEO-PTBR, the first replication of the GEO protocol in
-Brazilian Portuguese (PT-BR). We reproduce, in a controlled laboratory
-setting, the citation stage of a generative engine: given a query and five
-already-retrieved PT-BR sources, we measure how the visibility of one
-designated target source changes when each of the nine GEO techniques is
-applied to it, holding everything else fixed. The study spans 525 PT-BR
-queries across three sectors (health, legal, real estate) --- 500 evaluation
-queries plus a 25-query pitfall control set designed to detect measurement
-hallucination --- with 3 repetitions per cell, and, crucially, runs the
-\emph{same} queries and the \emph{same} transformed sources against three
-generative engines from three different model families
-(\texttt{gemini-3.5-flash-lite}, \texttt{claude-haiku-4-5}, and
-\texttt{gpt-5.6-luna}), so that ``which engine answers'' is the only
-variable that changes between runs. This design turns cross-engine
-agreement from a robustness check into a measurement. The three engines
-agree on the direction of the effect for only four of the nine techniques
-($44.4\%$), and all four are techniques that \emph{hurt}: what transfers
-across engines is which optimizations backfire, not which ones work. Adding
-Technical Terms is positive on one engine ($+1.9\%$) and negative on the
-other two ($-4.4\%$, $-12.4\%$), with bootstrap confidence intervals
-excluding zero on all three --- a genuine inversion of the same technique
-over the same queries. Effect sizes are not comparable in scale either: the
-most reactive engine responds $5$--$17\times$ more strongly than the least,
-and the mechanism is not gradual, since techniques such as Unique Words and
-Statistics Addition remove a previously cited source from the answer
-entirely in up to $26\%$ and $42\%$ of queries on two engines, against at
-most $0.2\%$ on the third. We further find that five of the nine techniques
-\emph{induce} citation of sources that cannot answer the query, and that the
-health (YMYL) sector is the least responsive of the three studied. Against
-the original English results the direction of effect replicates for five of
-nine techniques, but the level does not: the original's top techniques gain
-$+27$ to $+41\%$, while our largest positive effect on any engine is
-$+2.6\%$ and four of nine techniques are negative with confidence intervals
-excluding zero. Rank correlations across the nine techniques do not reach
-significance under an exact permutation test, so we make no claim that the
-technique ordering transfers. We release the full
-dataset (queries, sources, and per-technique results per engine) and code
-publicly.
+Generative engines answer queries by synthesizing and citing a few retrieved
+sources, displacing the link list and with it the mechanics by which content
+creators earn visibility. \citet{aggarwal2024geo} introduced
+\emph{Generative Engine Optimization} (GEO): nine content-side
+transformations that raise how prominently a source is cited, with gains up
+to $40\%$ in English. This paper reports GEO-PTBR, the first replication in
+Brazilian Portuguese, and turns cross-engine agreement from a robustness
+check into the measurement itself. Holding retrieval fixed, we apply each
+technique to one of five already-retrieved PT-BR sources over 525 queries in
+three sectors, and run the \emph{same} queries and the \emph{same}
+transformed sources against three engines from three model families, so that
+which engine answers is the only variable that changes.
+
+The effect of a GEO technique depends on who answers. The three engines
+agree on the direction of the effect for only four of nine techniques
+($44.4\%$), and all four are techniques that \emph{hurt}: what transfers is
+which optimizations backfire, not which ones work. Technical Terms inverts
+outright --- $+1.9\%$ on one engine, $-4.4\%$ and $-12.4\%$ on the others,
+bootstrap intervals excluding zero on all three --- and the most reactive
+engine responds $5$--$17\times$ more strongly than the least. Against the
+original English results, five of nine directions replicate but the level
+does not: its top techniques gain $+27$ to $+41\%$; our largest positive
+effect is $+2.6\%$. Rank correlations do not reach significance under an
+exact permutation test, so we claim no transfer of technique ordering.
+Five of nine techniques induce citation of sources that cannot answer the
+query --- a safety failure, not an optimization. Sources are
+model-generated texts, not live web pages; dataset, traces and code are
+released in full.
 \end{abstract}
 
 % =============================================================================
@@ -150,7 +124,14 @@ retrieval step itself --- that can increase how much of a generated answer
 cites that source, reporting visibility gains of up to 40\% on their
 English-language GEO-bench benchmark.
 
-In Brazil, this is no longer only a content-strategy question. On April 23,
+Brazil is not a marginal case for this shift. In the Reuters Institute's
+2026 Digital News Report, weekly use of AI chatbots for news reaches 13\% of
+Brazilian respondents against a 10\% global average
+\citep{dnr2026}, placing the country above the international
+trend rather than behind it --- and the language in which those answers are
+generated is Portuguese.
+
+In Brazil, this is also no longer only a content-strategy question. On April 23,
 2026, CADE --- the Brazilian competition authority --- unanimously opened a
 formal administrative proceeding against Google over the use of journalistic
 content in AI-generated summaries, on evidence of exploitative abuse of a
@@ -189,8 +170,15 @@ does that change when one source is optimized with one of the nine GEO
 techniques. This isolates the causal effect of content-side optimization on
 the citation/summarization step, holding retrieval fixed --- it does
 \emph{not} measure whether an optimized page would have been retrieved (or
-crawled, or indexed) in the first place; see \S\ref{sec:limitations} for the
-full scope of what this design does and does not measure.
+crawled, or indexed) in the first place. Two boundaries of the object under
+study should be stated before any result is read, not discovered in the
+Limitations. The sources are model-generated PT-BR texts, labeled as such
+and released in full: our results are about \emph{optimized text}, not about
+live Brazilian web pages with their HTML, markup, boilerplate, navigation
+and domain authority, none of which this design contains. And the five
+sources per query are a fixed context, so ``visibility'' here means share of
+a generated answer, never traffic. See \S\ref{sec:limitations} for the full
+scope of what this design does and does not measure.
 
 \paragraph{Contributions.}
 \begin{enumerate}[nosep]
@@ -318,18 +306,23 @@ cross-engine behavior of their methods, which we did not evaluate.
 \paragraph{Critical surveys of the field.} \citet{martinez2026survey}
 reviews 45 GEO studies published between 2023 and 2026 and concludes that
 GEO is not a single ranking task but a stochastic, partially observable
-pipeline, and --- most relevant here --- that no reviewed technique shows a
-stable, cross-platform causal effect, with generic optimization strategies
-transferring poorly across platforms.
+pipeline, and that ``generic heuristics transfer poorly'' across the
+reviewed corpus. Its strongest negative claim is precisely scoped, and we
+reproduce that scope rather than round it off: no reviewed technique shows
+a stable, longitudinal, cross-platform causal effect \emph{on organic
+discoverability or downstream behavior}. The survey does \emph{not} deny
+that already-retrieved content can causally alter its own citation --- it
+grants exactly that, and it is exactly what we measure.
 
-Our contribution is the direct experimental counterpart of that conclusion.
-Where the survey establishes the absence of demonstrated cross-platform
-stability from the literature, we measure the instability itself, under
-controlled conditions: identical queries, identical optimized sources, three
-engines, and the same technique inverting sign with confidence intervals
-excluding zero on all three (\S\ref{sec:results-crossengine}). We also
-extend it along an axis the reviewed corpus does not cover, since that
-corpus is overwhelmingly English-language.
+Our contribution is the direct experimental counterpart, one level below
+that claim. The survey finds cross-platform stability undemonstrated in the
+literature for discoverability; we measure the instability itself at the
+citation step, where the causal effect is granted, under controlled
+conditions: identical queries, identical optimized sources, three engines,
+and the same technique inverting sign with confidence intervals excluding
+zero on all three (\S\ref{sec:results-crossengine}). We also extend it along
+an axis the reviewed corpus does not cover, since that corpus is
+overwhelmingly English-language.
 
 \paragraph{Native PT-BR evaluation resources.} Our decision to build a
 PT-BR corpus rather than translate an English one follows established
@@ -359,13 +352,22 @@ from the live Brazilian web (\S\ref{sec:limitations}): our corpus is native
 PT-BR in register and topic, but it is not a sample of real Brazilian
 pages, and we do not claim it is.
 
-\TODO{Ainda em aberto: dado de mercado sobre adoção de motores
-generativos no Brasil (share de uso), para quantificar na Introdução o que
-hoje entra por via regulatória. NOTA DE PROVENIÊNCIA: os três trabalhos
-sobre GEO citados nesta seção além
-do GEO original e do C-SEO Bench foram caracterizados a partir dos ABSTRACTS
-(verificados no arXiv), não da leitura integral --- confirmar antes da
-submissão, em especial qualquer afirmação sobre o que cada método mede.}
+% PROVENIÊNCIA (verificada 2026-08-12, comentário — não sai no PDF):
+% AutoGEO, AgenticGEO e o survey do Martinez são caracterizados a partir dos
+% ABSTRACTS, não da leitura integral. Cada frase acima foi conferida palavra a
+% palavra contra o abstract no arXiv nesta data:
+%   - wu2026autogeo: "capture unique preferences in variant domains" — o texto
+%     acima diz "specific to different domains". Confere.
+%   - yuan2026agenticgeo: citação direta ("cannot flexibly adapt to diverse
+%     content or the changing behaviors of generative engines") e "two
+%     representative engines". Confere.
+%   - martinez2026survey: a versão anterior deste parágrafo OMITIA o
+%     qualificador "on organic discoverability or downstream behavior" da
+%     conclusão do survey — o que fazia o survey parecer negar o efeito causal
+%     que ele explicitamente concede (e que é o que este estudo mede).
+%     Corrigido acima. Foi exatamente o erro que esta nota existia para pegar.
+% Nenhuma afirmação aqui depende de conteúdo fora dos abstracts. Se alguma
+% passar a depender, ler os papers inteiros antes.
 
 % =============================================================================
 \section{Methodology}
@@ -648,6 +650,15 @@ three are drawn from three different model families and are matched by
 tier --- each is its provider's small/economy model of the current
 generation --- rather than by price or parameter count, neither of which is
 disclosed consistently across providers.
+
+Engine identifiers in this paper are not names we chose: each is the
+\texttt{model\_version} string the provider's API returned, recorded in
+every trace and released with them. Where a provider returns a pinned
+snapshot, that snapshot is the identifier of record --- the Anthropic engine
+resolves to \texttt{claude-haiku-4-5-20251001}, and we write the shorter
+alias in running text only for readability. A reader checking
+reproducibility should take the strings in \texttt{traces/}, not the ones
+here.
 
 To isolate the engine variable, \textbf{the transformation step is not
 re-run per engine}: all three engines receive the identical source texts,
@@ -1291,7 +1302,10 @@ either indistinguishable from no effect or actively harmful on the primary
 engine, and five of nine induce citation of sources that cannot answer the
 query at all --- an outcome that is a safety failure rather than an
 optimization, and one that a study measuring only visibility on answerable
-queries would not have seen.
+queries would not have seen. It is worth naming where that failure lands:
+nine of the twenty-five pitfall queries are health questions, so the
+techniques that most reliably induce a citation of a source that cannot
+answer are inducing it, in a third of cases, on YMYL content.
 
 The practical implication is that ``optimizing for AI search'' is not a
 single, portable target: a content strategy validated on one generative

@@ -188,6 +188,11 @@ _CELL_ESSENCIAL = [
     "n_queries", "baseline_mean", "tecnica_mean",
     "melhoria_mediana_pct", "melhoria_mediana_ci_lo", "melhoria_mediana_ci_hi",
     "sig_mediana",
+    # A média entra APESAR de a convenção do estudo ser "mediana lidera": o
+    # paper promete que a média acompanha, e discute mediana vs média onde a
+    # escolha muda a conclusão (§5.5). Se ela não aparecer em tabela nenhuma
+    # do PDF, essa discussão fica sem o número que a sustenta.
+    "melhoria_media_pct",
 ]
 
 # Versão enxuta, para as tabelas que já são LONGAS: sem `longtable` não há
@@ -277,6 +282,7 @@ _LABEL_COLUNA = {
     "melhoria_mediana_pct": "median \\%",
     "melhoria_mediana_ci_lo": "CI lo", "melhoria_mediana_ci_hi": "CI hi",
     "sig_mediana": "CI excl.\\ 0", "pct_citacao_zerada": "\\% zeroed",
+    "melhoria_media_pct": "mean \\%",
     "mesma_direcao": "agree", "tipo_divergencia": "divergence",
     "efeito_sig_em_todos": "sig.\\ all", "n_efetivo_min": "n eff.",
     "paper_valor_pct": "paper \\%", "direcao_replica_pos": "replicates",
@@ -418,6 +424,18 @@ _LATEX_SPECIAL = {
     "}": r"\}",
     "~": r"\textasciitilde{}",
     "^": r"\textasciicircum{}",
+    # Não-ASCII que o pipeline escreve nos DADOS. Sem estas entradas o caractere
+    # simplesmente NÃO EXISTE na fonte (ptmr8t) e o pdflatex o descarta com um
+    # aviso "Missing character" no meio de milhares de linhas de log: a célula
+    # sai VAZIA no PDF, e vazio lê-se como dado faltando, não como "não se
+    # aplica". Aconteceu com o travessão em `tipo_divergencia` e
+    # `tecnicas_excluidas`. Foi encontrado à mão; se aparecer outro caractere,
+    # o lugar de resolver é aqui.
+    "\u2014": "---",   # travessão (marcador de "não se aplica" no .csv)
+    "\u2013": "--",    # meia-risca
+    "\u2192": r"$\rightarrow$",
+    "\u00b1": r"$\pm$",
+    "\u03c1": r"$\rho$",
 }
 
 _NUMERIC_RE = re.compile(r"^[+-]?\d+(\.\d+)?%?$")
