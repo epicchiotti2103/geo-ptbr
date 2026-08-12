@@ -637,7 +637,11 @@ def build_github(destino, n_queries, n_sources, versao, namespace,
         citation_cff(versao, namespace, gh_namespace), encoding="utf-8")
     (destino / ".gitignore").write_text(GITIGNORE, encoding="utf-8")
 
-    arquivos = [p for p in destino.rglob("*") if p.is_file()]
+    # `.git` fica de fora da contagem: é o histórico local preservado entre
+    # builds, não conteúdo do pacote — incluí-lo faria o número relatado
+    # crescer sozinho a cada commit.
+    arquivos = [p for p in destino.rglob("*")
+                if p.is_file() and ".git" not in p.parts]
     return len(arquivos), sum(p.stat().st_size for p in arquivos) / 1e6
 
 
@@ -658,9 +662,26 @@ def main():
 
     saida = ROOT / args.out
     hf = saida / "huggingface"
+    # O pacote é reconstruído do zero — mas PRESERVANDO qualquer .git dentro
+    # dele. publish/github/ costuma ser um clone com remote configurado e
+    # histórico próprio; um rmtree cego apaga o .git junto e o `git push`
+    # seguinte falha com "repository does not exist" sem dizer por quê.
+    # (Aconteceu em 2026-08-12: o repo público teve de ser reinicializado.)
+    gits = [p for p in saida.rglob(".git") if p.is_dir()] if saida.exists() else []
+    guardados = []
+    for g in gits:
+        tmp = ROOT / f".git_preservado_{g.parent.name}"
+        if tmp.exists():
+            shutil.rmtree(tmp)
+        shutil.move(str(g), str(tmp))
+        guardados.append((tmp, g))
     if saida.exists():
         shutil.rmtree(saida)
     (hf / "data").mkdir(parents=True)
+    for tmp, destino_git in guardados:
+        destino_git.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(tmp), str(destino_git))
+        print(f"[publish] .git preservado em {destino_git.parent}")
 
     # --- dados -------------------------------------------------------------
     copia(ROOT / "data" / "queries.jsonl", hf / "data" / "queries.jsonl")
