@@ -121,9 +121,12 @@ most $0.2\%$ on the third. We further find that five of the nine techniques
 \emph{induce} citation of sources that cannot answer the query, and that the
 health (YMYL) sector is the least responsive of the three studied. Against
 the original English results the direction of effect replicates for five of
-nine techniques (Spearman $\rho = 0.62$ on technique ordering), but the
-level does not: the original's top techniques gain $+27$ to $+41\%$, while
-our largest positive effect on any engine is $+2.6\%$. We release the full
+nine techniques, but the level does not: the original's top techniques gain
+$+27$ to $+41\%$, while our largest positive effect on any engine is
+$+2.6\%$ and four of nine techniques are negative with confidence intervals
+excluding zero. Rank correlations across the nine techniques do not reach
+significance under an exact permutation test, so we make no claim that the
+technique ordering transfers. We release the full
 dataset (queries, sources, and per-technique results per engine) and code
 publicly.
 \end{abstract}
@@ -146,6 +149,23 @@ applied via prompting to a single retrieved source, without touching the
 retrieval step itself --- that can increase how much of a generated answer
 cites that source, reporting visibility gains of up to 40\% on their
 English-language GEO-bench benchmark.
+
+In Brazil, this is no longer only a content-strategy question. On April 23,
+2026, CADE --- the Brazilian competition authority --- unanimously opened a
+formal administrative proceeding against Google over the use of journalistic
+content in AI-generated summaries, on evidence of exploitative abuse of a
+dominant position \citep{cade2026google}. What makes the case relevant to a
+measurement paper is the specific mechanism the tribunal identified: the
+existing opt-out controls were characterized as a \emph{false choice},
+because a publisher who refuses to appear in AI summaries cannot do so
+without losing search visibility it depends on commercially. The quantity
+at issue in that proceeding --- how much of a generated answer a given
+source gets, and what the publisher can do about it --- is the quantity this
+paper measures, on Brazilian-Portuguese content, in the market where the
+proceeding is running. We take no position on the antitrust question, and
+nothing in our design was chosen to inform it; we note the proceeding only
+to establish that content-side visibility in generative answers is a live,
+contested variable in this market rather than a hypothetical one.
 
 Two gaps motivate this work. First, GEO's original evaluation is entirely
 in English, over English-web sources and English-native query
@@ -212,7 +232,7 @@ full scope of what this design does and does not measure.
     4.0. Releasing the traces is deliberate: this study holds that a result
     exists only if it came from a recorded execution, and every number in
     this paper can be recomputed from those traces with the released code
-    (\TODO{GitHub repository URL}).
+    (\url{https://github.com/epicchiotti2103/geo-ptbr}, MIT).
 \end{enumerate}
 
 % =============================================================================
@@ -311,10 +331,38 @@ excluding zero on all three (\S\ref{sec:results-crossengine}). We also
 extend it along an axis the reviewed corpus does not cover, since that
 corpus is overwhelmingly English-language.
 
-\TODO{Ainda em aberto: (i) dado de mercado sobre adoção de motores
-generativos no Brasil, para reforçar a relevância do PT-BR na Introdução;
-(ii) precedente de benchmark de PLN em PT-BR, se houver um diretamente
-comparável. NOTA DE PROVENIÊNCIA: os três trabalhos citados nesta seção além
+\paragraph{Native PT-BR evaluation resources.} Our decision to build a
+PT-BR corpus rather than translate an English one follows established
+practice in Brazilian-Portuguese IR and NLP evaluation.
+\citet{bueno2024quati} introduce Quati, a Brazilian-Portuguese retrieval
+dataset built from queries written by native speakers over documents from
+high-traffic Brazilian sites, motivated precisely by the shortage of
+non-translated PT-BR IR resources; before it, PT-BR retrieval work leaned
+on machine-translated collections such as mMARCO.
+\citet{mtebbr2026} take the constraint further: MTEB-BR admits only data
+created or found in Portuguese and \emph{excludes translations by
+construction}, across 22 tasks and 93 evaluated models. Two of their
+findings bear directly on our design. First, a native benchmark measures
+something the multilingual leaderboards do not --- a model's global rank
+predicts its Portuguese rank only moderately, and one model ranks 3rd
+globally and 49th there. Second, that is the same failure mode we report
+one level up the pipeline: performance measured on one distribution does
+not carry to another, whether the shift is of language (their case) or of
+answering engine (ours).
+
+Two caveats on how we use this precedent. Neither resource is a GEO
+benchmark --- both evaluate retrieval and embedding quality, not
+content-side optimization of an already-retrieved source --- so they
+license our corpus \emph{construction} choice, not our metrics or protocol.
+And unlike theirs, our sources are model-generated rather than collected
+from the live Brazilian web (\S\ref{sec:limitations}): our corpus is native
+PT-BR in register and topic, but it is not a sample of real Brazilian
+pages, and we do not claim it is.
+
+\TODO{Ainda em aberto: dado de mercado sobre adoção de motores
+generativos no Brasil (share de uso), para quantificar na Introdução o que
+hoje entra por via regulatória. NOTA DE PROVENIÊNCIA: os três trabalhos
+sobre GEO citados nesta seção além
 do GEO original e do C-SEO Bench foram caracterizados a partir dos ABSTRACTS
 (verificados no arXiv), não da leitura integral --- confirmar antes da
 submissão, em especial qualquer afirmação sobre o que cada método mede.}
@@ -828,11 +876,19 @@ queries that pull a pooled median toward zero.
 
 \paragraph{Rank agreement.} Spearman correlation over the nine-technique
 vectors is $\rho = 0.67$ (gemini--haiku), $0.55$ (gemini--luna) and $0.48$
-(haiku--luna). No pair of engines ranks the techniques closely alike. With
-$n=9$ points these should be read as an ordering summary and not as precise
-estimates, but the pattern is consistent with the direction-agreement rate:
-a GEO strategy tuned on one generative engine cannot be assumed to carry
-over to another.
+(haiku--luna). \textbf{None of the three reaches significance}: the exact
+two-sided $p$ values, from exhaustive permutation of the $9!$ orderings, are
+$0.059$, $0.133$ and $0.194$ against a critical $|\rho|$ of $0.700$.
+
+We stress what this does and does not establish. It is not evidence that the
+engines rank the techniques alike --- no pair does so distinguishably from
+chance. Neither is it evidence that they rank them differently: failing to
+reject the null is not accepting it, and nine points cannot settle the
+question in either direction. The claim of this section rests on the
+per-technique effects and their confidence intervals
+(Table~\ref{tab:concordancia_engines}), where the inversion of Technical
+Terms \emph{is} supported on all three engines, not on the rank
+correlations, which we report for completeness and lean on for nothing.
 
 \subsection{Breakdown by sector}
 \label{sec:results-sector}
@@ -917,24 +973,37 @@ All four divergences share a shape: the original reports them as positive
 measure them as negative, three of the four distinguishably so.
 
 Rank correlation with the original's Table~1 ordering is $\rho = +0.62$ by
-median and $\rho = +0.80$ by mean. The gap between the two is itself
-informative and was anticipated by the pilot: the mean of
-Eq.~\ref{eq:improvement} is inflated by queries with very small baseline
-visibility, where a modest absolute change produces a large ratio, and it is
-the mean that flatters the agreement. We treat the median as primary
-throughout (\S\ref{sec:stats}) and therefore report $\rho = +0.62$ as the
-comparison figure, with the mean-based value reported beside it rather than
-in place of it.
+median and $\rho = +0.80$ by mean.
 
-The correct reading of $\rho = +0.62$ is that the broad ordering partly
-survives translation to PT-BR --- techniques the original ranks poorly, we
-also rank poorly --- while the level does not: the original reports its
-top techniques at $+27$ to $+41\%$ over baseline, and our largest positive
-effect on any engine is $+2.6\%$. Absolute magnitudes are not comparable
-across the two studies by construction (\S\ref{sec:stats}), so the claim
-here is about ordering and sign only. What does not survive at all is the
-premise that these techniques are reliably beneficial: on our benchmark the
-majority of distinguishable effects are penalties.
+\textbf{Neither figure licenses a claim that the ordering is preserved, and
+the median-based one is not statistically distinguishable from chance.} With
+nine techniques the permutation null can be enumerated exhaustively ($9!$
+orderings), so we report an exact two-sided $p$ rather than an asymptotic
+approximation, which is not valid at this $n$. The critical value is
+$|\rho| = 0.700$; our median-based $\rho = +0.62$ gives $p = 0.086$, and only
+the mean-based $\rho = +0.80$ reaches significance ($p = 0.014$).
+
+This is an uncomfortable pairing and we report it rather than resolve it in
+our favour. The statistic we designated as primary in advance, for reasons
+independent of this comparison (\S\ref{sec:stats}), does not support an
+ordering claim; the statistic we designated as unreliable does. Choosing the
+mean here would be selecting the estimator by its result. We therefore make
+no claim that the technique ordering transfers from English to PT-BR: at
+$n=9$ this study is simply underpowered to establish it either way, and any
+future replication comparing technique rankings should treat nine points as
+a descriptive summary, not a test.
+
+What the data \emph{does} support is a claim about level rather than order,
+and it does not depend on the correlation at all. The original reports its
+top techniques at $+27$ to $+41\%$ over baseline; our largest positive
+effect on any engine is $+2.6\%$, four of nine techniques are negative with
+confidence intervals excluding zero, and the largest effect measured
+anywhere in this study is a penalty of $-81.5\%$. Absolute magnitudes are
+not comparable across studies by construction (\S\ref{sec:stats}), so we do
+not compare $+40\%$ against $+2.6\%$ as quantities. The comparison that
+survives is qualitative and, for a practitioner, the decisive one: in the
+original setting these techniques are a set of reliable gains, and in ours
+they are mostly not gains at all.
 
 \subsection{Citation induction on pitfall queries}
 \label{sec:results-pitfall}
@@ -1197,11 +1266,14 @@ excluding zero on all three. Agreement itself falls from $66.7\%$ with two
 engines to $44.4\%$ with three, so a two-engine cross-validation would have
 overstated how far these results travel.
 
-Against the original English study, the ordering of techniques partially
-replicates (Spearman $\rho = 0.62$; five of nine directions match) while the
-level does not: where the original reports its best techniques at $+27$ to
-$+41\%$, our largest positive effect on any engine is $+2.6\%$, and the
-largest effect anywhere in the study is a penalty of $-81.5\%$. Sector
+Against the original English study, five of nine effect directions match,
+but the level does not: where the original reports its best techniques at
+$+27$ to $+41\%$, our largest positive effect on any engine is $+2.6\%$, and
+the largest effect anywhere in the study is a penalty of $-81.5\%$. We do
+not claim the technique \emph{ordering} transfers --- with nine techniques,
+an exact permutation test leaves the rank correlations indistinguishable
+from chance, in this study and, by the same arithmetic, in any study that
+compares GEO techniques by rank at this $n$. Sector
 behavior compounds this --- health, the YMYL sector, is the least responsive
 of the three, and the only effect stable across all sectors is the harm done
 by Keyword Stuffing.

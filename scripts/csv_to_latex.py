@@ -122,9 +122,15 @@ KNOWN_TABLES = {
     ),
     "spearman_engines": (
         "Pairwise Spearman rank correlation between engines over the "
-        "nine-technique vector of median relative improvements. With $n=9$ "
-        "points the confidence interval is wide: this is reported as an "
-        "ordering summary, not as a precision estimate."
+        "nine-technique vector of median relative improvements. The $p$ is "
+        "exact --- the permutation null over the $9!$ orderings is enumerated "
+        "in full, since the asymptotic approximation is not valid at $n=9$. "
+        "\\textbf{No pair reaches significance}: the critical $|\\rho|$ is "
+        "$0.700$ (lower where ties in the ranks shrink the null), above every "
+        "$\\rho$ observed here. These correlations are reported for "
+        "completeness and support no claim about ordering; the "
+        "per-technique effects and their intervals "
+        "(Table~\\ref{tab:concordancia_engines}) are what this study leans on."
     ),
 }
 
@@ -239,8 +245,17 @@ PAPER_VIEW = {
                     "nosso_melhoria_mediana_ci_hi", "nosso_n_queries",
                     "sig_mediana", "direcao_replica"],
     },
-    # tabela_custo (11 linhas), spearman_engines (12) e inducao_pegadinhas (18)
-    # já cabem: sem view, saem inteiras.
+    # Spearman: com as colunas de significância exata a tabela foi de 7 para 10
+    # colunas e o \resizebox começou a encolher demais. Cortam-se as duas
+    # constantes (n_tecnicas=9 em toda linha, tecnicas_excluidas vazio) — o n
+    # está na legenda, e o .csv continua com tudo. As colunas que NÃO se cortam
+    # são p_exato/rho_critico/sig_spearman: são o ponto da tabela.
+    "spearman_engines": {
+        "columns": ["conjunto", "metrica", "engine_a", "engine_b", "spearman",
+                    "p_exato", "rho_critico", "sig_spearman"],
+    },
+    # tabela_custo (11 linhas) e inducao_pegadinhas (18) já cabem: sem view,
+    # saem inteiras.
 }
 
 # Acima deste número de linhas, a tabela sai como `longtable` (quebra entre
@@ -271,6 +286,10 @@ _LABEL_COLUNA = {
     "nosso_melhoria_mediana_ci_lo": "CI lo",
     "nosso_melhoria_mediana_ci_hi": "CI hi",
     "nosso_n_queries": "n",
+    "engine_a": "engine A", "engine_b": "engine B",
+    "spearman": "$\\rho$", "p_exato": "exact $p$",
+    "rho_critico": "crit.\\ $|\\rho|$", "sig_spearman": "$\\rho \\neq 0$",
+    "n_tecnicas": "n tech.", "tecnicas_excluidas": "excluded",
 }
 
 # Engines: o slug completo como cabeçalho de coluna é impagável em largura.

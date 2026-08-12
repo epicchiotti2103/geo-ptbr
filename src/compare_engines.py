@@ -372,12 +372,24 @@ def build_spearman(cells, tecnicas, engines, metricas):
                         xs.append(va)
                         ys.append(vb)
                         usadas.append(tecnica)
+                    # p EXATO por permutação: com 9 técnicas o valor crítico de
+                    # |ρ| a 5% bicaudal é 0,70, acima de TODOS os ρ que este
+                    # estudo mede. Reportar ρ sem o p convida a ler ordenação
+                    # onde não há evidência de ordenação.
+                    p_exato = aggregate.spearman_p_exato(xs, ys)
+                    crit = aggregate.spearman_critico(xs, ys)
                     rows.append({
                         "conjunto": conjunto,
                         "metrica": metrica,
                         "engine_a": a,
                         "engine_b": b,
                         "spearman": aggregate.spearman(xs, ys),
+                        "p_exato": p_exato,
+                        "rho_critico": crit,
+                        "sig_spearman": (
+                            "n insuficiente" if p_exato is None
+                            else ("sim" if p_exato < aggregate.ALPHA else "não")
+                        ),
                         "n_tecnicas": len(usadas),
                         "tecnicas_excluidas": ", ".join(t for t in tecnicas if t not in usadas) or "—",
                     })
@@ -390,6 +402,9 @@ COLS_SPEARMAN = [
     ("engine_a", "engine A", "str"),
     ("engine_b", "engine B", "str"),
     ("spearman", "Spearman ρ (mediana Eq. 4, 9 técnicas)", "float4"),
+    ("p_exato", "p bicaudal exato (permutação)", "float4"),
+    ("rho_critico", "|ρ| crítico a 5%", "float4"),
+    ("sig_spearman", "ρ ≠ 0 (5%)?", "str"),
     ("n_tecnicas", "n técnicas comparadas", "int"),
     ("tecnicas_excluidas", "técnicas sem valor nos dois", "str"),
 ]
@@ -613,9 +628,10 @@ def main():
         "Correlação de Spearman entre engines sobre o vetor de melhorias por técnica",
         header, COLS_SPEARMAN, rows_sp,
         footer_lines=rodape + [
-            "- ρ calculado sobre 9 pontos (as 9 técnicas). Informativo: com n=9 o "
-            "intervalo de confiança de Spearman é largo — usar como ordenação, não "
-            "como estimativa de precisão.",
+            "- ρ calculado sobre 9 pontos (as 9 técnicas). O p é EXATO, por permutação "
+            "exaustiva das 9! ordens — com n=9 a aproximação assintótica não vale. O "
+            "|ρ| crítico a 5% bicaudal é 0,70 (sem empates): ρ abaixo disso NÃO sustenta "
+            "afirmação sobre ordenação, por mais alto que pareça.",
         ],
     )
 

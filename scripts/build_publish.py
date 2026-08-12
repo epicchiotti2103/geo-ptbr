@@ -409,9 +409,15 @@ variable across runs is which engine answers.
 - **5 of 9 techniques induce citation of sources that cannot answer the
   query.** Baseline visibility on those control queries is exactly zero, so
   the pipeline is not hallucinating: the techniques are.
-- Against the original English results, 5 of 9 directions replicate
-  (Spearman $\\rho = 0.62$), but the level does not: the original's top
-  techniques gain $+27$ to $+41\\%$; our largest positive effect is $+2.6\\%$.
+- Against the original English results, 5 of 9 directions replicate, but the
+  level does not: the original's top techniques gain $+27$ to $+41\\%$; our
+  largest positive effect is $+2.6\\%$.
+- **No rank correlation in this study is statistically significant.** With
+  $n = 9$ techniques the permutation null is enumerated in full ($9!$ orders),
+  and the critical $|\\rho|$ at 5% is $0.700$ --- above every $\\rho$ we
+  measure (engine pairs: $0.667$, $0.550$, $0.483$; against the original:
+  $0.617$ by median). We report them and claim nothing from them, in either
+  direction.
 
 ## Layout
 
@@ -529,7 +535,75 @@ paper/draft/*.synctex.gz
 """
 
 
-def build_github(destino, n_queries, n_sources, versao, namespace):
+# Data do release, em ISO. NÃO é `date.today()`: o Zenodo grava este campo no
+# DOI, e um build rodado noutro dia mudaria o registro sem que nada no estudo
+# tivesse mudado. Bump manual, junto da tag.
+DATA_RELEASE = "2026-08-12"
+
+
+def citation_cff(versao, namespace, gh_namespace):
+    """CITATION.cff — como citar o repositório.
+
+    Existe por dois motivos: o GitHub passa a mostrar "Cite this repository",
+    e a integração Zenodo↔GitHub lê este arquivo ao cunhar o DOI do release.
+    Sem ele o DOI sai com autoria derivada do login do git, que não é o nome
+    do autor.
+
+    Não traz `preferred-citation` porque o preprint ainda não tem identificador
+    — quando o arXiv atribuir um, é aqui que ele entra, e só então.
+    """
+    return f"""cff-version: 1.2.0
+message: "If you use this dataset or code, please cite it as below."
+title: "GEO-PTBR: a Brazilian-Portuguese replication of Generative Engine Optimization"
+abstract: >-
+  Replication of the nine GEO content-side optimization techniques
+  (Aggarwal et al., arXiv:2311.09735) on a 525-query Brazilian-Portuguese
+  benchmark, measured across three generative engines. Includes the
+  benchmark, the measurement pipeline, and the per-engine and cross-engine
+  results with bootstrap confidence intervals.
+type: dataset
+authors:
+  - family-names: Picchiotti
+    given-names: Elio Suraci
+    affiliation: "AEO BR, Caracol Media"
+    email: elio.picchiotti@aeobr.com.br
+version: "{versao or '0.0.0'}"
+date-released: "{DATA_RELEASE}"
+license:
+  - MIT
+  - CC-BY-4.0
+repository-code: "https://github.com/{gh_namespace}/geo-ptbr"
+url: "https://huggingface.co/datasets/{namespace}/geo-ptbr"
+keywords:
+  - generative engine optimization
+  - GEO
+  - Brazilian Portuguese
+  - information retrieval
+  - LLM evaluation
+  - replication study
+references:
+  - type: article
+    title: "GEO: Generative Engine Optimization"
+    authors:
+      - family-names: Aggarwal
+        given-names: Pranjal
+      - family-names: Murahari
+        given-names: Vishvak
+      - family-names: Rajpurohit
+        given-names: Tanmay
+      - family-names: Kalyan
+        given-names: Ashwin
+      - family-names: Narasimhan
+        given-names: Karthik
+      - family-names: Deshpande
+        given-names: Ameet
+    year: 2024
+    notes: "arXiv:2311.09735 — the study replicated here"
+"""
+
+
+def build_github(destino, n_queries, n_sources, versao, namespace,
+                 gh_namespace):
     destino.mkdir(parents=True, exist_ok=True)
 
     for d in CODIGO_DIRS:
@@ -559,6 +633,8 @@ def build_github(destino, n_queries, n_sources, versao, namespace):
     (destino / "README.md").write_text(
         readme_github(n_queries, n_sources, versao, namespace), encoding="utf-8")
     (destino / "LICENSE").write_text(LICENSE_MIT, encoding="utf-8")
+    (destino / "CITATION.cff").write_text(
+        citation_cff(versao, namespace, gh_namespace), encoding="utf-8")
     (destino / ".gitignore").write_text(GITIGNORE, encoding="utf-8")
 
     arquivos = [p for p in destino.rglob("*") if p.is_file()]
@@ -572,6 +648,10 @@ def main():
     ap.add_argument("--namespace", default="epicchi2103",
                     help="namespace do Hugging Face, usado no exemplo de "
                          "load_dataset do card (default: epicchi2103)")
+    ap.add_argument("--gh-namespace", default="epicchiotti2103",
+                    help="usuário do GitHub — NÃO é o mesmo do Hugging Face "
+                         "(default: epicchiotti2103). Vai para o CITATION.cff, "
+                         "que o Zenodo lê ao cunhar o DOI")
     ap.add_argument("--com-traces", action="store_true",
                     help="inclui os traces brutos (~100 MB, mas é a evidência)")
     args = ap.parse_args()
@@ -642,7 +722,8 @@ def main():
 
     # --- pacote do GitHub --------------------------------------------------
     n_gh, mb_gh = build_github(saida / "github", n_queries, n_sources, versao,
-                                args.namespace)
+                               namespace=args.namespace,
+                               gh_namespace=args.gh_namespace)
     print(f"[publish] GitHub: {n_gh} arquivos, {mb_gh:.1f} MB em {saida / 'github'}")
     return 0
 

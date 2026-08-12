@@ -34,9 +34,15 @@ variable across runs is which engine answers.
 - **5 of 9 techniques induce citation of sources that cannot answer the
   query.** Baseline visibility on those control queries is exactly zero, so
   the pipeline is not hallucinating: the techniques are.
-- Against the original English results, 5 of 9 directions replicate
-  (Spearman $\rho = 0.62$), but the level does not: the original's top
-  techniques gain $+27$ to $+41\%$; our largest positive effect is $+2.6\%$.
+- Against the original English results, 5 of 9 directions replicate, but the
+  level does not: the original's top techniques gain $+27$ to $+41\%$; our
+  largest positive effect is $+2.6\%$.
+- **No rank correlation in this study is statistically significant.** With
+  $n = 9$ techniques the permutation null is enumerated in full ($9!$ orders),
+  and the critical $|\rho|$ at 5% is $0.700$ --- above every $\rho$ we
+  measure (engine pairs: $0.667$, $0.550$, $0.483$; against the original:
+  $0.617$ by median). We report them and claim nothing from them, in either
+  direction.
 
 ## Layout
 

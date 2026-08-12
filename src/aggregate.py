@@ -482,6 +482,87 @@ def spearman(x, y):
     return cov / math.sqrt(var_x * var_y)
 
 
+_CACHE_NULL_SPEARMAN = {}
+_MAX_N_PERMUTACAO = 10       # teto de n para a permutação exaustiva (n! ordens)
+
+
+def spearman_p_exato(x, y):
+    """p bicaudal EXATO do ρ de Spearman, por permutação exaustiva.
+
+    Com n=9 (as 9 técnicas do estudo) são 9! = 362.880 permutações: dá para
+    enumerar todas e obter o p exato, em vez de usar aproximação assintótica —
+    que é justamente inválida nesse n. Sem scipy, coerente com o resto do
+    módulo.
+
+    POR QUE ISTO EXISTE: um ρ alto com n=9 pode não ser distinguível de acaso.
+    O valor crítico a 5% bicaudal é |ρ| = 0,70 (n=9, sem empates) — acima de vários ρ que este
+    estudo reporta. Sem o p ao lado, o leitor (e o autor) lê ordenação onde não
+    há evidência de ordenação.
+
+    A distribuição nula sob permutação depende só do MULTICONJUNTO de ranks de
+    cada vetor, então cacheia-se por ele: sem empates, todas as células do
+    estudo compartilham a mesma distribuição e ela é calculada uma vez.
+    """
+    n = len(x)
+    if n < 2 or len(y) != n:
+        return None
+    # Enumeração exaustiva é n! — em n=9 são 363 mil ordens (segundos), em n=11
+    # já são 40 milhões (dezenas de minutos). Acima do teto devolve None em vez
+    # de travar: este módulo é MIT e vai ser chamado com outros n.
+    if n > _MAX_N_PERMUTACAO:
+        return None
+    rho = spearman(x, y)
+    if rho is None:
+        return None
+    rx, ry = _ranks(x), _ranks(y)
+    chave = (tuple(sorted(rx)), tuple(sorted(ry)))
+    dist = _CACHE_NULL_SPEARMAN.get(chave)
+    if dist is None:
+        import itertools
+        dist = sorted(
+            abs(v) for v in (
+                spearman(rx, [ry[i] for i in perm])
+                for perm in itertools.permutations(range(n))
+            ) if v is not None
+        )
+        _CACHE_NULL_SPEARMAN[chave] = dist
+    if not dist:
+        return None
+    alvo = abs(rho) - 1e-12
+    # nº de permutações com |ρ| >= |ρ observado|, por busca binária
+    import bisect
+    return (len(dist) - bisect.bisect_left(dist, alvo)) / len(dist)
+
+
+def spearman_critico(x, y, alpha=ALPHA):
+    """|ρ| mínimo para significância a `alpha` (bicaudal), no mesmo n e com a
+    mesma estrutura de empates. Reportado junto do ρ para o leitor comparar
+    sem consultar tabela.
+
+    A distribuição nula é DISCRETA, então não basta pegar o percentil 95: se o
+    valor no índice 0,95·N se repete abaixo dele, o próprio ρ crítico teria
+    p > alpha — e a tabela sairia com ρ = ρ_crítico marcado "não significativo".
+    Devolve-se o menor valor DISTINTO cujo p realmente satisfaz p <= alpha, ou
+    None quando nenhum |ρ| possível naquele n atinge o nível.
+    """
+    if spearman_p_exato(x, y) is None:
+        return None
+    chave = (tuple(sorted(_ranks(x))), tuple(sorted(_ranks(y))))
+    dist = _CACHE_NULL_SPEARMAN.get(chave)
+    if not dist:
+        return None
+    import bisect
+    # p(v) = (N - início do run de v) / N <= alpha  ⟺  início do run >= N(1-alpha)
+    limite = len(dist) - alpha * len(dist)
+    i = math.ceil(limite)  # nenhum run que comece antes daqui pode qualificar
+    while i < len(dist):
+        inicio = bisect.bisect_left(dist, dist[i])
+        if inicio >= limite:
+            return dist[i]
+        i = bisect.bisect_right(dist, dist[i])
+    return None
+
+
 def _cell_to_row(extra, cell):
     row = dict(extra)
     if cell.get("n_queries", 0) == 0:
@@ -885,6 +966,9 @@ def build_comparacao_paper(tabela_principal_rows, tecnicas):
 
         summaries[conjunto] = {
             "rho_spearman_mediana": spearman(paper_para_mediana, nossos_mediana),
+            "p_exato_mediana": spearman_p_exato(paper_para_mediana, nossos_mediana),
+            "p_exato_media": spearman_p_exato(paper_para_media, nossos_media),
+            "rho_critico": spearman_critico(paper_para_mediana, nossos_mediana),
             "n_tecnicas_corr_mediana": len(nossos_mediana),
             "rho_spearman_media": spearman(paper_para_media, nossos_media),
             "n_tecnicas_corr_media": len(nossos_media),
@@ -1389,6 +1473,27 @@ def main():
                 f"- [{conjunto}] direção replica: sim={summary['n_direcao_sim']}, "
                 f"não={summary['n_direcao_nao']}, não medido={summary['n_direcao_naomedido']}"
             )
+            # p EXATO por permutação: com n=9 a aproximação assintótica não vale,
+            # e um ρ alto pode não ser distinguível de acaso. Sem esta linha, o
+            # leitor lê "ordenação preservada" onde não há evidência disso.
+            p_med, p_mea = summary.get("p_exato_mediana"), summary.get("p_exato_media")
+            crit = summary.get("rho_critico")
+            if p_med is not None:
+                footer.append(
+                    f"- [{conjunto}] **p bicaudal EXATO** (permutação exaustiva, "
+                    f"{summary['n_tecnicas_corr_mediana']}! arranjos): mediana p={p_med:.4f} "
+                    f"({'significativo' if p_med < ALPHA else 'NÃO significativo'} a "
+                    f"{int(ALPHA*100)}%)"
+                    + (f"; média p={p_mea:.4f} "
+                       f"({'significativo' if p_mea < ALPHA else 'NÃO significativo'})"
+                       if p_mea is not None else "")
+                )
+            if crit is not None:
+                footer.append(
+                    f"- [{conjunto}] |ρ| crítico a {int(ALPHA*100)}% bicaudal neste n: "
+                    f"{crit:.4f}. ρ abaixo disso NÃO sustenta afirmação sobre ordenação, "
+                    "por mais alto que pareça."
+                )
         footer.extend(rodape_conjunto)
         footer.append(
             "- O ρ é calculado sobre as 9 medianas por técnica: no conjunto `todas`, medianas "
