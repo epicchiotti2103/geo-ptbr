@@ -306,6 +306,11 @@ Per-technique visibility, relative improvement (Eq. 4 of the original paper)
 with bootstrap 95% confidence intervals, cross-engine agreement, and Spearman
 correlations. `results/por_engine/<engine>/` holds the single-engine tables.
 
+The Spearman table carries an exact permutation `p` (the 9! orderings are
+enumerated in full — the asymptotic approximation is invalid at n=9). **No
+correlation in this study is significant**: the critical |rho| at 5% is 0.700,
+above every value measured. Read them as reported, not as evidence of ordering.
+
 Every table reports **two query sets** side by side: `baseline_pos` (primary;
 queries whose target source had positive baseline visibility) and the full set
 (sensitivity). This matters — pooling them pins the median at exactly zero on
@@ -540,6 +545,13 @@ paper/draft/*.synctex.gz
 # tivesse mudado. Bump manual, junto da tag.
 DATA_RELEASE = "2026-08-12"
 
+# Versão CITÁVEL, que o Zenodo grava no DOI. Deliberadamente SEPARADA de
+# `versao_experimento` (0.3.0 hoje, o mesmo número por coincidência): aquela
+# marca o desenho do estudo e sobe quando o pipeline muda; esta marca o que foi
+# publicado e sobe junto da tag. Acopladas, uma mudança interna do pipeline
+# moveria a versão citada de um artefato já com DOI.
+VERSAO_RELEASE = "0.3.0"
+
 
 def citation_cff(versao, namespace, gh_namespace):
     """CITATION.cff — como citar o repositório.
@@ -567,7 +579,7 @@ authors:
     given-names: Elio Suraci
     affiliation: "AEO BR, Caracol Media"
     email: elio.picchiotti@aeobr.com.br
-version: "{versao or '0.0.0'}"
+version: "{VERSAO_RELEASE}"
 date-released: "{DATA_RELEASE}"
 license:
   - MIT

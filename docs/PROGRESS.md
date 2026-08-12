@@ -5,6 +5,72 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-12 (cont. 7) — 2ª revisão externa; paper sem TODO
+
+Segundo revisor. Boa parte da crítica dele já estava superada (leu o PDF de
+antes da correção do Spearman), mas cinco pontos procediam. **Paper em 22
+páginas, zero TODO renderizado, zero caractere perdido.**
+
+### O que era bloqueio de verdade
+1. **TODO no PDF** — fechado. Dado de mercado saiu do Reuters Institute
+   (Digital News Report 2026, página do Brasil): **13% de uso semanal de
+   chatbots de IA para notícias, contra 10% da média global**. Fonte com
+   metodologia publicada, não levantamento de agência de SEO. A nota de
+   proveniência virou comentário no fonte, fora do PDF.
+2. **Abstract: 3.690 caracteres.** O formulário do arXiv **rejeita** acima de
+   **1.920** — a submissão não passaria. Reescrito em 1.816, com a dependência
+   de engine e a inversão na frente.
+
+### O erro que a conferência achou
+Conferi as três caracterizações de trabalhos recentes palavra a palavra
+contra os abstracts. AutoGEO e AgenticGEO conferem. **O survey do Martinez
+não**: o parágrafo omitia o qualificador *"on organic discoverability or
+downstream behavior"*. Sem ele, o survey parecia negar o efeito causal que
+ele **explicitamente concede** — e que é exatamente o que este estudo mede
+(citação de conteúdo já recuperado). Corrigido, e agora a distinção é o
+próprio argumento: o survey diz "não demonstrado para descoberta"; nós
+medimos a instabilidade um nível abaixo, no passo de citação.
+
+Era precisamente o erro que a nota de proveniência existia para pegar. A nota
+cumpriu a função e por isso pôde sair do PDF.
+
+### Outras entradas
+- **Escopo antes do número**: fontes são texto gerado por modelo, não página
+  web viva (HTML, markup, boilerplate, autoridade de domínio). Estava só em
+  Limitations; foi para a Introdução.
+- **Snapshot pinado** `claude-haiku-4-5-20251001` não aparecia em lugar nenhum
+  do paper. Registrado, com a nota de que os identificadores vêm do
+  `model_version` devolvido pela API.
+- **Conclusão** liga indução em pegadinhas ao YMYL com número: 9 das 25
+  pegadinhas são de saúde.
+- **Média por técnica entrou na tabela principal.** O §5.5 discute mediana vs
+  média, e a média não estava em tabela nenhuma do PDF — a convenção "mediana
+  lidera, média acompanha" ficava sem o número que a sustenta.
+
+### Defeito de renderização achado no caminho
+O travessão `—`, que o pipeline escreve como marcador de "não se aplica",
+**não existe na fonte** (ptmr8t) e o pdflatex o descartava com um aviso
+perdido no log. A célula saía **vazia** no PDF — e vazio lê-se como dado
+faltando. Mapeado no escapador do `csv_to_latex.py`, junto de outros
+não-ASCII que o pipeline pode emitir.
+
+### Recusado, com motivo
+- **Blindagem contra a moderação do arXiv** (ponto do 1º revisor): o paper é
+  inequivocamente empírico; "isto não é um survey" soa defensivo.
+- **Condensar Limitations**: arXiv não tem limite de páginas.
+- **Seção de implicações práticas para AEO**: a Conclusão já tem o parágrafo
+  derivado da medição; uma seção separada puxa para registro de mercado.
+- **"Conferir se as tabelas batem com os CSVs"**: impossível não baterem — as
+  tabelas são geradas por script a partir dos CSVs, cada `.tex` nomeia sua
+  origem no cabeçalho.
+
+### Pendências
+- Nome de autor: confirmar com o Du se indexa como "Elio Suraci Picchiotti"
+- Zenodo (release + DOI) → arXiv (cs.IR) → endorsement
+- HF ainda com `viewer: false`
+
+---
+
 ## Sessão 2026-08-12 (cont. 6) — revisão externa: nenhum ρ é significativo
 
 Um amigo do Du revisou o paper e apontou 5 pontos. Quatro entraram; o quinto
