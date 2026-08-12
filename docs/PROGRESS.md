@@ -5,6 +5,34 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-12 (cont. 8) — ORCID; SSD1 caiu no meio e voltou
+
+ORCID do Du criado: **0009-0006-3058-4096**. Entrou no bloco de autor do
+`main.tex` e no `CITATION.cff` (via `build_publish.py`), publicado nos dois
+repositórios. Nome de autor decidido: **Elio Suraci Picchiotti**, com o
+Suraci — mais único em indexador, e o último sobrenome é que vira o nome de
+família de qualquer jeito ("Picchiotti, E. S."). O ORCID é a proteção contra
+indexador que leia "Suraci Picchiotti" como sobrenome composto.
+
+**Incidente**: o volume `/Volumes/SSD1` desmontou no meio da sessão — o
+`diskutil` não via disco externo nenhum, ou seja, desconexão física, não só
+unmount. Nada foi perdido: tudo estava commitado E já publicado fora do disco
+(GitHub + HF). Ao voltar, `git fsck` limpo e árvore sem pendência.
+
+Lição prática, que vale enquanto o projeto morar em disco externo: **o
+GitHub e o HF não são só distribuição, são a cópia de segurança real**.
+Publicar cedo e com frequência é o que tornou a queda um contratempo em vez
+de um problema.
+
+### Fila daqui
+1. Zenodo: criar release e cunhar o DOI (o CITATION.cff já está pronto para
+   isso — `version` é a versão CITÁVEL, separada da `versao_experimento`)
+2. arXiv: cs.IR primário, cs secundário; homepage https://aeobr.com.br;
+   ORCID no formulário. Abstract já cabe no limite de 1.920 caracteres.
+3. Pedidos de endorsement
+
+---
+
 ## Sessão 2026-08-12 (cont. 7) — 2ª revisão externa; paper sem TODO
 
 Segundo revisor. Boa parte da crítica dele já estava superada (leu o PDF de
