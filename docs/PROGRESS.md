@@ -5,6 +5,95 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-12 (cont. 6) — revisão externa: nenhum ρ é significativo
+
+Um amigo do Du revisou o paper e apontou 5 pontos. Quatro entraram; o quinto
+foi recusado com justificativa. **Paper em 22 páginas, compila limpo, 1 TODO.**
+
+### 1. Spearman — ele estava certo, e o erro era maior do que ele viu
+
+O paper afirmava ordenação a partir de ρ=0,62 com n=9. Não sustenta. Pior: o p
+usado era assintótico, **inválido nesse n**, e nenhuma tabela trazia p algum.
+
+Agora o p é EXATO, por enumeração das 9! = 362.880 ordens
+(`aggregate.spearman_p_exato`, cache pelo multiconjunto de ranks, teto n<=10).
+
+| comparação | ρ | p exato | significativo? |
+|---|---|---|---|
+| gemini × haiku | 0,667 | 0,059 | não |
+| gemini × luna | 0,550 | 0,133 | não |
+| haiku × luna | 0,483 | 0,194 | não |
+| vs. paper original (mediana) | 0,617 | 0,086 | não |
+| vs. paper original (média) | 0,800 | 0,014 | **sim** |
+
+**|ρ| crítico a 5% bicaudal com n=9 é 0,700** — o valor de tabela. A primeira
+versão do `spearman_critico` devolveu 0,683 porque pegava o percentil 95 da
+distribuição nula, e a nula é DISCRETA: 0,683 tem p=0,0503 > 0,05. Corrigido
+para o menor valor distinto com p <= alpha. O paper chegou a citar 0,683 —
+corrigido antes do commit.
+
+Só a MÉDIA passaria. A média é o estimador que o §3.5 declarou instável antes
+desta comparação existir. Trocar agora seria escolher o estimador pelo
+resultado, e o §5.5 diz isso com todas as letras. **Retiradas todas as
+afirmações de ordenação** — §5.2, §5.5, Abstract, Conclusão, e o README
+público, que ainda anunciava "ρ=0,62".
+
+### 2. Blindagem contra a moderação do arXiv — RECUSADO
+
+A política de out/2025 sobre survey/position é real, mas este paper é
+inequivocamente empírico (3 engines, 525 queries, IC por bootstrap, 10 tabelas
+geradas). Acrescentar "isto não é um survey" soa defensivo e custa tom.
+Registro do orquestrador: recusa deliberada, não esquecimento.
+
+### 3. CADE — entrou na Introdução
+
+Processo administrativo contra o Google instaurado em **23/04/2026**, por
+unanimidade, por uso de conteúdo jornalístico em resumos de IA (representação
+da Globo; apoio de ANJ, ABERT, Ajor, ANER, FENAJ, IDEC, Artigo 19). O que
+importa aqui não é o antitruste: o Tribunal caracterizou o opt-out existente
+como **"falsa escolha"** — recusar aparecer no resumo custa a visibilidade de
+busca. Essa é a variável que este estudo mede, no mercado onde o processo
+corre. A Introdução declara explicitamente que não toma posição sobre o mérito.
+
+### 4. Precedente PT-BR — fechou o TODO do Related Work
+
+Quati (arXiv:2404.06976) e MTEB-BR (arXiv:2607.04581, só dado nativo,
+traduções excluídas por construção). O MTEB-BR ainda traz o paralelo direto:
+rank global prediz rank em PT só moderadamente — um modelo é 3º lá e 49º neste.
+Mesma falha um nível acima no pipeline. Com dois cavetes registrados: nenhum
+dos dois é benchmark de GEO, e as nossas fontes são geradas por modelo, não
+coletadas da web brasileira.
+
+### 5. CITATION.cff — criado
+
+Gerado pelo `build_publish.py` (não escrito à mão), com `date-released` fixo em
+constante: `date.today()` mudaria o registro do Zenodo a cada build sem que
+nada do estudo tivesse mudado. Sem `preferred-citation` até o arXiv atribuir
+identificador.
+
+### Incidente operacional: o rmtree comeu o .git do repo público
+
+`build_publish.py` reconstrói `publish/` com `shutil.rmtree` — e apagou junto o
+`publish/github/.git`, que tinha remote e histórico. O `git add -A` seguinte,
+rodado de dentro de `publish/github`, subiu na árvore e **commitou no repo de
+trabalho** 246 arquivos com mensagem que descrevia o repo público. Desfeito com
+`reset --soft`, recommitado em dois commits corretos. O script agora preserva
+qualquer `.git` dentro do destino. Repo público reinicializado a partir do
+remote e atualizado (`6479559`).
+
+Lição, que é a mesma de antes com outro disfarce: **verificar onde o comando
+está rodando antes de rodá-lo**, não depois de ler a saída.
+
+### Pendências
+- Zenodo (release + DOI) → arXiv (cs.IR, cs) → pedidos de endorsement
+- HF ainda com `viewer: false` (hipótese não confirmada: 1.575 dos 1.623
+  arquivos são traces fora dos configs declarados)
+- TODO que restou no paper: dado de mercado sobre adoção de motores
+  generativos no Brasil, e a nota de proveniência (3 trabalhos caracterizados
+  por abstract, a confirmar antes da submissão)
+
+---
+
 ## Sessão 2026-08-12 (cont. 5) — §5 escrito com números reais
 
 Toda a prosa narrativa do §5 está escrita, mais Abstract, Conclusion e o
