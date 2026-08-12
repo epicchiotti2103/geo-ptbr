@@ -579,6 +579,7 @@ authors:
     given-names: Elio Suraci
     affiliation: "AEO BR, Caracol Media"
     email: elio.picchiotti@aeobr.com.br
+    orcid: "https://orcid.org/0009-0006-3058-4096"
 version: "{VERSAO_RELEASE}"
 date-released: "{DATA_RELEASE}"
 license:
