@@ -432,7 +432,7 @@ splitting its word count equally among them):
 \begin{align}
   \Impwc(c_i, r) &= \frac{\sum_{s \in S_{c_i}} |s|}{\sum_{s \in S_r} |s|}
   \label{eq:wc}\\[4pt]
-  \Imppwc(c_i, r) &= \frac{\sum_{s \in S_{c_i}} |s| \cdot e^{-\mathrm{pos}(s)/|s|}}{\sum_{s \in S_r} |s|}
+  \Imppwc(c_i, r) &= \frac{\sum_{s \in S_{c_i}} |s| \cdot e^{-\mathrm{pos}(s)/|S_r|}}{\sum_{s \in S_r} |s|}
   \label{eq:pwc}
 \end{align}
 Relative improvement of a technique for source $s_i$ is computed as in the
@@ -453,8 +453,9 @@ formalizes mathematically in the visible text (documented in
 \texttt{paper/KEY\_FACTS.md} \S1.2). We fix this ambiguity, once and for
 all analyses in this paper, as $\mathrm{pos}(s) = \mathrm{idx}(s)$, the
 0-indexed position of sentence $s$ among the response's sentences ---
-i.e.\ the position weight is $e^{-\mathrm{idx}(s)/n}$ with $n$ the number of
-sentences in the response --- matching both the qualitative description and
+i.e.\ the position weight is $e^{-\mathrm{idx}(s)/|S_r|}$, where $|S_r|$ is
+the number of sentences in the response (written $n$ in the implementation)
+--- matching both the qualitative description and
 the reference implementation's exponential-decay-by-order behavior
 (implementation: \texttt{src/metrics.py}, \texttt{METRICS\_VERSION = "v1"}).
 This is a documented interpretive choice, not a claim about what the
@@ -1139,6 +1140,65 @@ Note the disjunction with \S\ref{sec:results-main}: three of these five
 harmful for genuine visibility on answerable queries while being among the
 most effective at inducing a citation where none is warranted.
 
+\subsection{A confound we can measure: transformations change source length}
+\label{sec:results-length}
+
+Visibility is a share of the generated answer attributed to a source. A
+transformation that leaves the source with more --- or less --- usable
+material can move that share without the engine having judged the source
+better or worse. Until this is measured, ``Keyword Stuffing hurts'' and
+``Keyword Stuffing shortens the source by $12\%$'' are indistinguishable
+claims. We measure it, and the news is not comfortable.
+
+\IfFileExists{tables/comprimento_transformacao.tex}{%
+  \input{tables/comprimento_transformacao.tex}
+}{%
+  \begin{center}\TODO{\texttt{results/comprimento\_transformacao.csv} not yet
+  generated}\end{center}
+}
+
+The nine techniques change source length by between $-14.4\%$
+(Easy-to-Understand) and $+7.3\%$ (Fluency Optimization). Across those nine
+points, length change and visibility change are strongly rank-correlated on
+every engine: $\rho = +0.80$ on gemini ($p = 0.014$), $+0.73$ on haiku
+($p = 0.031$) and $+0.67$ on luna ($p = 0.059$), by the same exact
+permutation test used in \S\ref{sec:results-crossengine} against the same
+critical $|\rho| = 0.700$. Two of the three are significant, and the third
+misses by a hair in the same direction.
+
+\paragraph{What this confounds.} The \emph{ordering of techniques} by
+visibility effect. A reader who takes our per-technique ranking as a
+statement about which rhetorical strategies engines reward is reading, in
+substantial part, a statement about how much text each transformation
+leaves behind. We do not know how to separate the two with this design,
+because length is not a nuisance variable that could have been held fixed:
+rewriting a source \emph{is} changing its text, and a rewrite that adds
+quotations or replaces prose with figures necessarily changes its size. The
+honest position is that the per-technique effect sizes in
+Table~\ref{tab:comparacao_3_engines} are joint effects of the rhetorical
+manipulation and the length change it entails, and we have not decomposed
+them.
+
+\paragraph{What this does \emph{not} confound.} The comparison between
+engines, which is this paper's claim. The transformation is performed once
+and the identical text --- with the identical length change --- is served to
+all three engines (\S\ref{sec:methodology}). Any disagreement between them
+is therefore not attributable to length, because length does not vary
+between them. Fluency Optimization makes this concrete: it lengthens the
+source by $7.3\%$, and that same lengthened text raises visibility
+significantly on haiku and lowers it significantly on luna. A mechanical
+length effect cannot produce opposite signs from identical input. Nor does
+length touch the abstention result of \S\ref{sec:results-abstention}, which
+is about whether the engine refuses at all, not about shares.
+
+\paragraph{Why we report it.} This analysis was not planned; it was
+prompted by a reviewer asking whether the metric rewards content rather than
+credibility, and it partially confirms that worry. We report it because a
+confound found by the authors and bounded is worth more than one found by a
+reader after publication, and because the bound turns out to matter: it
+narrows what our per-technique numbers mean without touching the finding the
+paper is named for.
+
 \subsection{Abstention, and how optimization erodes it}
 \label{sec:results-abstention}
 
@@ -1420,6 +1480,23 @@ not as an afterthought.
   flag it as the most obvious analysis this dataset supports and this paper
   does not perform.
 
+\item \textbf{No manipulation check on the transformations.} We assume each
+  transformed source instantiates its intended technique and preserves the
+  original's factual content. Neither is audited. No human or independent
+  model verified that the Statistics Addition output actually adds
+  statistics, that Authoritative actually reads as more authoritative, or
+  that any transformation left the source's claims intact --- and
+  \S\ref{sec:results-abstention} shows transformations can manufacture
+  answer-bearing content that was not there. We measured the one component
+  of this that is mechanically measurable, the change in source length
+  (\S\ref{sec:results-length}), and found it rank-correlated with the
+  visibility effect on all three engines. The rest --- fidelity to the
+  technique, factual preservation, answer-equivalence to the original ---
+  remains unaudited, and until it is, per-technique effects cannot be
+  attributed cleanly to style, authority cues or terminology rather than to
+  changed content. An independent audit of a sample of transformed sources
+  is the cheapest high-value addition to this study.
+
 \item \textbf{The metric rewards content, and some techniques add content.}
   Visibility is a share of the generated answer attributable to a source, so
   a transformation that makes a source carry more usable material can raise
@@ -1518,6 +1595,14 @@ result is conditional on. Whether a technique executed by a different
 transforming model would produce the same disagreement is a separate
 experiment, and the released harness runs it by changing one configuration
 value.
+
+A third boundary is internal to the numbers themselves. How much a
+technique changes the source's length rank-predicts how much it changes the
+source's visibility ($\rho = +0.80$, $+0.73$, $+0.67$ across the three
+engines), so our ordering of techniques is partly an ordering by a
+mechanical property of the rewrite. It does not reach the engine comparison
+--- identical text, identical length change, opposite signs --- but it does
+narrow what a per-technique number means.
 
 Two further boundaries keep that result from being read as more than it is. All
 three engines are economy-tier, so what we demonstrate is engine-dependence

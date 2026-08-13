@@ -120,6 +120,18 @@ KNOWN_TABLES = {
         "\\emph{attenuation} (effect present on one engine, null on another), "
         "since the two support different claims."
     ),
+    "comprimento_transformacao": (
+        "Length change of the transformed source per technique (median over "
+        "the 525 queries, in words, against the original source), alongside "
+        "the median visibility change each engine measures. The "
+        "transformation is performed once and reused across engines, so the "
+        "length column is engine-independent. Across the nine techniques, "
+        "length change and visibility change are strongly rank-correlated: "
+        "$\\rho = +0.80$ ($p = 0.014$) on gemini, $+0.73$ ($p = 0.031$) on "
+        "haiku and $+0.67$ ($p = 0.059$) on luna, exact permutation $p$ with "
+        "critical $|\\rho| = 0.700$. See \\S\\ref{sec:results-length} for what "
+        "this does and does not confound."
+    ),
     "abstencao_pegadinhas": (
         "Abstention on the 25 pitfall queries, by technique and engine: the "
         "share of generated answers in which the engine states that the "

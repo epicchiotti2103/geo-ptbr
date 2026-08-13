@@ -1,6 +1,9 @@
 #!/bin/bash
 # Driver autônomo: gera fontes das queries faltantes via grok CLI, 3 em paralelo.
-cd /Volumes/SSD1/Projects/paper
+# Raiz do repositório, derivada da localização DESTE arquivo — não do caminho
+# da máquina do autor. A versão anterior tinha `cd /Volumes/SSD1/Projects/paper`
+# fixo, o que quebrava para qualquer pessoa que clonasse o repositório.
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 for p in .tmp_fontes/*.prompt; do
   qid=$(basename "$p" .prompt)
   [ -f "data/sources/$qid.jsonl" ] && continue

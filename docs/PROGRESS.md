@@ -5,6 +5,94 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-12/13 (cont. 9) — multiplicidade, abstenção, figura
+
+Duas revisões externas fortes. A primeira mudou um resultado; a segunda
+produziu uma seção nova. **26 páginas, zero TODO, primeira figura do paper.**
+
+### 1. Correção de multiplicidade — o achado central mudou de técnica
+
+O paper reportava "IC exclui zero" em dezenas de células sem correção nenhuma.
+Família primária pré-especificada: 9 técnicas x 3 engines, conjunto e métrica
+primários (27 testes), com Holm-Bonferroni. Holm e não Benjamini-Hochberg
+porque o que inverteria a leitura é UM falso positivo na tabela principal.
+O p vem da MESMA distribuição bootstrap que gerou o IC.
+
+**18 dos 27 sobrevivem.** E os dois que caem eram o centro do paper:
+
+| | mediana | p bruto | p Holm |
+|---|---|---|---|
+| technical_terms x gemini | +1,92% | 0,039 | **0,347** |
+| technical_terms x haiku | −4,37% | 0,043 | **0,347** |
+| technical_terms x luna | −12,41% | 0,0001 | 0,003 |
+
+Robusto à família: por engine (m=9, o mais permissivo defensável), gemini fica
+em 0,193 e haiku em 0,174. A "única inversão genuína" vira atenuação.
+
+**O que sobrevive é melhor:** fluency_optimization inverte com os DOIS braços
+passando por Holm — +7,89% no haiku (p=0,031), −6,89% no luna (p=0,003). É a
+técnica mais inócua das nove: só reescreve para ler melhor. E o braço positivo
+saiu do gemini para o haiku, que não escreveu o texto que premia — a
+autopreferência deixa de explicar o positivo.
+
+Setor e posição ficam EXPLORATÓRIOS (não pré-especificados). Conjunto e
+métrica de sensibilidade ficam "sensibilidade (não corrigido)" — são a mesma
+hipótese de outro ângulo, não análise exploratória. Rotular os dois igual
+fazia metade da tabela principal parecer não-confirmatória.
+
+### 2. Abstenção nas pegadinhas (§5.7, nova) — o dado estava nos traces
+
+No baseline os três engines se recusam a responder as 25 pegadinhas em **100%**
+das respostas, quase sempre com a mesma frase pronta. As técnicas erodem isso:
+
+| técnica | gemini | haiku | luna |
+|---|---|---|---|
+| statistics_addition | 68,0% | 80,0% | 74,7% |
+| keyword_stuffing | 82,7% | 89,3% | 92,0% |
+| authoritative | 84,0% | 88,0% | 92,0% |
+
+E o que substitui a recusa não é hedge. Na p006 ("o fisioterapeuta André Moura
+tem agenda livre na próxima terça?"), sob statistics_addition: *"havendo
+apenas de 3% a 5% de vagas remanescentes disponíveis [4]"* — número inventado,
+pergunta irrespondível, alegação atribuída a fonte.
+
+**O contraste é o achado**: statistics_addition sobre VISIBILIDADE é o efeito
+mais dependente de engine do estudo (−1,4 / +0,6 / −81,5); sobre ABSTENÇÃO é
+consistente, os três perdem 20 a 32 pontos. A portabilidade, neste benchmark,
+é propriedade do dano e não do ganho — e isso vale também entre tipos de
+desfecho, não só entre técnicas.
+
+Limite declarado: detector léxico conferido à mão, não classificador validado.
+Funciona porque a recusa no baseline é frase estereotipada.
+
+### 3. Dois erros meus, pegos antes do PDF
+- O contador de abstenção incluía registros de `fase == "transform"`, que são
+  o TEXTO-FONTE reescrito, não resposta. Só o gemini transforma, então ele
+  aparecia com 100 "respostas" contra 75 dos outros — foi essa discrepância
+  que denunciou. O exemplo que eu ia citar era, por isso, texto de fonte.
+- "Quatro técnicas preservam a recusa nos três engines": são DUAS
+  (cite_sources, unique_words). Ao corrigir, generalizei de novo dizendo que
+  ambas estão entre as que mais prejudicam — só vale para unique_words.
+
+### 4. Figura, e o resto
+Primeira figura do paper (26 páginas, zero até então): barras de mediana por
+técnica x engine, em **pgfplots** — desenhada em LaTeX, sem imagem externa e
+sem dependência Python nova, e gerada do CSV como as tabelas.
+
+Conclusão liga AutoGEO/AgenticGEO/Martinez explicitamente: os três partem da
+premissa de que catálogo fixo é o primitivo errado, e essa premissa costuma
+ser argumentada e assumida — nós medimos. Mais: escopo tier econômico, escopo
+YMYL, dois estágios P(citada) x share|citada como trabalho futuro, e a
+ausência de adjudicação humana das pegadinhas.
+
+### Incidente: SSD1 caiu de novo, no meio de uma regeneração
+Segunda queda em dois dias, desta vez pegando trabalho ENTRE commits. Nada se
+perdeu (git fsck limpo ao voltar), mas o `results/` ficou meio escrito e teve
+de ser regenerado do zero antes de commitar. Lição aplicada: commitar em
+blocos menores enquanto o projeto morar em disco externo.
+
+---
+
 ## Sessão 2026-08-12 (cont. 8) — ORCID; SSD1 caiu no meio e voltou
 
 ORCID do Du criado: **0009-0006-3058-4096**. Entrou no bloco de autor do

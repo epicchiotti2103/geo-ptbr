@@ -1,5 +1,16 @@
-google-genai>=1.0.0
-anthropic>=0.40.0
-pyyaml>=6.0
-pandas>=2.0
-matplotlib>=3.8
+# Dependências de EXECUÇÃO do estudo. Versões conferidas na .venv usada para
+# gerar os resultados publicados (`pip list`), não digitadas de memória.
+#
+# NÃO entram aqui — e não devem entrar — pandas, numpy, scipy ou matplotlib.
+# O estudo faz bootstrap, Spearman, permutação exaustiva e a figura do paper
+# sem nenhuma delas (a figura é pgfplots, desenhada em LaTeX). Estiveram
+# listadas por engano até 2026-08-13, sem serem importadas em lugar nenhum.
+
+google-genai>=1.0.0      # gemini-3.5-flash-lite (engine primário + transformações)
+anthropic>=0.40.0        # claude-haiku-4-5 (Batch API)
+openai>=2.0.0            # gpt-5.6-luna (Batch API) — era a ausência mais grave:
+                         # usado em src/run_engine_batch.py e não declarado
+pyyaml>=6.0              # config/study.yaml, config/prices.yaml
+
+# Só a análise (regerar tabelas e paper a partir dos traces publicados) precisa
+# apenas de pyyaml — nenhuma chave de API é necessária para isso.

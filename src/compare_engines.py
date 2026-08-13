@@ -74,6 +74,7 @@ DECISÕES DE IMPLEMENTAÇÃO
     números entrarem no paper sem marcação).
 """
 import argparse
+import json
 import re
 import statistics
 import sys
@@ -231,6 +232,85 @@ ABSTENCAO_RE = re.compile(
 
 def _abstem(resposta):
     return bool(ABSTENCAO_RE.search(resposta or ""))
+
+
+# ---------------------------------------------------------------------------
+# Comprimento da fonte transformada: a técnica muda o TAMANHO do texto?
+# ---------------------------------------------------------------------------
+#
+# POR QUE ISTO EXISTE. A visibilidade é a fração da resposta atribuída à fonte.
+# Uma transformação que deixa a fonte com mais (ou menos) material utilizável
+# pode mover essa fração sem que o engine tenha julgado a fonte melhor ou pior.
+# Enquanto isso não for medido, "keyword stuffing prejudica" e "keyword stuffing
+# encurta a fonte em 12%" são indistinguíveis.
+#
+# Mede-se o Δ mediano de palavras entre a fonte ORIGINAL (data/sources) e a
+# transformada (trace com `fase == "transform"`, que existe só no engine que
+# transforma — as transformações são feitas uma vez e reusadas nos três), e
+# correlaciona-se com o Δ de visibilidade por técnica, em cada engine avaliador.
+# ρ alto NÃO invalida a comparação entre engines: o mesmo Δ de comprimento é
+# entregue aos três. O que ele contamina é a ORDENAÇÃO das técnicas por efeito.
+
+
+def _palavras(txt):
+    return len((txt or "").split())
+
+
+def build_comprimento_transformacao(records_por_engine, sources_por_query,
+                                    cells, tecnicas, engines,
+                                    conjunto=aggregate.CONJUNTO_PRIMARIO,
+                                    metrica="pwc"):
+    """Δ de comprimento da fonte por técnica + ρ contra o Δ de visibilidade."""
+    deltas = {}
+    for tecnica in tecnicas:
+        vals = []
+        for recs in records_por_engine.values():
+            for r in recs:
+                if r.get("fase") != "transform" or r.get("tecnica") != tecnica:
+                    continue
+                base = sources_por_query.get((r.get("query_id"), r.get("target_pos")))
+                if not base:
+                    continue
+                vals.append(100.0 * (_palavras(r.get("resposta")) - base) / base)
+        deltas[tecnica] = statistics.median(vals) if vals else None
+
+    rows = []
+    for tecnica in tecnicas:
+        row = {"tecnica": tecnica, "delta_comprimento_pct": deltas[tecnica]}
+        for engine in engines:
+            cell = cells.get((conjunto, metrica, tecnica, engine), {})
+            row[f"melhoria_mediana_pct__{engine}"] = cell.get("melhoria_mediana_pct")
+        rows.append(row)
+
+    # Linha de correlação por engine, com o p exato de permutação já usado no
+    # resto do estudo (n=9: |ρ| crítico 0,700).
+    corr = []
+    xs = [deltas[t] for t in tecnicas]
+    for engine in engines:
+        ys = [cells.get((conjunto, metrica, t, engine), {}).get("melhoria_mediana_pct")
+              for t in tecnicas]
+        if any(v is None for v in xs + ys):
+            corr.append({"engine": engine, "spearman": None, "p_exato": None,
+                         "rho_critico": None, "sig_spearman": "n insuficiente"})
+            continue
+        rho = aggregate.spearman(xs, ys)
+        pex = aggregate.spearman_p_exato(xs, ys)
+        corr.append({
+            "engine": engine, "spearman": rho, "p_exato": pex,
+            "rho_critico": aggregate.spearman_critico(xs, ys),
+            "sig_spearman": ("n insuficiente" if pex is None
+                             else ("sim" if pex < aggregate.ALPHA else "não")),
+        })
+    return rows, corr
+
+
+COLS_CORR_COMPRIMENTO = [
+    ("engine", "engine avaliador", "str"),
+    ("spearman", "ρ (Δcomprimento × Δvisibilidade)", "float4"),
+    ("p_exato", "p bicaudal exato", "float4"),
+    ("rho_critico", "|ρ| crítico a 5%", "float4"),
+    ("sig_spearman", "ρ ≠ 0 (5%)?", "str"),
+]
 
 
 def build_abstencao_pegadinhas(by_query_por_engine, queries_meta, tecnicas, engines):
@@ -719,6 +799,47 @@ def main():
         ],
     )
 
+    # Fontes originais, para o Δ de comprimento das transformações.
+    sources_por_query = {}
+    for path in sorted((ROOT / "data" / "sources").glob("*.jsonl")):
+        qid = path.stem
+        for linha in path.read_text(encoding="utf-8").splitlines():
+            linha = linha.strip()
+            if not linha:
+                continue
+            rec = json.loads(linha)
+            sources_por_query[(qid, rec.get("posicao"))] = _palavras(rec.get("texto"))
+
+    rows_len, corr_len = build_comprimento_transformacao(
+        records_por_engine, sources_por_query, cells, tecnicas, engines)
+    aggregate.emit_table(
+        out_dir, "comprimento_transformacao",
+        "Mudança de comprimento da fonte por técnica, e sua correlação com a mudança de visibilidade",
+        header,
+        [("tecnica", "técnica", "str"),
+         ("delta_comprimento_pct", "Δ comprimento da fonte (mediana %)", "pct")]
+        + [(f"melhoria_mediana_pct__{e}", f"Δ visibilidade [{e}] (mediana %)", "pct")
+           for e in engines],
+        rows_len,
+        footer_lines=[
+            "- Δ comprimento: mediana, sobre as 525 queries, de (palavras da fonte "
+            "TRANSFORMADA − palavras da ORIGINAL) / original. A transformação é "
+            "feita uma vez e reusada nos três engines, então esta coluna não "
+            "depende do engine avaliador.",
+            "- Correlação de Spearman entre as duas colunas, por engine avaliador "
+            "(n=9 técnicas; p EXATO por permutação; |ρ| crítico 0,700):",
+        ] + [
+            f"    {c['engine']}: ρ={c['spearman']:+.3f}, p={c['p_exato']:.4f} "
+            f"({'significativo' if c['sig_spearman'] == 'sim' else 'não significativo'})"
+            for c in corr_len if c["spearman"] is not None
+        ] + [
+            "- LEITURA: ρ alto significa que a ORDENAÇÃO das técnicas por efeito de "
+            "visibilidade acompanha uma propriedade mecânica da transformação — "
+            "quanto texto ela deixa. NÃO invalida a comparação ENTRE engines: os "
+            "três recebem exatamente o mesmo texto, com o mesmo Δ de comprimento.",
+        ],
+    )
+
     rows_abst = build_abstencao_pegadinhas(by_query_por_engine, queries_meta,
                                            tecnicas, engines)
     aggregate.emit_table(
@@ -744,7 +865,8 @@ def main():
     )
 
     print(f"[compare] escrito em {out_dir}: comparacao_3_engines, concordancia_engines, "
-          "spearman_engines, abstencao_pegadinhas (.md + .csv)")
+          "spearman_engines, abstencao_pegadinhas, comprimento_transformacao "
+          "(.md + .csv)")
     return 0
 
 
