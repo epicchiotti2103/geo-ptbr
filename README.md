@@ -27,8 +27,14 @@ variable across runs is which engine answers.
 - The three engines agree on the direction of the effect for **4 of 9
   techniques (44.4%)**, and all four are techniques that **hurt**. What
   transfers across engines is which optimizations backfire, not which work.
-- **Technical Terms inverts:** $+1.9\%$ on one engine, $-4.4\%$ and $-12.4\%$
-  on the others, with bootstrap CIs excluding zero on all three.
+- **Fluency Optimization inverts outright:** $+7.9\%$ on one engine and
+  $-6.9\%$ on another, **both arms surviving Holm correction** over the
+  primary family of 27 tests (9 techniques $\times$ 3 engines). Technical
+  Terms reads like a second inversion ($+1.9\%$, $-4.4\%$, $-12.4\%$, all
+  three CIs excluding zero uncorrected), but two of its three arms do not
+  survive correction, so we report it as attenuation, not inversion.
+  Benjamini-Hochberg selects exactly the same 18 of 27 tests as Holm --- the
+  choice of correction does not drive the result.
 - Agreement drops from **66.7% with two engines to 44.4% with three** --- a
   two-engine cross-validation would have overstated transferability.
 - **5 of 9 techniques induce citation of sources that cannot answer the
@@ -37,12 +43,30 @@ variable across runs is which engine answers.
 - Against the original English results, 5 of 9 directions replicate, but the
   level does not: the original's top techniques gain $+27$ to $+41\%$; our
   largest positive effect is $+2.6\%$.
-- **No rank correlation in this study is statistically significant.** With
-  $n = 9$ techniques the permutation null is enumerated in full ($9!$ orders),
-  and the critical $|\rho|$ at 5% is $0.700$ --- above every $\rho$ we
-  measure (engine pairs: $0.667$, $0.550$, $0.483$; against the original:
+- **No correlation between technique orderings is statistically significant.**
+  With $n = 9$ techniques the permutation null is enumerated in full ($9!$
+  orders), and the critical $|\rho|$ at 5% is $0.700$ --- above every $\rho$
+  we measure (engine pairs: $0.667$, $0.550$, $0.483$; against the original:
   $0.617$ by median). We report them and claim nothing from them, in either
   direction.
+
+## Limitations
+
+Read the paper's Limitations before building on this. The two that most
+constrain how the findings above may be used:
+
+- **Source length confounds the ordering of techniques.** The transformations
+  change source length from $-14.4\%$ to $+7.3\%$, and that delta predicts the
+  visibility delta ($\rho = +0.80$, $+0.73$, $+0.67$ across the three engines;
+  significant on two). Any reading of the ranking above is partly a reading of
+  how much text each transformation leaves. It does **not** confound the
+  comparison *between* engines --- all three receive the identical text with the
+  identical delta, and a mechanical length effect cannot produce opposite signs
+  from the same input --- nor does it touch abstention.
+- **Fixed context.** The results measure citation *given* that the source was
+  already retrieved. They say nothing about crawling, indexing, retrieval or
+  traffic, and content-side rewriting can improve one stage while harming
+  another.
 
 ## Layout
 

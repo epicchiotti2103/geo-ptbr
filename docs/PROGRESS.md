@@ -5,6 +5,122 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-13 (cont. 11) — pacote do arXiv, e um erro no README público
+
+Registro do orquestrador. Nada de coleta nem de análise mudou; o que mudou foi
+o que se publica sobre a análise, e apareceu material para a fila externa.
+
+### O README público afirmava o que o paper retratou
+
+Ao ler o `publish/github/README.md` para escrever as notas de release, o bullet
+de destaque dizia:
+
+> **Technical Terms inverts:** +1,9% num engine, −4,4% e −12,4% nos outros, com
+> CIs de bootstrap excluindo zero nos três.
+
+É a leitura **pré-correção de multiplicidade** — verdadeira sem correção e
+derrubada por ela. Conferido no `results/comparacao_3_engines.csv`, conjunto
+`baseline_pos`, métrica `pwc`:
+
+| técnica × engine | mediana | p bruto | p Holm | |
+|---|---|---|---|---|
+| technical_terms × gemini | +1,92% | 0,0386 | 0,3474 | cai |
+| technical_terms × haiku | −4,37% | 0,0434 | 0,3474 | cai |
+| technical_terms × luna | −12,41% | 0,0001 | 0,0027 | passa |
+| fluency_optimization × haiku | +7,89% | 0,0026 | 0,0312 | passa |
+| fluency_optimization × luna | −6,89% | 0,0001 | 0,0027 | passa |
+
+A inversão que sobrevive é a do `fluency_optimization`, com os dois braços. O
+paper já estava certo desde a cont. 9; o pacote público é que ficou para trás.
+Corrigido no GERADOR (`scripts/build_publish.py`), não no arquivo de saída —
+`publish/` é reconstruído a cada build e uma correção no destino evapora.
+
+O card do Hugging Face tinha o mesmo erro no *Headline finding* e faltavam nele
+duas limitações que o paper reporta: o confundidor de comprimento (§5.7) e a
+ausência de manipulation check. Ambas adicionadas.
+
+**A lição:** o README público não é gerado a partir do `.tex`. Toda revisão que
+muda um resultado tem de passar pelo `build_publish.py` também, ou o repositório
+que as pessoas leem primeiro continua contando a versão anterior do achado.
+Pego a dez minutos de um DOI que congelaria isso.
+
+### A varredura que a primeira correção não fez
+
+Achar aquele bullet foi sorte, não cobertura — então varri **todas** as
+afirmações numéricas do gerador contra os `results/`. Confirmadas: 4/9 = 44,4%
+de concordância com os três engines e as quatro negativas; 66,7% com dois
+engines (`par_gemini_haiku`, `baseline_pos`/pwc); 5/9 técnicas induzindo
+citação com baseline exatamente zero; 5/9 direções replicando; +27 a +41% no
+original contra +2,6% de maior efeito positivo nosso; ρ de 0,667 / 0,550 /
+0,483 entre engines e 0,617 contra o original; Holm e BH selecionando os mesmos
+18 de 27, **sem uma divergência sequer** nas 27 células.
+
+E apareceu um segundo erro, este criado pela própria revisão 6:
+
+> **No rank correlation in this study is statistically significant.**
+
+Deixou de ser verdade quando a §5.7 entrou. O ρ do confundidor de comprimento é
+uma correlação de Spearman deste estudo e é **significativo** em dois engines
+(+0,800 p=0,0138; +0,733 p=0,0311). A afirmação valia para a ORDENAÇÃO das
+técnicas — entre engines e contra o original — e foi escrita antes de existir
+uma segunda família de ρ. Reescopada nos dois textos, e o ρ do comprimento
+agora é citado explicitamente como o que é: o confundidor, não um achado sobre
+qual técnica funciona.
+
+O README do GitHub também não tinha seção de Limitations nenhuma (só o card do
+HF tinha). Ganhou uma, com o confundidor de comprimento e o contexto fixo.
+
+### Pacote-fonte do arXiv (`scripts/build_arxiv.py`)
+
+Duas falhas silenciosas justificam o script em vez de um `tar czf`:
+
+1. **O arXiv não roda BibTeX.** O `.bbl` precisa ir dentro do pacote; sem ele
+   toda citação renderiza `[?]`. O `tectonic` — único engine desta máquina —
+   roda o BibTeX sozinho e **não** deixa o `.bbl` em disco sem
+   `--keep-intermediates`.
+2. **`main.tex` inclui cada tabela por `\IfFileExists`.** Um `.tex` fora do
+   tarball não quebra nada: sai `[TODO: ...]` vermelho no lugar da tabela, com
+   exit 0. Testado de propósito — removendo `tables/tabela_principal.tex` do
+   pacote, o PDF sai com **46 páginas e 1 TODO** e o compilador retorna
+   **sucesso**. É a mesma classe do `.gitignore` que descartava o `main.pdf`.
+
+Por isso a validação **extrai o tarball num diretório vazio, compila lá** e
+compara contra o `main.pdf` de referência: páginas (47), TODOs (0), citações
+órfãs (0) e o texto extraído inteiro. Passou nos quatro.
+
+Mora em `paper/arxiv/`, **não** em `publish/`: `build_publish.py` faz `rmtree`
+do `publish/` inteiro (preservando só os `.git`) e apagou o pacote em silêncio
+na primeira versão.
+
+⚠️ O clean-room roda tectonic, que baixa o que falta. Ele prova que o **pacote
+está completo**, não que o TeX Live do arXiv compila igual — esta máquina não
+tem `pdflatex`. A lista de `\usepackage` ficou registrada no script para que uma
+rejeição por pacote seja diagnosticável sem reabrir o `.tex`.
+
+### Decisões tomadas no chat (não são autorização)
+
+- Release citável em **1.0.0**, data **2026-08-13** — artefato de arquivo do
+  paper submetido. `versao_experimento` segue em 0.3.0, deliberadamente
+  desacoplada.
+- arXiv: primária `cs.IR`, **secundária `cs.CL`**.
+- Alcance desta sessão: **só preparar**. Release, Zenodo e submissão ficam com
+  o humano.
+
+### Estado da fila externa
+
+`docs/submissao.md` tem o passo a passo e os campos prontos para colar
+(abstract em texto puro, 1.847 caracteres, teto 1.920);
+`docs/release_notes_v1.0.0.md` são as notas do release.
+
+Conferido: **não há placeholder de DOI** no `main.tex` nem nos READMEs, então a
+ordem Zenodo → arXiv não obriga recompilar o PDF depois.
+
+Esta sessão não executou nenhum ato externo: o alcance combinado foi só
+preparar, e o `git push` do pacote público, o release, o Zenodo e a submissão
+ficam com o humano, na ordem de `docs/submissao.md`.
+
+---
+
 ## Sessão 2026-08-13 (cont. 10) — revisões 6 e 7; paper em 47 páginas
 
 Duas revisões externas a mais (um matemático e um revisor editorial). Uma

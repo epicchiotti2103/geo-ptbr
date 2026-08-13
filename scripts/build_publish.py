@@ -251,8 +251,8 @@ variable across the three runs is which engine answers.
 
 **Headline finding:** the three engines agree on the direction of the effect
 for only four of the nine techniques, and all four are techniques that *hurt*.
-One technique (Technical Terms) inverts sign across engines with bootstrap
-confidence intervals excluding zero on all three.
+One technique (Fluency Optimization) inverts sign across engines, and both arms
+survive Holm correction over the primary family of 27 tests.
 
 ## Contents
 
@@ -308,8 +308,16 @@ correlations. `results/por_engine/<engine>/` holds the single-engine tables.
 
 The Spearman table carries an exact permutation `p` (the 9! orderings are
 enumerated in full — the asymptotic approximation is invalid at n=9). **No
-correlation in this study is significant**: the critical |rho| at 5% is 0.700,
-above every value measured. Read them as reported, not as evidence of ordering.
+correlation between technique orderings is significant** — not between any pair
+of engines, not against the original paper: the critical |rho| at 5% is 0.700,
+above every value measured. Read them as reported, not as evidence that an
+ordering transfers.
+
+The one Spearman correlation in this study that *does* reach significance is a
+different quantity: source length against visibility, in
+`results/comprimento_transformacao.csv` (rho = +0.80 and +0.73 on two of the
+three engines). That is the confounder described under Limitations, not a
+finding about which technique works.
 
 Every table reports **two query sets** side by side: `baseline_pos` (primary;
 queries whose target source had positive baseline visibility) and the full set
@@ -338,6 +346,17 @@ Read these before using the dataset:
   not test whether another model would have rewritten them better.
 - **`gpt-5.6-luna` does not accept a custom temperature**; the other two ran at
   0.7.
+- **Source length is a confounder for the ordering of techniques.** The
+  transformations change source length from $-14.4\\%$ to $+7.3\\%$, and that
+  delta predicts the visibility delta ($\\rho = +0.80$, $+0.73$, $+0.67$ across
+  the three engines). Any claim about *which* technique ranks where is partly a
+  claim about how much text it leaves. It does **not** confound the comparison
+  between engines --- all three receive the identical text with the identical
+  delta, and a mechanical length effect cannot produce opposite signs from the
+  same input --- nor does it touch abstention. See the paper's Section 5.7.
+- **No manipulation check.** Nobody audited whether each technique does what its
+  name says (that `statistics_addition` in fact adds statistics), nor whether
+  the transformations preserve the factual content of the source.
 
 ## License
 
@@ -407,8 +426,14 @@ variable across runs is which engine answers.
 - The three engines agree on the direction of the effect for **4 of 9
   techniques (44.4%)**, and all four are techniques that **hurt**. What
   transfers across engines is which optimizations backfire, not which work.
-- **Technical Terms inverts:** $+1.9\\%$ on one engine, $-4.4\\%$ and $-12.4\\%$
-  on the others, with bootstrap CIs excluding zero on all three.
+- **Fluency Optimization inverts outright:** $+7.9\\%$ on one engine and
+  $-6.9\\%$ on another, **both arms surviving Holm correction** over the
+  primary family of 27 tests (9 techniques $\\times$ 3 engines). Technical
+  Terms reads like a second inversion ($+1.9\\%$, $-4.4\\%$, $-12.4\\%$, all
+  three CIs excluding zero uncorrected), but two of its three arms do not
+  survive correction, so we report it as attenuation, not inversion.
+  Benjamini-Hochberg selects exactly the same 18 of 27 tests as Holm --- the
+  choice of correction does not drive the result.
 - Agreement drops from **66.7% with two engines to 44.4% with three** --- a
   two-engine cross-validation would have overstated transferability.
 - **5 of 9 techniques induce citation of sources that cannot answer the
@@ -417,12 +442,30 @@ variable across runs is which engine answers.
 - Against the original English results, 5 of 9 directions replicate, but the
   level does not: the original's top techniques gain $+27$ to $+41\\%$; our
   largest positive effect is $+2.6\\%$.
-- **No rank correlation in this study is statistically significant.** With
-  $n = 9$ techniques the permutation null is enumerated in full ($9!$ orders),
-  and the critical $|\\rho|$ at 5% is $0.700$ --- above every $\\rho$ we
-  measure (engine pairs: $0.667$, $0.550$, $0.483$; against the original:
+- **No correlation between technique orderings is statistically significant.**
+  With $n = 9$ techniques the permutation null is enumerated in full ($9!$
+  orders), and the critical $|\\rho|$ at 5% is $0.700$ --- above every $\\rho$
+  we measure (engine pairs: $0.667$, $0.550$, $0.483$; against the original:
   $0.617$ by median). We report them and claim nothing from them, in either
   direction.
+
+## Limitations
+
+Read the paper's Limitations before building on this. The two that most
+constrain how the findings above may be used:
+
+- **Source length confounds the ordering of techniques.** The transformations
+  change source length from $-14.4\\%$ to $+7.3\\%$, and that delta predicts the
+  visibility delta ($\\rho = +0.80$, $+0.73$, $+0.67$ across the three engines;
+  significant on two). Any reading of the ranking above is partly a reading of
+  how much text each transformation leaves. It does **not** confound the
+  comparison *between* engines --- all three receive the identical text with the
+  identical delta, and a mechanical length effect cannot produce opposite signs
+  from the same input --- nor does it touch abstention.
+- **Fixed context.** The results measure citation *given* that the source was
+  already retrieved. They say nothing about crawling, indexing, retrieval or
+  traffic, and content-side rewriting can improve one stage while harming
+  another.
 
 ## Layout
 
@@ -548,14 +591,15 @@ paper/draft/*.blg
 # Data do release, em ISO. NÃO é `date.today()`: o Zenodo grava este campo no
 # DOI, e um build rodado noutro dia mudaria o registro sem que nada no estudo
 # tivesse mudado. Bump manual, junto da tag.
-DATA_RELEASE = "2026-08-12"
+DATA_RELEASE = "2026-08-13"
 
 # Versão CITÁVEL, que o Zenodo grava no DOI. Deliberadamente SEPARADA de
-# `versao_experimento` (0.3.0 hoje, o mesmo número por coincidência): aquela
-# marca o desenho do estudo e sobe quando o pipeline muda; esta marca o que foi
-# publicado e sobe junto da tag. Acopladas, uma mudança interna do pipeline
-# moveria a versão citada de um artefato já com DOI.
-VERSAO_RELEASE = "0.3.0"
+# `versao_experimento` (que segue em 0.3.0): aquela marca o desenho do estudo e
+# sobe quando o pipeline muda; esta marca o que foi publicado e sobe junto da
+# tag. Acopladas, uma mudança interna do pipeline moveria a versão citada de um
+# artefato já com DOI. Foram ao mesmo número até 2026-08-12, por coincidência —
+# a 1.0.0 é o release de arquivo do paper submetido, não uma mudança do estudo.
+VERSAO_RELEASE = "1.0.0"
 
 
 def citation_cff(versao, namespace, gh_namespace):
