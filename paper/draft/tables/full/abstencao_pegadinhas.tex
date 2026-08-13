@@ -3,7 +3,7 @@
 % source experiment version (versao_experimento): 0.3.0
 % model_version(s) in traces: claude-haiku-4-5-20251001, gemini-3.5-flash-lite, gpt-5.6-luna
 % data aggregated (UTC, from results/abstencao_pegadinhas.csv header): 2026-08-13T13:06:34.981266+00:00
-% this .tex file generated (UTC): 2026-08-13T13:08:59.265576+00:00
+% this .tex file generated (UTC): 2026-08-13T13:15:43.932111+00:00
 
 \begin{table}[htbp]
 \centering
@@ -47,5 +47,5 @@ keyword\_stuffing & gpt-5.6-luna & 75 & 69 & 92.00 & 8.000 \\
 \end{tabular}%
 }
 \caption{Abstention on the 25 pitfall queries, by technique and engine: the share of generated answers in which the engine states that the provided sources do not answer the question. At baseline all three engines abstain in $100\%$ of answers; every figure below that is erosion of a correct refusal. Detection is by lexical pattern over PT-BR refusal phrasings, hand-checked on a sample --- not a validated classifier (\S\ref{sec:limitations}); it is reliable here only because the baseline refusal is a near-verbatim fixed phrase.}
-\label{tab:abstencao_pegadinhas}
+\label{tab:abstencao_pegadinhas_full}
 \end{table}

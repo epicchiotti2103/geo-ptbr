@@ -54,7 +54,7 @@ KNOWN_TABLES = {
         "technique, with bootstrap 95\\% CI and relative improvement (mean and "
         "median, Eq.~4). Each technique appears twice, once per query set: "
         "\\texttt{baseline\\_pos} (\\textbf{primary}) restricts to queries whose "
-        "target source has positive baseline visibility, and \\texttt{todas} "
+        "target source has positive baseline visibility, and \\texttt{all} "
         "(sensitivity) adds the queries where the source was never cited, which "
         "enter Eq.~4 as an exact $0\\%$ and pull the median toward zero. Read "
         "the primary row as the result; see \\S\\ref{sec:stats}."
@@ -243,9 +243,14 @@ PAPER_VIEW = {
         # margem (longtable não tem \resizebox). O n por conjunto está no
         # cabeçalho do .csv e na legenda, e é o mesmo em toda linha do
         # conjunto — é a coluna mais barata de perder.
+        # Sai também `sig_mediana` (o teste NÃO corrigido): com Holm e BH ao
+        # lado, três colunas de significância para a mesma célula é redundância
+        # que custa margem. O IC continua na tabela, então o leitor vê o teste
+        # bruto — é exatamente "o intervalo exclui zero?".
         "columns": ["conjunto", "tecnica", "engine"]
-                   + [c for c in _CELL_ENXUTO if c != "n_queries"]
-                   + ["sig_holm", "pct_citacao_zerada"],
+                   + [c for c in _CELL_ENXUTO
+                      if c not in ("n_queries", "sig_mediana")]
+                   + ["sig_holm", "sig_bh", "pct_citacao_zerada"],
     },
     "comparacao_2_engines": {
         "filter": {"metrica": "pwc"},
@@ -311,7 +316,8 @@ _LABEL_COLUNA = {
     "melhoria_mediana_ci_lo": "CI lo", "melhoria_mediana_ci_hi": "CI hi",
     "sig_mediana": "CI excl.\\ 0", "pct_citacao_zerada": "\\% zeroed",
     "melhoria_media_pct": "mean \\%",
-    "sig_holm": "sig.\\ (Holm)", "p_boot_mediana": "$p$",
+    "sig_holm": "sig.\\ (Holm)", "sig_bh": "sig.\\ (BH)",
+    "p_bh_mediana": "$p$ (BH)", "p_boot_mediana": "$p$",
     "p_holm_mediana": "$p$ (Holm)",
     "mesma_direcao": "agree", "tipo_divergencia": "divergence",
     "efeito_sig_em_todos": "sig.\\ all", "n_efetivo_min": "n eff.",
@@ -358,6 +364,12 @@ _LABEL_VALOR = {
     # português e longo ("não primário (exploratório)"), estourando a margem da
     # longtable — que não tem \resizebox para absorver.
     "não (Holm)": "no", "não primário (exploratório)": "expl.",
+    # Valores de dado que o pipeline escreve em português. O paper é em inglês;
+    # deixá-los crus fazia a tabela alternar de idioma célula a célula. As
+    # CHAVES do .csv seguem em português — o dado publicado não muda de nome
+    # por causa da tradução da tabela.
+    "pareado": "paired", "todas": "all", "saude": "health",
+    "juridico": "legal", "imobiliario": "real estate",
     "sensibilidade (não corrigido)": "sens.",
     "inversao": "inversion", "atenuacao": "attenuation",
     "sim": "yes", "nao": "no", "não": "no", "NAO": "NO",
@@ -574,7 +586,49 @@ def _column_alignment(header, rows):
     return aligns
 
 
+# Colunas que identificam a LINHA: repetem-se em toda fatia, senão a fatia 2
+# vira uma lista de números sem dizer de quê.
+_COLS_CHAVE = ("conjunto", "metrica", "tecnica", "engine", "setor",
+               "target_pos", "n_queries", "n_pegadinhas")
+# Orçamento em CARACTERES por fatia, não em número de colunas: o que estoura a
+# margem é a largura, e uma coluna de texto ("sensibilidade (não corrigido)")
+# vale por três de número. Calibrado medindo o overfull em \tiny.
+BUDGET_CHARS_FATIA = 190
+
+
+def _largura_col(coluna, header, rows):
+    i = header.index(coluna)
+    return max([len(coluna)] + [len(str(r[i] if r[i] is not None else "")) for r in rows]) + 2
+
+
+def _fatia_por_colunas(name, header, rows):
+    """[(header_fatia, rows_fatia, sufixo_label, texto_extra_da_legenda)]."""
+    chaves = [c for c in header if c in _COLS_CHAVE]
+    resto = [c for c in header if c not in chaves]
+    larg = {c: _largura_col(c, header, rows) for c in header}
+    orcamento = max(20, BUDGET_CHARS_FATIA - sum(larg[c] for c in chaves))
+    blocos, atual, usado = [], [], 0
+    for c in resto:
+        if atual and usado + larg[c] > orcamento:
+            blocos.append(atual); atual, usado = [], 0
+        atual.append(c); usado += larg[c]
+    if atual:
+        blocos.append(atual)
+    blocos = blocos or [[]]
+    saida = []
+    for k, bloco in enumerate(blocos, 1):
+        cols = chaves + bloco
+        idx = [header.index(c) for c in cols]
+        rs = [[r[i] for i in idx] for r in rows]
+        extra = ("" if len(blocos) == 1 else
+                 f" \\textbf{{Part {k} of {len(blocos)}}} of the complete table; "
+                 f"the identifying columns repeat in every part.")
+        saida.append((cols, rs, f"_full{k}" if len(blocos) > 1 else "_full", extra))
+    return saida
+
+
 def build_latex_table(name, meta_lines, header, rows, caption_override=None,
+                      compacto=False, sufixo_label=None, caption_extra='',
                        nota_view=None, rotular=False):
     versao, model, data_geracao = extract_meta(meta_lines)
     generated_now = datetime.now(timezone.utc).isoformat()
@@ -603,7 +657,9 @@ def build_latex_table(name, meta_lines, header, rows, caption_override=None,
     caption = caption_override or KNOWN_TABLES.get(name, f"Table: {escape_latex(name)} (auto-generated).")
     if nota_view:
         caption = f"{caption} {nota_view}"
-    label = f"tab:{name}"
+    if caption_extra:
+        caption = f"{caption}{caption_extra}"
+    label = f"tab:{name}{sufixo_label or ''}"
     n_col = len(header)
     _rot = label_coluna if rotular else escape_latex
     titulos = " & ".join(f"\\textbf{{{_rot(h)}}}" for h in header) + " \\\\"
@@ -626,7 +682,12 @@ def build_latex_table(name, meta_lines, header, rows, caption_override=None,
         # \small vai num GRUPO em volta, nunca dentro do ambiente: dentro do
         # longtable já se está em contexto de linha, e um comando de fonte ali
         # desalinha o \noalign do \toprule ("Misplaced \noalign").
-        lines.append("{\\footnotesize\\setlength{\\tabcolsep}{2pt}")
+        # No apêndice (tabela COMPLETA, até 26 colunas) o footnotesize/2pt não
+        # basta: longtable não tem \resizebox para absorver o excesso, então a
+        # única saída é fonte e espaçamento menores. No corpo continua
+        # footnotesize, que é legível.
+        tam, colsep = ("\\tiny", "1pt") if compacto else ("\\footnotesize", "2pt")
+        lines.append("{" + tam + "\\setlength{\\tabcolsep}{" + colsep + "}")
         lines.append("\\begin{longtable}{" + col_spec + "}")
         lines.append(f"\\caption{{{caption}}}\\label{{{label}}}\\\\")
         lines.append("\\toprule")
@@ -687,6 +748,12 @@ def convert_one(name, csv_dir, tables_dir, force=False, full=False):
     esperado antes da Fase 4; bloqueado é uma parada que o humano precisa ver)."""
     csv_path = _resolve_csv_path(name, csv_dir)
     tables_dir = Path(tables_dir)
+    # As tabelas completas vão para um subdiretório em vez de sobrescrever a
+    # versão do corpo do paper: as duas convivem, e o apêndice inclui estas.
+    # Sem isso, `--full` destruía a tabela recortada e o paper passava a
+    # embutir a tabela inteira no meio do texto.
+    if full:
+        tables_dir = tables_dir / "full"
     tables_dir.mkdir(parents=True, exist_ok=True)
     tex_path = tables_dir / f"{name}.tex"
 
@@ -724,8 +791,25 @@ def convert_one(name, csv_dir, tables_dir, force=False, full=False):
     if not full:
         header, rows, nota_view = apply_paper_view(name, header, rows)
 
-    tex = build_latex_table(name, meta_lines, header, rows,
-                             nota_view=nota_view, rotular=not full)
+    if full:
+        # As tabelas completas chegam a 26 colunas. Não cabem na página nem em
+        # paisagem (medido: pdflscape não alarga o bloco de texto, e
+        # \newgeometry ignora `landscape` dentro do documento). A saída correta
+        # é FATIAR POR COLUNAS, repetindo as colunas-chave em cada fatia, de
+        # modo que qualquer linha possa ser lida inteira juntando as partes.
+        tex = "\n".join(
+            # rotular=True também no apêndice: o que a tabela completa entrega
+            # é o DADO completo, não rótulo cru. Deixar "sensibilidade (não
+            # corrigido)" por extenso fazia o apêndice trocar de idioma em
+            # relação ao corpo — e, de quebra, era o que mais gastava largura.
+            build_latex_table(name, meta_lines, h, rs, rotular=True,
+                              compacto=True, sufixo_label=suf,
+                              caption_extra=extra)
+            for h, rs, suf, extra in _fatia_por_colunas(name, header, rows)
+        )
+    else:
+        tex = build_latex_table(name, meta_lines, header, rows,
+                                 nota_view=nota_view, rotular=True)
     tex_path.write_text(tex, encoding="utf-8")
     recorte = "" if n_bruto == len(rows) else f", recortado de {n_bruto}"
     forma = "longtable" if len(rows) > MAX_LINHAS_FLOAT else "table"

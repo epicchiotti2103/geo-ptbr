@@ -781,7 +781,8 @@ divergence with rank correlation rather than by comparing magnitudes, which
 the two studies' scales do not permit.
 
 A caveat on reading the sensitivity rows of the table: the
-\texttt{todas} rows include queries whose target source was never cited at
+\texttt{all} rows (\texttt{todas} in the released CSV) include queries
+whose target source was never cited at
 all, which enter Eq.~\ref{eq:improvement} as an exact $0\%$
 (\S\ref{sec:stats}). On this engine that set is small --- 3 of 500 queries
 --- so the two row sets nearly coincide. That is a property of this engine,
@@ -879,6 +880,14 @@ that label in the released CSV.
 Eighteen of the 27 primary tests survive correction, against 20 before it.
 The two that fall are consequential, and we report the fall rather than the
 uncorrected reading.
+
+The choice of correction does not drive this. Benjamini--Hochberg, the
+natural alternative if one reads the table as a list of candidates to
+investigate rather than as confirmatory tests, is reported in the same table
+and selects \emph{exactly the same 18} --- no test changes status between
+the two, including the two that fall. We report both so that the choice of
+correction cannot be read as a choice of result, which is the same reason
+\S\ref{sec:results-comparison} refuses to switch estimators.
 
 \paragraph{The inversion that survives is Fluency Optimization, not Technical
 Terms.} At the uncorrected level, Technical Terms looks like this study's
@@ -1639,6 +1648,24 @@ domains: e-commerce, consumer technology and general informational content
 are absent, and nothing here establishes that the anti-hack pattern we
 observe holds outside the three we ran.
 
+\paragraph{What this leaves a practitioner.} A fair objection to a study
+whose headline is instability: if the effect depends on the engine and we
+tested one tier of three engines, what is anyone supposed to do with it? The
+honest answer is short, and it is a result rather than a shrug. First: do
+not port an optimization from one engine to another without measuring it on
+the second, because in this benchmark four of nine techniques changed sign
+or lost their effect across engines, and the mildest technique in the
+catalogue inverted. Second: the techniques that transferred are the ones
+that \emph{hurt}, so the safest use of a fixed catalogue is as a list of
+things to avoid rather than to apply --- Keyword Stuffing costs visibility
+on all three engines, with no engine on which it pays. Third, and least
+comfortable: some techniques that look like optimization are also
+reliability failures. Statistics Addition erodes a correct refusal on every
+engine we tested (\S\ref{sec:results-abstention}), and that cost does not
+depend on which engine answers, so it is not something a per-engine test
+would reveal. None of this requires knowing which technique wins; all of it
+follows from measurement rather than from the catalogue.
+
 The practical implication is that ``optimizing for AI search'' is not a
 single, portable target: a content strategy validated on one generative
 engine may be neutral on a second and actively counterproductive on a
@@ -1647,6 +1674,45 @@ number above but the released artifact --- 525 PT-BR queries with sources,
 per-technique results on three engines, and the full measurement pipeline
 --- so that the boundary we found can be tested, contested, and extended on
 engines and languages we did not cover.
+
+% =============================================================================
+\appendix
+\section{Complete tables}
+\label{sec:appendix-tables}
+% =============================================================================
+
+Every table in the body is a curated view: the full CSV carries auxiliary
+columns (mean-based estimates, level confidence intervals, zero and
+undefined counts) and, for some tables, rows for the secondary metric and
+query set. Those views were chosen for legibility, not to hide anything.
+This appendix removes the need to take that on trust: below is every table
+on which a claim in this paper rests, with all columns and all rows, from
+the same CSVs that produced the body versions. Nothing is recomputed --- the
+two are emitted by the same script from the same file, differing only in
+which columns are printed. Where a table is too wide for the page it is
+split by columns into parts, with the identifying columns repeated in each
+part, so any row can still be read end to end.
+
+Two tables are deliberately \emph{not} reproduced here in full: the
+breakdowns by sector and by target-source position. They are the two
+analyses this paper declares exploratory rather than confirmatory
+(\S\ref{sec:results-crossengine}), they are the two largest (108 and 180
+rows, which column-splitting would multiply into some sixty pages of
+six-point type), and their body views already show the primary query set and
+metric --- the rows any claim would use. Both are released complete in
+\texttt{results/}, with the study version and model identifiers in their
+header lines, as is every table below.
+
+\input{tables/full/tabela_principal.tex}
+\input{tables/full/comparacao_3_engines.tex}
+\input{tables/full/concordancia_engines.tex}
+\input{tables/full/spearman_engines.tex}
+\input{tables/full/comprimento_transformacao.tex}
+\input{tables/full/abstencao_pegadinhas.tex}
+\input{tables/full/inducao_pegadinhas.tex}
+\input{tables/full/comparacao_paper.tex}
+\input{tables/full/tabela_custo.tex}
+
 
 % =============================================================================
 \bibliography{refs}

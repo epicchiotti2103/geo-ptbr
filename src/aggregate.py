@@ -616,6 +616,32 @@ def spearman_critico(x, y, alpha=ALPHA):
     return None
 
 
+def benjamini_hochberg(ps):
+    """p ajustados por Benjamini-Hochberg (controle de FDR), na ordem de
+    entrada; None passa como None e não conta no tamanho da família.
+
+    Reportado AO LADO do Holm, não no lugar dele. As duas correções respondem
+    a perguntas diferentes e o paper faz as duas: Holm controla a chance de
+    QUALQUER falso positivo, que é o que importa para a afirmação central (uma
+    inversão falsa inverteria a leitura); BH controla a PROPORÇÃO de falsos
+    entre os achados, que é o critério certo para quem lê a tabela como lista
+    de candidatos a investigar. Deixar as duas visíveis evita que a escolha da
+    correção seja lida como escolha do resultado.
+    """
+    idx = [i for i, v in enumerate(ps) if v is not None]
+    m = len(idx)
+    if m == 0:
+        return list(ps)
+    ordem = sorted(idx, key=lambda i: ps[i], reverse=True)   # do maior p para o menor
+    ajust = list(ps)
+    corrente = 1.0
+    for k, i in enumerate(ordem):
+        rank = m - k                       # posição crescente de p
+        corrente = min(corrente, m * ps[i] / rank)   # monotonicidade (step-up)
+        ajust[i] = min(corrente, 1.0)
+    return ajust
+
+
 def _cell_to_row(extra, cell):
     row = dict(extra)
     if cell.get("n_queries", 0) == 0:
@@ -628,6 +654,7 @@ def _cell_to_row(extra, cell):
             "sig_media": "n insuficiente", "sig_mediana": "n insuficiente",
             "p_boot_mediana": None, "p_holm_mediana": None,
             "sig_holm": "n insuficiente",
+            "p_bh_mediana": None, "sig_bh": "n insuficiente",
         })
         return row
     b_lo, b_hi = cell["baseline_ci"]
@@ -652,6 +679,8 @@ def _cell_to_row(extra, cell):
         "p_boot_mediana": cell.get("p_boot_mediana"),
         "p_holm_mediana": None,
         "sig_holm": "pendente",
+        "p_bh_mediana": None,
+        "sig_bh": "pendente",
     })
     return row
 
@@ -671,6 +700,8 @@ def marca_exploratorio(rows):
     for r in rows:
         r["p_holm_mediana"] = None
         r["sig_holm"] = "não primário (exploratório)"
+        r["p_bh_mediana"] = None
+        r["sig_bh"] = "não primário (exploratório)"
     return rows
 
 
@@ -696,18 +727,23 @@ def aplica_holm(rows, chave_familia=lambda r: (r.get("conjunto"), r.get("metrica
             for r in linhas:
                 r["p_holm_mediana"] = None
                 r["sig_holm"] = "sensibilidade (não corrigido)"
+                r["p_bh_mediana"] = None
+                r["sig_bh"] = "sensibilidade (não corrigido)"
             continue
         ps = [r.get("p_boot_mediana") for r in linhas]
-        for r, a in zip(linhas, holm(ps)):
-            r["p_holm_mediana"] = a
-            if a is None:
-                r["sig_holm"] = "n insuficiente"
-            elif a < ALPHA:
-                mediana = r.get("melhoria_mediana_pct")
-                r["sig_holm"] = ("sim (efeito positivo)" if (mediana or 0) > 0
-                                 else "sim (efeito negativo)")
-            else:
-                r["sig_holm"] = "não (Holm)"
+        for campo, rotulo_nao, ajustados in (
+                ("holm", "não (Holm)", holm(ps)),
+                ("bh", "não (BH)", benjamini_hochberg(ps))):
+            for r, a in zip(linhas, ajustados):
+                r[f"p_{campo}_mediana"] = a
+                if a is None:
+                    r[f"sig_{campo}"] = "n insuficiente"
+                elif a < ALPHA:
+                    mediana = r.get("melhoria_mediana_pct")
+                    r[f"sig_{campo}"] = ("sim (efeito positivo)" if (mediana or 0) > 0
+                                         else "sim (efeito negativo)")
+                else:
+                    r[f"sig_{campo}"] = rotulo_nao
     return rows
 
 
@@ -734,6 +770,8 @@ COLS_CELL = [
     ("p_boot_mediana", "p bootstrap (mediana)", "float4"),
     ("p_holm_mediana", "p ajustado (Holm)", "float4"),
     ("sig_holm", "sig. após Holm", "str"),
+    ("p_bh_mediana", "p ajustado (Benjamini-Hochberg)", "float4"),
+    ("sig_bh", "sig. após BH", "str"),
 ]
 
 

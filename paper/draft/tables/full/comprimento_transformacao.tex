@@ -3,7 +3,7 @@
 % source experiment version (versao_experimento): 0.3.0
 % model_version(s) in traces: claude-haiku-4-5-20251001, gemini-3.5-flash-lite, gpt-5.6-luna
 % data aggregated (UTC, from results/comprimento_transformacao.csv header): 2026-08-13T13:06:34.981266+00:00
-% this .tex file generated (UTC): 2026-08-13T13:08:59.265236+00:00
+% this .tex file generated (UTC): 2026-08-13T13:15:43.931826+00:00
 
 \begin{table}[htbp]
 \centering
@@ -26,5 +26,5 @@ keyword\_stuffing & -12.43 & -9.103 & -28.62 & -45.31 \\
 \end{tabular}%
 }
 \caption{Length change of the transformed source per technique (median over the 525 queries, in words, against the original source), alongside the median visibility change each engine measures. The transformation is performed once and reused across engines, so the length column is engine-independent. Across the nine techniques, length change and visibility change are strongly rank-correlated: $\rho = +0.80$ ($p = 0.014$) on gemini, $+0.73$ ($p = 0.031$) on haiku and $+0.67$ ($p = 0.059$) on luna, exact permutation $p$ with critical $|\rho| = 0.700$. See \S\ref{sec:results-length} for what this does and does not confound.}
-\label{tab:comprimento_transformacao}
+\label{tab:comprimento_transformacao_full}
 \end{table}

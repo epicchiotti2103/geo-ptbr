@@ -3,7 +3,7 @@
 % source experiment version (versao_experimento): 0.3.0
 % model_version(s) in traces: claude-haiku-4-5-20251001, gemini-3.5-flash-lite
 % data aggregated (UTC, from results/comparacao_2_engines.csv header): 2026-08-11T19:03:11.255380+00:00
-% this .tex file generated (UTC): 2026-08-13T12:56:16.744260+00:00
+% this .tex file generated (UTC): 2026-08-13T13:08:59.264183+00:00
 
 \begin{table}[htbp]
 \centering
@@ -13,24 +13,24 @@
 \toprule
 \textbf{set} & \textbf{technique} & \textbf{engine} & \textbf{n} & \textbf{median \%} & \textbf{CI lo} & \textbf{CI hi} & \textbf{CI excl.\ 0} & \textbf{\% zeroed} \\
 \midrule
-pareado & cite\_sources & gemini-3.5-flash-lite & 500 & 1.740 & 0.2001 & 3.796 & yes ($+$) & 0.2012 \\
-pareado & cite\_sources & claude-haiku-4-5 & 500 & 0 & -2.604 & 0 & no & 6.697 \\
-pareado & quotation\_addition & gemini-3.5-flash-lite & 500 & 0.5363 & -0.6521 & 2.132 & no & 0.2012 \\
-pareado & quotation\_addition & claude-haiku-4-5 & 500 & 0 & -2.361 & 0 & no & 5.774 \\
-pareado & statistics\_addition & gemini-3.5-flash-lite & 500 & -1.324 & -3.114 & 0.5866 & no & 0 \\
-pareado & statistics\_addition & claude-haiku-4-5 & 500 & 0 & -3.469 & 0.0803 & no & 8.545 \\
-pareado & fluency\_optimization & gemini-3.5-flash-lite & 500 & 0.6499 & -0.3601 & 2.313 & no & 0.2012 \\
-pareado & fluency\_optimization & claude-haiku-4-5 & 500 & 5.041 & 0.8291 & 11.35 & yes ($+$) & 4.388 \\
-pareado & easy\_to\_understand & gemini-3.5-flash-lite & 500 & -5.255 & -7.573 & -3.459 & yes ($-$) & 0.2012 \\
-pareado & easy\_to\_understand & claude-haiku-4-5 & 500 & -7.220 & -11.30 & -1.385 & yes ($-$) & 6.928 \\
-pareado & authoritative & gemini-3.5-flash-lite & 500 & -2.343 & -4.193 & 0 & yes ($-$) & 0.4024 \\
-pareado & authoritative & claude-haiku-4-5 & 500 & -3.846 & -8.229 & 0 & no & 7.621 \\
-pareado & unique\_words & gemini-3.5-flash-lite & 500 & -2.062 & -4.230 & -0.2078 & yes ($-$) & 0.6036 \\
-pareado & unique\_words & claude-haiku-4-5 & 500 & -46.46 & -54.38 & -41.30 & yes ($-$) & 28.87 \\
-pareado & technical\_terms & gemini-3.5-flash-lite & 500 & 2.526 & 0.9487 & 4.084 & yes ($+$) & 0.2012 \\
-pareado & technical\_terms & claude-haiku-4-5 & 500 & -0.7657 & -5.769 & 0 & no & 7.621 \\
-pareado & keyword\_stuffing & gemini-3.5-flash-lite & 500 & -9.751 & -11.66 & -5.590 & yes ($-$) & 0.2012 \\
-pareado & keyword\_stuffing & claude-haiku-4-5 & 500 & -25.24 & -30.06 & -19.62 & yes ($-$) & 18.01 \\
+paired & cite\_sources & gemini-3.5-flash-lite & 500 & 1.740 & 0.2001 & 3.796 & yes ($+$) & 0.2012 \\
+paired & cite\_sources & claude-haiku-4-5 & 500 & 0 & -2.604 & 0 & no & 6.697 \\
+paired & quotation\_addition & gemini-3.5-flash-lite & 500 & 0.5363 & -0.6521 & 2.132 & no & 0.2012 \\
+paired & quotation\_addition & claude-haiku-4-5 & 500 & 0 & -2.361 & 0 & no & 5.774 \\
+paired & statistics\_addition & gemini-3.5-flash-lite & 500 & -1.324 & -3.114 & 0.5866 & no & 0 \\
+paired & statistics\_addition & claude-haiku-4-5 & 500 & 0 & -3.469 & 0.0803 & no & 8.545 \\
+paired & fluency\_optimization & gemini-3.5-flash-lite & 500 & 0.6499 & -0.3601 & 2.313 & no & 0.2012 \\
+paired & fluency\_optimization & claude-haiku-4-5 & 500 & 5.041 & 0.8291 & 11.35 & yes ($+$) & 4.388 \\
+paired & easy\_to\_understand & gemini-3.5-flash-lite & 500 & -5.255 & -7.573 & -3.459 & yes ($-$) & 0.2012 \\
+paired & easy\_to\_understand & claude-haiku-4-5 & 500 & -7.220 & -11.30 & -1.385 & yes ($-$) & 6.928 \\
+paired & authoritative & gemini-3.5-flash-lite & 500 & -2.343 & -4.193 & 0 & yes ($-$) & 0.4024 \\
+paired & authoritative & claude-haiku-4-5 & 500 & -3.846 & -8.229 & 0 & no & 7.621 \\
+paired & unique\_words & gemini-3.5-flash-lite & 500 & -2.062 & -4.230 & -0.2078 & yes ($-$) & 0.6036 \\
+paired & unique\_words & claude-haiku-4-5 & 500 & -46.46 & -54.38 & -41.30 & yes ($-$) & 28.87 \\
+paired & technical\_terms & gemini-3.5-flash-lite & 500 & 2.526 & 0.9487 & 4.084 & yes ($+$) & 0.2012 \\
+paired & technical\_terms & claude-haiku-4-5 & 500 & -0.7657 & -5.769 & 0 & no & 7.621 \\
+paired & keyword\_stuffing & gemini-3.5-flash-lite & 500 & -9.751 & -11.66 & -5.590 & yes ($-$) & 0.2012 \\
+paired & keyword\_stuffing & claude-haiku-4-5 & 500 & -25.24 & -30.06 & -19.62 & yes ($-$) & 18.01 \\
 baseline\_pos & cite\_sources & gemini-3.5-flash-lite & 431 & 0.5709 & -0.5827 & 2.440 & no & 0 \\
 baseline\_pos & cite\_sources & claude-haiku-4-5 & 431 & -2.387 & -5.646 & 1.628 & no & 6.729 \\
 baseline\_pos & quotation\_addition & gemini-3.5-flash-lite & 431 & 0.1876 & -1.117 & 1.750 & no & 0 \\
