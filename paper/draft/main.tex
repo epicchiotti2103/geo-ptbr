@@ -44,6 +44,11 @@
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{url}
+% Figura de resultados: pgfplots desenha em LaTeX, sem imagem externa e sem
+% dependência de Python nova (o projeto não usa matplotlib/pandas). O .tex da
+% figura é GERADO de results/comparacao_3_engines.csv, como as tabelas.
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 
 % --- bibliography (natbib + bibtex, per paper/draft/Makefile) ---------------
 \usepackage{natbib}
@@ -785,6 +790,9 @@ hold for the others.
 \subsection{Cross-engine comparison: does the effect depend on who answers?}
 \label{sec:results-crossengine}
 
+\IfFileExists{tables/fig_efeitos.tex}{\input{tables/fig_efeitos.tex}}{}
+
+
 This is the central comparison of the study. All three engines answered the
 same queries with the same already-transformed sources
 (\S\ref{sec:setup}), so a difference between them is a difference in
@@ -1131,6 +1139,80 @@ Note the disjunction with \S\ref{sec:results-main}: three of these five
 harmful for genuine visibility on answerable queries while being among the
 most effective at inducing a citation where none is warranted.
 
+\subsection{Abstention, and how optimization erodes it}
+\label{sec:results-abstention}
+
+The induction result of \S\ref{sec:results-pitfall} says that optimized
+sources get cited on queries they cannot answer. It does not say what the
+engine does with the rest of the answer. That turns out to be the more
+serious half.
+
+On the 25 pitfall queries, at baseline, all three engines abstain in
+$100\%$ of generated answers --- they state that the provided sources do not
+answer the question, usually in a near-verbatim fixed phrase (``As fontes
+fornecidas não respondem a esta pergunta''). The refusal is not marginal or
+hedged; it is unanimous, across three model families and every repetition.
+
+\IfFileExists{tables/abstencao_pegadinhas.tex}{%
+  \input{tables/abstencao_pegadinhas.tex}
+}{%
+  \begin{center}\TODO{\texttt{results/abstencao\_pegadinhas.csv} not yet
+  generated}\end{center}
+}
+
+Optimizing one of the five sources erodes that refusal, and Statistics
+Addition erodes it most: abstention falls to $68.0\%$ on gemini, $74.7\%$ on
+luna and $80.0\%$ on haiku --- a drop of $32$, $25$ and $20$ percentage
+points from a unanimous baseline. Keyword Stuffing, Authoritative and
+Easy-to-Understand follow. Only two techniques --- Cite Sources and Unique
+Words --- leave the refusal intact on all three engines. One of them, Unique
+Words, is also the second most damaging technique for visibility on
+answerable queries ($-54\%$ and $-55\%$ on two engines): a technique can be
+safe in this sense and useless in the other.
+
+What replaces the refusal is not a hedge. Pitfall query \texttt{p006} asks
+whether a named physiotherapist at a named clinic has an opening next
+Tuesday --- a fact about a specific person's calendar, present in no source.
+Every baseline answer declines. Under Statistics Addition, the engine
+answers:
+
+\begin{quote}\small
+``A ocupação da agenda do fisioterapeuta André Moura para a próxima
+terça-feira oscila constantemente [\ldots] havendo apenas de $3\%$ a $5\%$
+de vagas remanescentes disponíveis~[4].''
+
+\emph{(``The occupancy of physiotherapist André Moura's calendar for next
+Tuesday fluctuates constantly [\ldots] with only $3\%$ to $5\%$ of remaining
+slots available~[4].'')}
+\end{quote}
+
+The number is invented, the question is unanswerable, and the claim is
+attributed to source~[4]. The technique did not merely raise a source's
+share of the answer: it converted a correct refusal into a fabricated,
+sourced assertion.
+
+\paragraph{This failure transfers where the benefit does not.} The
+comparison with \S\ref{sec:results-crossengine} is the point of this
+subsection. Statistics Addition's effect on \emph{visibility} is as
+engine-dependent as anything in this study --- indeterminate on gemini
+($-1.4\%$) and haiku ($+0.6\%$), catastrophic on luna ($-81.5\%$). Its
+effect on \emph{abstention} is consistent: all three engines lose 20 to 32
+points. A practitioner choosing techniques by visibility would find this one
+unusable on one engine and neutral on two; the safety cost is paid on all
+three regardless. Portability, in this benchmark, is a property of the
+damage rather than of the gain --- and that holds not only across
+techniques, as \S\ref{sec:results-crossengine} showed, but across the two
+kinds of outcome.
+
+We are careful about what this measurement is. Abstention is detected by a
+lexical pattern over PT-BR refusal phrasings, hand-checked on a sample, not
+by a validated classifier or human annotation; it works here because the
+baseline refusal is so stereotyped. The direction and the size of the drop
+are too large to be an artifact of phrasing, but the exact percentages do
+not carry the guarantee that the visibility measurements do, which come from
+word counts. \S\ref{sec:limitations} records what a proper validation would
+require.
+
 \subsection{Cost}
 \label{sec:results-cost}
 
@@ -1445,6 +1527,32 @@ the sources are optimized text, not live web pages. Neither boundary rescues
 the fixed-catalogue approach --- a technique catalogue that does not survive
 three engines of one tier in one language has not earned the word
 ``portable'' --- but both mark where the evidence stops.
+
+These results are the experimental counterpart of a claim the adaptive-GEO
+literature makes from the other direction. \citet{wu2026autogeo} and
+\citet{yuan2026agenticgeo} both begin from the premise that a fixed
+catalogue of hand-designed transformations is the wrong primitive --- the
+first learning engine preference rules, the second evolving compositional
+strategies because static heuristics ``cannot flexibly adapt to [\ldots] the
+changing behaviors of generative engines.'' That premise is normally argued
+and then assumed. We measured it: applied unchanged to identical sources and
+queries, the nine transformations agree in direction on four of nine across
+three engines, all four of them harmful, and the mildest of them inverts
+sign between two engines with both arms surviving correction. If a fixed
+catalogue carried a stable effect from one engine to the next, the case for
+learning or evolving engine-specific strategies would be weaker; our
+measurement is that it does not. We make no claim about how well those
+adaptive methods themselves transfer --- we did not evaluate them --- and
+\citet{martinez2026survey} reaches the same negative conclusion from the
+literature that we reach from a controlled run.
+
+One scope note belongs with that. Our three sectors --- health, legal, real
+estate --- were chosen because two are YMYL and one is high-value
+transactional, which is where citation errors are costly and where the
+regulatory attention is. It is a deliberate choice and not a sample of
+domains: e-commerce, consumer technology and general informational content
+are absent, and nothing here establishes that the anti-hack pattern we
+observe holds outside the three we ran.
 
 The practical implication is that ``optimizing for AI search'' is not a
 single, portable target: a content strategy validated on one generative

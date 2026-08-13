@@ -687,9 +687,15 @@ def aplica_holm(rows, chave_familia=lambda r: (r.get("conjunto"), r.get("metrica
         grupos.setdefault(chave_familia(r), []).append(r)
     for chave, linhas in grupos.items():
         if chave != FAMILIA_PRIMARIA:
+            # Duas coisas diferentes que não podem receber o mesmo rótulo:
+            # o conjunto/métrica de SENSIBILIDADE são a mesma hipótese vista de
+            # outro ângulo (não se corrige duas vezes o mesmo teste), enquanto
+            # setor e posição são análises que não foram pré-especificadas.
+            # Chamar as duas de "exploratório" faria a tabela principal parecer
+            # não-confirmatória em metade das linhas.
             for r in linhas:
                 r["p_holm_mediana"] = None
-                r["sig_holm"] = "não primário (exploratório)"
+                r["sig_holm"] = "sensibilidade (não corrigido)"
             continue
         ps = [r.get("p_boot_mediana") for r in linhas]
         for r, a in zip(linhas, holm(ps)):

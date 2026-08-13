@@ -120,6 +120,16 @@ KNOWN_TABLES = {
         "\\emph{attenuation} (effect present on one engine, null on another), "
         "since the two support different claims."
     ),
+    "abstencao_pegadinhas": (
+        "Abstention on the 25 pitfall queries, by technique and engine: the "
+        "share of generated answers in which the engine states that the "
+        "provided sources do not answer the question. At baseline all three "
+        "engines abstain in $100\\%$ of answers; every figure below that is "
+        "erosion of a correct refusal. Detection is by lexical pattern over "
+        "PT-BR refusal phrasings, hand-checked on a sample --- not a "
+        "validated classifier (\\S\\ref{sec:limitations}); it is reliable here "
+        "only because the baseline refusal is a near-verbatim fixed phrase."
+    ),
     "spearman_engines": (
         "Pairwise Spearman rank correlation between engines over the "
         "nine-technique vector of median relative improvements. The $p$ is "
@@ -210,7 +220,8 @@ PAPER_VIEW = {
     # Tabela principal: mantém os DOIS conjuntos e as DUAS métricas — é a tabela
     # em que o §3.5 promete `baseline_pos` e `todas` lado a lado. 36 linhas.
     "tabela_principal": {
-        "columns": ["conjunto", "tecnica", "metrica"] + _CELL_ESSENCIAL,
+        "columns": ["conjunto", "tecnica", "metrica"] + _CELL_ESSENCIAL
+                   + ["sig_holm"],
     },
     # Comparação entre engines: os dois conjuntos, só a métrica primária (a wc
     # fica no .csv). Inclui a citação zerada, que é o mecanismo do achado.
@@ -335,6 +346,7 @@ _LABEL_VALOR = {
     # português e longo ("não primário (exploratório)"), estourando a margem da
     # longtable — que não tem \resizebox para absorver.
     "não (Holm)": "no", "não primário (exploratório)": "expl.",
+    "sensibilidade (não corrigido)": "sens.",
     "inversao": "inversion", "atenuacao": "attenuation",
     "sim": "yes", "nao": "no", "não": "no", "NAO": "NO",
     "positivo": "$+$", "negativo": "$-$", "nulo": "0",
