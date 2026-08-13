@@ -5,6 +5,94 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-13 (cont. 10) — revisões 6 e 7; paper em 47 páginas
+
+Duas revisões externas a mais (um matemático e um revisor editorial). Uma
+achou erro na equação central; a outra trouxe quase só falso positivo, mas o
+pouco que procedia era caro. **Corpo em 26 páginas, apêndice da 27 à 47, zero
+TODO, zero estouro de tabela.**
+
+### Erro na Eq. 2 (o matemático estava certo)
+A Eq. 2 escrevia o peso de posição como `e^{-pos(s)/|s|}` — dividindo pelo
+número de palavras da SENTENÇA. A prosa (§3.4) e o código
+(`metrics.py`: `math.exp(-idx / n)`) dividem pelo número de SENTENÇAS da
+resposta. Prosa e código concordavam; a equação é que estava errada.
+Corrigida para `e^{-pos(s)/|S_r|}`. **Nenhum número muda** — o errado era a
+descrição, não o que rodou.
+
+### O confundidor de comprimento — o achado desconfortável
+Ele pediu auditoria das transformações. A parte mensurável revelou algo que
+não sabíamos: as técnicas mudam o tamanho da fonte de −14,4%
+(easy_to_understand) a +7,3% (fluency_optimization), e esse Δ **prediz** o Δ
+de visibilidade.
+
+| engine | ρ | p exato |
+|---|---|---|
+| gemini | +0,80 | 0,014 |
+| haiku | +0,73 | 0,031 |
+| luna | +0,67 | 0,059 |
+
+Nova §5.7 com a fronteira exata. **Contamina** a ordenação das técnicas: quem
+lê nosso ranking como afirmação sobre que retórica os engines premiam está
+lendo, em parte, quanto texto cada transformação deixa. **Não contamina** a
+comparação entre engines — os três recebem o texto idêntico com o Δ idêntico,
+e efeito mecânico de comprimento não produz sinais opostos a partir da mesma
+entrada (fluency: +7,3% de comprimento, +7,9% no haiku, −6,9% no luna). Nem
+toca a abstenção, que é sobre recusar, não sobre fração.
+
+Tabela `comprimento_transformacao` no pipeline; limitação nova sobre a
+ausência de manipulation check (ninguém auditou se statistics_addition de fato
+adiciona estatística, nem se as transformações preservam o factual).
+
+### Revisão 7: quase toda falso positivo, mas o resto era caro
+Os "erros críticos" que ela lista NÃO EXISTEM — conferido no .tex e no PDF:
+"hurr", "clade-hauki-4.5", "gemini-3.5-flash-line", "indelneteracy",
+"invmach", "invoves" dão **zero** ocorrências nos dois. São corrupções da
+extração de texto dela (`$\frac{5}{2}$` é "§5.2"). Idem a alegação de que a
+Eq. 1 tem numerador igual ao denominador (numerador soma sobre S_{c_i},
+denominador sobre S_r) e a "contradição mediana/média", que está invertida na
+leitura dela — o paper diz que a MÉDIA é instável e a MEDIANA é primária.
+
+O que procedia:
+1. **Tabelas completas no paper.** "Ver o CSV" não serve para paper publicado.
+   Apêndice novo com as 9 tabelas em que alguma afirmação se apoia. Como
+   algumas têm 26 colunas, o gerador FATIA POR COLUNAS com orçamento de
+   LARGURA (não de contagem — uma coluna de texto vale por três de número),
+   repetindo as colunas-chave em cada parte. Medido no caminho: `pdflscape`
+   NÃO alarga o bloco de texto (452pt) e `\newgeometry{landscape}` é ignorado
+   dentro do documento (529pt) — paisagem não resolve, fatiar resolve.
+   Ficam de fora as quebras por setor e posição: são as maiores (108 e 180
+   linhas → ~60 páginas de corpo 6) e são as declaradamente exploratórias.
+2. **Benjamini-Hochberg ao lado de Holm.** Ele diz que Holm é conservador
+   demais para 27 testes. Implementado: **BH seleciona exatamente os mesmos 18
+   de 27**, sem uma divergência, inclusive nas duas quedas do technical_terms.
+   A escolha da correção não dirige o resultado — agora é fato medido no
+   paper, não suposição.
+3. **Idioma nas tabelas.** "todas", "pareado", "saude", "juridico" num paper
+   em inglês. Traduzidos na camada de exibição; as CHAVES do .csv seguem em
+   português (o dado publicado não muda de nome por causa da tradução).
+4. **Parágrafo para practitioners** na Conclusão.
+
+### O PDF no repositório público, e o commit que mentiu
+O pacote público passou a levar o `main.pdf` compilado — quem chega pelo link
+do dataset quer ler o paper, não instalar tectonic. **O primeiro commit disso
+mentiu**: a linha `paper/draft/*.pdf` no `.gitignore` do pacote fazia o
+`git add -A` descartar o PDF em SILÊNCIO, e o link do README apontaria para
+arquivo inexistente. Só peguei porque conferi no remoto com `gh api` em vez de
+confiar no "push ok".
+
+### Correções minhas, pegas antes do PDF
+- Citei "46% e 50%" de citação zerada para unique_words; são **26,1% e 20,6%**.
+- Escrevi "quatro técnicas preservam a recusa nos três engines"; são **duas**.
+- Ao corrigir a anterior, generalizei de novo ("ambas estão entre as que mais
+  prejudicam") — só vale para unique_words.
+
+### Pendências (todas externas, dependem das contas do Du)
+Zenodo (release + DOI; CITATION.cff pronto com o ORCID) → arXiv (cs.IR
+primária, cs secundária; homepage aeobr.com.br) → pedidos de endorsement.
+
+---
+
 ## Sessão 2026-08-12/13 (cont. 9) — multiplicidade, abstenção, figura
 
 Duas revisões externas fortes. A primeira mudou um resultado; a segunda
