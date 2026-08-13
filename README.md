@@ -7,7 +7,7 @@ Code and paper for *GEO-PTBR: A Brazilian-Portuguese Replication of Generative
 Engine Optimization and the Engine-Dependence of Its Effects*.
 
 - 📊 **Dataset:** https://huggingface.co/datasets/epicchi2103/geo-ptbr (CC BY 4.0)
-- 📄 **Paper:** `paper/draft/main.tex` (build instructions below)
+- 📄 **Paper:** [`paper/draft/main.pdf`](paper/draft/main.pdf) --- compiled, 47 pages (body to p. 26, complete-tables appendix from p. 27). Source: `paper/draft/main.tex`, build instructions below
 - Experiment version: `0.3.0`
 
 ## What this measures

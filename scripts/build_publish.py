@@ -387,7 +387,7 @@ Code and paper for *GEO-PTBR: A Brazilian-Portuguese Replication of Generative
 Engine Optimization and the Engine-Dependence of Its Effects*.
 
 - 📊 **Dataset:** https://huggingface.co/datasets/{namespace}/geo-ptbr (CC BY 4.0)
-- 📄 **Paper:** `paper/draft/main.tex` (build instructions below)
+- 📄 **Paper:** [`paper/draft/main.pdf`](paper/draft/main.pdf) --- compiled, 47 pages (body to p. 26, complete-tables appendix from p. 27). Source: `paper/draft/main.tex`, build instructions below
 - Experiment version: `{versao or 'n/d'}`
 
 ## What this measures
@@ -637,10 +637,15 @@ def build_github(destino, n_queries, n_sources, versao, namespace,
     for path in sorted((ROOT / "data" / "sources").glob("*.jsonl")):
         copia(path, destino / "data" / "sources" / path.name)
 
-    # paper: fonte LaTeX e tabelas geradas; sem PDF (saída de build)
+    # paper: fonte LaTeX, tabelas geradas E o main.pdf compilado.
+    #
+    # O PDF é saída de build e por isso fica fora do repositório de TRABALHO
+    # (.gitignore) — mas no pacote PÚBLICO ele é o artefato principal: quem
+    # chega pelo link do dataset ou pelo Zenodo quer ler o paper, não instalar
+    # tectonic para compilá-lo. Os outros subprodutos de build seguem de fora.
     for path in sorted((ROOT / "paper" / "draft").rglob("*")):
         if path.is_file() and _copiavel(path) and path.suffix not in (
-                ".pdf", ".aux", ".log", ".out", ".synctex.gz", ".bbl", ".blg"):
+                ".aux", ".log", ".out", ".synctex.gz", ".bbl", ".blg"):
             copia(path, destino / path.relative_to(ROOT))
 
     (destino / "README.md").write_text(
