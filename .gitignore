@@ -8,5 +8,10 @@ publish/
 paper/draft/*.aux
 paper/draft/*.log
 paper/draft/*.out
-paper/draft/*.pdf
 paper/draft/*.synctex.gz
+paper/draft/*.bbl
+paper/draft/*.blg
+# NOTA: `paper/draft/*.pdf` NÃO entra aqui de propósito. No repositório de
+# trabalho o PDF é lixo de build e é ignorado; aqui ele é o artefato que a
+# pessoa vem buscar. Quando estava listado, o `git add -A` descartava o PDF em
+# silêncio e o link do README apontava para um arquivo inexistente.
