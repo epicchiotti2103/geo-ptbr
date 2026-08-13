@@ -118,7 +118,10 @@ KNOWN_TABLES = {
         "denominator is never reduced to the measurable subset. Disagreements "
         "are further split into \\emph{inversion} (opposite signs) and "
         "\\emph{attenuation} (effect present on one engine, null on another), "
-        "since the two support different claims."
+        "since the two support different claims. The per-engine significance "
+        "columns are uncorrected bootstrap intervals; under Holm correction "
+        "the only inversion with both arms surviving is Fluency Optimization "
+        "(\\S\\ref{sec:results-crossengine})."
     ),
     "comprimento_transformacao": (
         "Length change of the transformed source per technique (median over "
@@ -363,7 +366,8 @@ _LABEL_VALOR = {
     # Rótulos da correção de multiplicidade. Sem estas entradas o valor sai em
     # português e longo ("não primário (exploratório)"), estourando a margem da
     # longtable — que não tem \resizebox para absorver.
-    "não (Holm)": "no", "não primário (exploratório)": "expl.",
+    "não (Holm)": "no", "não (BH)": "no",
+    "não primário (exploratório)": "expl.",
     # Valores de dado que o pipeline escreve em português. O paper é em inglês;
     # deixá-los crus fazia a tabela alternar de idioma célula a célula. As
     # CHAVES do .csv seguem em português — o dado publicado não muda de nome

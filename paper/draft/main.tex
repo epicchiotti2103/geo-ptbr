@@ -103,8 +103,9 @@ engine, $-6.9\%$ on another, both arms surviving. The most reactive engine
 responds $5$--$17\times$ more strongly than the least. Against the
 original English results, five of nine directions replicate but the level
 does not: its top techniques gain $+27$ to $+41\%$; our largest positive
-effect is $+2.6\%$. Rank correlations do not reach significance under an
-exact permutation test, so we claim no transfer of technique ordering.
+effect is $+2.6\%$. Rank correlations of technique ordering, under the
+primary (median) estimator, do not reach significance in an exact
+permutation test, so we claim no transfer of ordering.
 Five of nine techniques induce citation of sources that cannot answer the
 query --- a safety failure, not an optimization. Sources are
 model-generated texts, not live web pages; dataset, traces and code are
@@ -302,8 +303,9 @@ one engine to the next, the case for automatically learning or evolving
 engine-specific strategies would be considerably weaker. We measure that
 premise rather than assume it: the nine techniques of
 \citet{aggarwal2024geo}, applied unchanged to identical sources and queries,
-agree in direction across three engines for only four of nine, and one
-technique inverts sign with confidence intervals excluding zero on all three
+agree in direction across three engines for only four of nine, and the
+mildest technique in the catalogue inverts sign between two engines with
+both arms surviving multiplicity correction
 (\S\ref{sec:results-crossengine}). Our study and this line of work are
 complementary --- they propose adaptive methods, we quantify the
 non-transferability that motivates them --- and we make no claim about the
@@ -325,8 +327,8 @@ that claim. The survey finds cross-platform stability undemonstrated in the
 literature for discoverability; we measure the instability itself at the
 citation step, where the causal effect is granted, under controlled
 conditions: identical queries, identical optimized sources, three engines,
-and the same technique inverting sign with confidence intervals excluding
-zero on all three (\S\ref{sec:results-crossengine}). We also extend it along
+and the same technique inverting sign between two engines with both arms
+surviving multiplicity correction (\S\ref{sec:results-crossengine}). We also extend it along
 an axis the reviewed corpus does not cover, since that corpus is
 overwhelmingly English-language.
 
@@ -594,7 +596,8 @@ confidence interval crossing zero when degenerate queries are pooled in ---
 that is, as no effect --- and as $-4.4\%$ with the interval excluding zero
 once they are separated. The pooled figure is not a different estimate of
 the same quantity; it is a different quantity, and reporting it as the
-effect of the technique would have reversed the paper's central finding.
+effect of the technique would have turned a distinguishable negative arm
+into an apparent absence of effect.
 
 \paragraph{Fair-comparison rule.} The original paper reports visibility on
 an arbitrary, per-study normalized scale (its own baseline is
@@ -957,7 +960,7 @@ that the optimized source is cited a little less. It is that the source
 \emph{stops being cited at all}. Among queries whose target source was cited
 in the baseline, Unique Words removes it entirely from $26.1\%$ of answers on
 haiku and $20.6\%$ on luna, and Statistics Addition removes it from $42.3\%$
-of answers on luna. On gemini the same figure never exceeds $0.2\%$ for any
+of answers on luna. On gemini the same figure never reaches $0.3\%$ for any
 technique: that engine essentially never drops a source it had already
 cited, whatever is done to the text.
 
@@ -977,10 +980,11 @@ engines rank the techniques alike --- no pair does so distinguishably from
 chance. Neither is it evidence that they rank them differently: failing to
 reject the null is not accepting it, and nine points cannot settle the
 question in either direction. The claim of this section rests on the
-per-technique effects and their confidence intervals
-(Table~\ref{tab:concordancia_engines}), where the inversion of Technical
-Terms \emph{is} supported on all three engines, not on the rank
-correlations, which we report for completeness and lean on for nothing.
+per-technique effects under correction
+(Table~\ref{tab:concordancia_engines}): direction agreement on only four of
+nine, and the Fluency Optimization inversion with both arms surviving Holm
+--- not on the rank correlations, which we report for completeness and lean
+on for nothing.
 
 \subsection{Breakdown by sector}
 \label{sec:results-sector}
@@ -1007,7 +1011,8 @@ distinguishable from zero in any of the three sectors, health included.
 Only one effect is stable across all three sectors, and it is a penalty:
 Keyword Stuffing is negative and distinguishable everywhere, and it is
 weakest precisely in health ($-5.9\%$, versus $-10.9\%$ legal and $-11.1\%$
-real estate). Technical Terms, the best technique overall on this engine, is
+real estate). Technical Terms, the technique with the largest median gain on
+this engine, is
 positive and distinguishable in health and real estate but not in legal
 ($+1.1\%$, CI crossing zero) --- a reminder that a single headline number
 per technique conceals sector-level variation of the same order as the
@@ -1090,7 +1095,11 @@ mean here would be selecting the estimator by its result. We therefore make
 no claim that the technique ordering transfers from English to PT-BR: at
 $n=9$ this study is simply underpowered to establish it either way, and any
 future replication comparing technique rankings should treat nine points as
-a descriptive summary, not a test.
+a descriptive summary, not a test. A further reason for caution is specific
+to ordering claims: how much a technique changes the source's length
+rank-predicts its effect (\S\ref{sec:results-length}), so any per-technique
+ordering here is partly an ordering by a mechanical property of the
+rewrite.
 
 What the data \emph{does} support is a claim about level rather than order,
 and it does not depend on the correlation at all. The original reports its
@@ -1423,8 +1432,11 @@ not as an afterthought.
   random: they formed one contiguous block of query identifiers, because
   the failure was a single budget event rather than scattered timeouts.
   The consequence is not hypothetical: at the incomplete $n$, one
-  technique's confidence interval crossed zero, and it became significant
-  on both affected engines once the missing cells were recovered. We
+  technique's uncorrected confidence interval crossed zero, and it excluded
+  zero on both affected engines once the missing cells were recovered ---
+  the same two arms that Holm later attenuates
+  (\S\ref{sec:results-crossengine}); the point is how far the missing block
+  moved the estimate, not the arms' final status. We
   therefore treat completeness as a \emph{per-cell} property --- baseline
   plus all nine techniques, each with all repetitions present --- verified
   before any analysis, and never infer completeness from output-file
@@ -1576,10 +1588,10 @@ Against the original English study, five of nine effect directions match,
 but the level does not: where the original reports its best techniques at
 $+27$ to $+41\%$, our largest positive effect on any engine is $+2.6\%$, and
 the largest effect anywhere in the study is a penalty of $-81.5\%$. We do
-not claim the technique \emph{ordering} transfers --- with nine techniques,
-an exact permutation test leaves the rank correlations indistinguishable
-from chance, in this study and, by the same arithmetic, in any study that
-compares GEO techniques by rank at this $n$. Sector
+not claim the technique \emph{ordering} transfers --- under the primary
+(median) estimator, an exact permutation test leaves the rank correlations
+indistinguishable from chance, and at $n = 9$ this study is underpowered to
+settle ordering either way (\S\ref{sec:results-comparison}). Sector
 behavior compounds this --- health, the YMYL sector, is the least responsive
 of the three, and the only effect stable across all sectors is the harm done
 by Keyword Stuffing.
@@ -1653,7 +1665,7 @@ whose headline is instability: if the effect depends on the engine and we
 tested one tier of three engines, what is anyone supposed to do with it? The
 honest answer is short, and it is a result rather than a shrug. First: do
 not port an optimization from one engine to another without measuring it on
-the second, because in this benchmark four of nine techniques changed sign
+the second, because in this benchmark five of nine techniques changed sign
 or lost their effect across engines, and the mildest technique in the
 catalogue inverted. Second: the techniques that transferred are the ones
 that \emph{hurt}, so the safest use of a fixed catalogue is as a list of

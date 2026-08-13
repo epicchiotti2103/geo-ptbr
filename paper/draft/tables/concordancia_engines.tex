@@ -3,7 +3,7 @@
 % source experiment version (versao_experimento): 0.3.0
 % model_version(s) in traces: claude-haiku-4-5-20251001, gemini-3.5-flash-lite, gpt-5.6-luna
 % data aggregated (UTC, from results/concordancia_engines.csv header): 2026-08-13T13:06:34.981266+00:00
-% this .tex file generated (UTC): 2026-08-13T13:08:59.264748+00:00
+% this .tex file generated (UTC): 2026-08-13T23:56:28.478339+00:00
 
 \begin{table}[htbp]
 \centering
@@ -52,6 +52,6 @@ baseline\_pos & wc & keyword\_stuffing & -8.575 & -30.58 & -43.84 & yes ($-$) & 
 \bottomrule
 \end{tabular}%
 }
-\caption{Direction-of-effect agreement across engines, per technique: the sign of the median relative improvement on each engine and whether all engines agree. The denominator is all nine techniques of the study and an indeterminate result counts as non-agreement --- the denominator is never reduced to the measurable subset. Disagreements are further split into \emph{inversion} (opposite signs) and \emph{attenuation} (effect present on one engine, null on another), since the two support different claims. \textbf{Paper view:} 13 of 18 columns shown. The complete table is released in \texttt{results/concordancia\_engines.csv}.}
+\caption{Direction-of-effect agreement across engines, per technique: the sign of the median relative improvement on each engine and whether all engines agree. The denominator is all nine techniques of the study and an indeterminate result counts as non-agreement --- the denominator is never reduced to the measurable subset. Disagreements are further split into \emph{inversion} (opposite signs) and \emph{attenuation} (effect present on one engine, null on another), since the two support different claims. The per-engine significance columns are uncorrected bootstrap intervals; under Holm correction the only inversion with both arms surviving is Fluency Optimization (\S\ref{sec:results-crossengine}). \textbf{Paper view:} 13 of 18 columns shown. The complete table is released in \texttt{results/concordancia\_engines.csv}.}
 \label{tab:concordancia_engines}
 \end{table}
