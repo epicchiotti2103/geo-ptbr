@@ -1,5 +1,7 @@
 # GEO-PTBR
 
+[![DOI](https://zenodo.org/badge/1332338644.svg)](https://doi.org/10.5281/zenodo.21936791)
+
 **The first Brazilian-Portuguese replication of Generative Engine Optimization
 (GEO) --- and a measurement of how far its effects transfer between engines.**
 
@@ -8,6 +10,7 @@ Engine Optimization and the Engine-Dependence of Its Effects*.
 
 - 📊 **Dataset:** https://huggingface.co/datasets/epicchi2103/geo-ptbr (CC BY 4.0)
 - 📄 **Paper:** [`paper/draft/main.pdf`](paper/draft/main.pdf) --- compiled, 47 pages (body to p. 26, complete-tables appendix from p. 27). Source: `paper/draft/main.tex`, build instructions below
+- 🗄️ **Archived release (v1.0.0):** https://doi.org/10.5281/zenodo.21936792
 - Experiment version: `0.3.0`
 
 ## What this measures
@@ -136,6 +139,7 @@ listing what changed).
   title  = {GEO-PTBR: A Brazilian-Portuguese Replication of Generative Engine
             Optimization and the Engine-Dependence of Its Effects},
   year   = {2026},
+  doi    = {10.5281/zenodo.21936792},
 }
 ```
 

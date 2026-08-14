@@ -370,6 +370,7 @@ Read these before using the dataset:
   title  = {{GEO-PTBR: A Brazilian-Portuguese Replication of Generative Engine
             Optimization and the Engine-Dependence of Its Effects}},
   year   = {{2026}},
+  doi    = {{{DOI_VERSAO}}},
   note   = {{Dataset and code: AEO BR, Caracol Media --- https://aeobr.com.br}},
 }}
 ```
@@ -399,6 +400,8 @@ def _copiavel(path):
 def readme_github(n_queries, n_sources, versao, namespace):
     return f"""# GEO-PTBR
 
+[![DOI]({ZENODO_BADGE})](https://doi.org/{DOI_CONCEITO})
+
 **The first Brazilian-Portuguese replication of Generative Engine Optimization
 (GEO) --- and a measurement of how far its effects transfer between engines.**
 
@@ -407,6 +410,7 @@ Engine Optimization and the Engine-Dependence of Its Effects*.
 
 - 📊 **Dataset:** https://huggingface.co/datasets/{namespace}/geo-ptbr (CC BY 4.0)
 - 📄 **Paper:** [`paper/draft/main.pdf`](paper/draft/main.pdf) --- compiled, 47 pages (body to p. 26, complete-tables appendix from p. 27). Source: `paper/draft/main.tex`, build instructions below
+- 🗄️ **Archived release (v{VERSAO_RELEASE}):** https://doi.org/{DOI_VERSAO}
 - Experiment version: `{versao or 'n/d'}`
 
 ## What this measures
@@ -535,6 +539,7 @@ listing what changed).
   title  = {{GEO-PTBR: A Brazilian-Portuguese Replication of Generative Engine
             Optimization and the Engine-Dependence of Its Effects}},
   year   = {{2026}},
+  doi    = {{{DOI_VERSAO}}},
 }}
 ```
 
@@ -593,6 +598,14 @@ paper/draft/*.blg
 # tivesse mudado. Bump manual, junto da tag.
 DATA_RELEASE = "2026-08-13"
 
+# DOIs cunhados pelo Zenodo em 2026-08-14, a partir do release v1.0.0 do
+# GitHub. O CONCEITO resolve sempre para a versão mais recente e é o alvo do
+# badge (recomendação do Zenodo); o de VERSÃO identifica o arquivo congelado
+# do v1.0.0 e é o que entra em citação e no campo Comments do arXiv.
+DOI_CONCEITO = "10.5281/zenodo.21936791"
+DOI_VERSAO = "10.5281/zenodo.21936792"
+ZENODO_BADGE = "https://zenodo.org/badge/1332338644.svg"
+
 # Versão CITÁVEL, que o Zenodo grava no DOI. Deliberadamente SEPARADA de
 # `versao_experimento` (que segue em 0.3.0): aquela marca o desenho do estudo e
 # sobe quando o pipeline muda; esta marca o que foi publicado e sobe junto da
@@ -631,6 +644,7 @@ authors:
     orcid: "https://orcid.org/0009-0006-3058-4096"
 version: "{VERSAO_RELEASE}"
 date-released: "{DATA_RELEASE}"
+doi: "{DOI_VERSAO}"
 license:
   - MIT
   - CC-BY-4.0
