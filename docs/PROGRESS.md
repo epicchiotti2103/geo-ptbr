@@ -5,6 +5,71 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-13 (cont. 12) — revisão externa nº 8: o .tex tinha a mesma doença do README
+
+Registro do orquestrador. A pedido do Du, um agente revisor (Opus) leu o paper
+inteiro e conferiu ~60 números do corpo contra `results/` — **todos batem**.
+Veredito: "não pronto — 5 bloqueadores", todos de REDAÇÃO, nenhum de dado. Era
+a mesma falha da cont. 11, só que dentro do `main.tex`: afirmações pré-Holm
+que a retratação da cont. 9 não varreu.
+
+### Os 5 bloqueadores (corrigidos)
+
+1. **§5.2, parágrafo de rank agreement**: "the inversion of Technical Terms
+   *is* supported on all three engines" — contradizia o parágrafo 80 linhas
+   acima, no mesmo §5.2, que retrata exatamente isso. Agora aponta os quatro
+   de nove que concordam e a inversão da Fluency sob Holm.
+2. **Related Work, 2 ocorrências**: "inverts sign with confidence intervals
+   excluding zero on all three" — pré-Holm. Agora: "between two engines with
+   both arms surviving multiplicity correction". (Trocar só o nome da técnica
+   não bastava: a fluency tem DUAS pernas significativas, gemini indeterminado.)
+3. **Limitations, item da coleta em batch**: "became significant on both
+   affected engines" — qualificado como leitura não corrigida, com nota de que
+   Holm depois atenua esses braços e ponteiro para o §5.2.
+4. **Conclusão**: "four of nine techniques changed sign or lost their effect"
+   — quatro é o número que CONCORDA; o que discorda é cinco (conferido no
+   `concordancia_engines.csv`, baseline_pos/pwc: sim=4, não=5). → five.
+5. **Conclusão**: "by the same arithmetic, in any study that compares GEO
+   techniques by rank at this n" — universal falso: o próprio paper tem ρ
+   significativos a n=9 (média p=0,014; comprimento §5.7). Escopado ao
+   estimador primário deste estudo.
+
+### Ressalvas menores também aplicadas
+
+- Abstract: "Rank correlations do not reach significance" qualificado como
+  "of technique ordering, under the primary (median) estimator" — sem isso é
+  a fusão das duas famílias de ρ contra a qual o CLAUDE.md avisa.
+  **1.895/1.920 caracteres** — margem de 25; qualquer acréscimo futuro mede.
+- §5.6 agora cita o confundidor de comprimento (§5.7) junto da discussão de
+  ordenação — era citado uma única vez no paper todo, em Limitations.
+- §5.3: "the best technique overall on this engine" → "the technique with the
+  largest median gain on this engine".
+- §5.2: "never exceeds 0.2%" era literalmente falso (máx real 0,2488%) →
+  "never reaches 0.3%".
+- §3.5: "would have reversed the paper's central finding" — superlativo que a
+  correção de Holm desatualizou (essa perna não é mais o achado central) →
+  "would have turned a distinguishable negative arm into an apparent absence
+  of effect".
+- `csv_to_latex.py`: faltava `"não (BH)": "no"` no `_LABEL_VALOR` — a coluna
+  BH saía em português na tabela principal (25 "não" no PDF). E a caption da
+  `concordancia_engines` agora diz que as colunas de significância são não
+  corrigidas e aponta a leitura pós-Holm (a tabela mostrava `sig. all = yes`
+  para technical_terms sem aviso).
+
+### Estado após as correções
+
+PDF recompilado: **47 páginas, 0 TODO**. `build_arxiv.py` re-rodado: clean-room
+OK, 47 páginas, 0 TODO, 0 citação órfã, texto idêntico à referência.
+`build_publish.py` re-rodado (o README gerado já estava pós-Holm e correto —
+não precisou de mudança de conteúdo); commit no `publish/github` por cima do
+da cont. 11 — **dois commits locais sem push** agora. Push, release e
+submissão seguem com o Du.
+
+O agente também validou: tratamento estatístico, §5.6 (recusa de trocar de
+estimador), §5.7 e Limitations como pontos fortes do paper.
+
+---
+
 ## Sessão 2026-08-13 (cont. 11) — pacote do arXiv, e um erro no README público
 
 Registro do orquestrador. Nada de coleta nem de análise mudou; o que mudou foi
