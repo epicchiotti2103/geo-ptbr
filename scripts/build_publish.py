@@ -710,7 +710,9 @@ def zenodo_json(namespace, gh_namespace):
             f"Canonical dataset copy: "
             f"https://huggingface.co/datasets/{namespace}/geo-ptbr — "
             f"source repository: "
-            f"https://github.com/{gh_namespace}/geo-ptbr</p>"),
+            f"https://github.com/{gh_namespace}/geo-ptbr</p>"
+            "<p>Produced by <a href=\"https://www.aeobr.com.br\">AEO BR, "
+            "Caracol Media</a> (Brazil).</p>"),
         "creators": [{
             "name": "Picchiotti, Elio Suraci",
             "affiliation": "AEO BR, Caracol Media",
