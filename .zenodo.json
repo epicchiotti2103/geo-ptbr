@@ -1,0 +1,23 @@
+{
+  "upload_type": "dataset",
+  "title": "GEO-PTBR: a Brazilian-Portuguese replication of Generative Engine Optimization",
+  "description": "<p>Replication of the nine GEO content-side optimization techniques (Aggarwal et al., arXiv:2311.09735) on a 525-query Brazilian-Portuguese benchmark, measured across three generative engines. Includes the benchmark, the measurement pipeline, the compiled paper, and the per-engine and cross-engine results with bootstrap confidence intervals.</p><p>Code is MIT-licensed; data and paper are CC BY 4.0. Canonical dataset copy: https://huggingface.co/datasets/epicchi2103/geo-ptbr — source repository: https://github.com/epicchiotti2103/geo-ptbr</p>",
+  "creators": [
+    {
+      "name": "Picchiotti, Elio Suraci",
+      "affiliation": "AEO BR, Caracol Media",
+      "orcid": "0009-0006-3058-4096"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "version": "1.0.0",
+  "publication_date": "2026-08-13",
+  "keywords": [
+    "generative engine optimization",
+    "GEO",
+    "Brazilian Portuguese",
+    "information retrieval",
+    "LLM evaluation",
+    "replication study"
+  ]
+}

@@ -664,6 +664,55 @@ references:
 """
 
 
+def zenodo_json(namespace, gh_namespace):
+    """.zenodo.json — metadados que o Zenodo usa com PRECEDÊNCIA sobre o CFF.
+
+    Existe porque o parser de CITATION.cff do Zenodo é pré-1.2.0 (o exemplo
+    na UI deles diz `cff-version: 1.1.0`) e engasga em recursos 1.2.0 que o
+    nosso CFF usa — `license` em lista e `type: dataset`. Medido em
+    2026-08-14: o release v1.0.0 falhou no Zenodo com "Citation metadata
+    load failed", com o CFF validando limpo no cffconvert oficial. O CFF
+    fica como está (o GitHub o lê certo no "Cite this repository"); este
+    arquivo é o que o Zenodo consome.
+
+    Mantido MÍNIMO de propósito — cada campo extra é uma chance de rejeição
+    por um formato que o depósito legado não aceita. O detalhe das duas
+    licenças (MIT código, CC BY 4.0 dados) vai na descrição; o campo
+    `license` do depósito é um só e aponta a do dataset, que é o tipo do
+    depósito.
+    """
+    dados = {
+        "upload_type": "dataset",
+        "title": ("GEO-PTBR: a Brazilian-Portuguese replication of "
+                  "Generative Engine Optimization"),
+        "description": (
+            "<p>Replication of the nine GEO content-side optimization "
+            "techniques (Aggarwal et al., arXiv:2311.09735) on a 525-query "
+            "Brazilian-Portuguese benchmark, measured across three "
+            "generative engines. Includes the benchmark, the measurement "
+            "pipeline, the compiled paper, and the per-engine and "
+            "cross-engine results with bootstrap confidence intervals.</p>"
+            f"<p>Code is MIT-licensed; data and paper are CC BY 4.0. "
+            f"Canonical dataset copy: "
+            f"https://huggingface.co/datasets/{namespace}/geo-ptbr — "
+            f"source repository: "
+            f"https://github.com/{gh_namespace}/geo-ptbr</p>"),
+        "creators": [{
+            "name": "Picchiotti, Elio Suraci",
+            "affiliation": "AEO BR, Caracol Media",
+            "orcid": "0009-0006-3058-4096",
+        }],
+        "license": "cc-by-4.0",
+        "version": VERSAO_RELEASE,
+        "publication_date": DATA_RELEASE,
+        "keywords": [
+            "generative engine optimization", "GEO", "Brazilian Portuguese",
+            "information retrieval", "LLM evaluation", "replication study",
+        ],
+    }
+    return json.dumps(dados, ensure_ascii=False, indent=2) + "\n"
+
+
 def build_github(destino, n_queries, n_sources, versao, namespace,
                  gh_namespace):
     destino.mkdir(parents=True, exist_ok=True)
@@ -702,6 +751,8 @@ def build_github(destino, n_queries, n_sources, versao, namespace,
     (destino / "LICENSE").write_text(LICENSE_MIT, encoding="utf-8")
     (destino / "CITATION.cff").write_text(
         citation_cff(versao, namespace, gh_namespace), encoding="utf-8")
+    (destino / ".zenodo.json").write_text(
+        zenodo_json(namespace, gh_namespace), encoding="utf-8")
     (destino / ".gitignore").write_text(GITIGNORE, encoding="utf-8")
 
     # `.git` fica de fora da contagem: é o histórico local preservado entre
