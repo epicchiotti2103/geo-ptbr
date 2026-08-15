@@ -5,6 +5,106 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-14 (cont. 13) — DOI cunhado, página no site, endorsement pedido
+
+Registro do orquestrador. O dia em que o projeto saiu do disco e virou coisa
+pública com identificador permanente.
+
+### Zenodo: falhou, foi consertado, cunhou
+
+1. Du criou o release v1.0.0 → Zenodo **falhou** com "Citation metadata load
+   failed". Causa: o parser de CFF do Zenodo é pré-1.2.0 (a UI deles exibe
+   exemplo `cff-version: 1.1.0`) e engasga em `license` em lista e
+   `type: dataset` — com o CITATION.cff validando limpo no cffconvert 1.2.0.
+2. Correção no GERADOR: `build_publish.py` agora emite **`.zenodo.json`**
+   (o Zenodo o lê com precedência sobre o CFF). Mínimo de propósito; licença
+   única `cc-by-4.0` (a do dataset); MIT citado na descrição.
+3. Du apagou e recriou o release → **publicado**. DOIs:
+   - **10.5281/zenodo.21936792** (versão v1.0.0 — citação, Comments do arXiv)
+   - **10.5281/zenodo.21936791** (conceito — alvo do badge, resolve p/ latest)
+4. DOI propagado via gerador: badge no README do GitHub, `doi:` no
+   CITATION.cff, `doi` nos dois BibTeX, card do HF, placeholder do
+   `docs/submissao.md` preenchido. GitHub e HF republicados.
+5. Backlink: descrição do registro editada pelo Du na UI (não muda DOI) com
+   "Produced by AEO BR, Caracol Media (Brazil): https://www.aeobr.com.br" —
+   confirmado por curl como **anchor `<a href>` SEM nofollow**, e presente
+   também no og:description e no JSON-LD de Dataset que o Zenodo serve.
+
+### Ajustes no paper (recompilado, clean-room revalidado)
+
+- Bloco de título: e-mail e ORCID saíram do `\texttt` gigante (\normalsize,
+  ORCID em romana com link) — apontado pelo Du no PDF.
+- `\date`: August 12 → **August 13, 2026**, alinhada ao release/CITATION.cff.
+- 47 páginas / 0 TODO / texto idêntico à referência; tarball do arXiv refeito.
+
+### arXiv: submissão iniciada, parada no endorsement (esperado)
+
+- Formulário: CC BY 4.0, cs.IR primária (cs.CL adiciona-se no passo seguinte).
+- Tela de endorsement: código **MUZUZV** (também no e-mail do Du).
+- Pedido enviado a **Pranjal Aggarwal** (1º autor do GEO original, qualificado
+  p/ cs.IR) em pranjala@andrew.cmu.edu (endereço atual segundo o arXiv), via
+  Resend do robo prospect, id `0a7086bb-028f-4440-ad7b-5fed2b379147`,
+  entregue. Fila B se não responder em ~3-4 dias: autores do AutoGEO, do
+  agentic GEO e do survey (checar "Which of the authors can endorse?").
+- ⚠️ Feedback do Du gravado em memória: e-mails de contato NÃO levam
+  travessão (— ou --) — "fica na cara que é IA".
+
+### Página do paper no site da Caracol (aeobr.com.br)
+
+**https://www.aeobr.com.br/estudos/paper-geo-ptbr/** — no ar, com PDF
+hospedado junto (`geo-ptbr.pdf`). Conteúdo: hero definition-lead, 4 stats,
+6 achados (leitura pós-Holm, modelos nomeados), **placar 9×3** (medianas de
+`baseline_pos`/pwc do `comparacao_3_engines.csv`, cor = sobrevive a Holm),
+glossário leigo das 9 técnicas com exemplos, artefatos (PDF/DOI/GitHub/HF),
+metodologia com limitações, BibTeX, FAQ com 6 perguntas (inclui "GEO vs AEO"
+e "qual IA caiu menos") — JSON-LD de ScholarlyArticle + Dataset + WebPage +
+FAQPage validado. Card no índice de estudos, sitemap, llms.txt e llms-full.
+
+⚠️ Operacional do repo do site (`/Users/elio/projects/caracol_aeo_site`):
+o checkout é a branch **`rebrand-cinematic`** (redesign WIP do Du, não
+publicada). Os commits da página foram feitos nela e **cherry-picked para
+`origin/main`** via worktree temporário — a main remota (deploy do Pages)
+recebeu só a página; o redesign não foi tocado. Repetir esse caminho em
+edições futuras da página enquanto o rebrand não for mergeado.
+
+A hipótese temporal do Du ("técnica envelhece com modelo melhor") entrou na
+página COMO HIPÓTESE, apoiada no dado real (gemini foi o engine que menos
+respondeu às técnicas) e com o limite declarado (tier econômico; fronteira
+não testada). No LinkedIn idem: rascunho entregue SEM "modelos de fronteira"
+(seria falso) — "IAs atuais de 2026" vs "técnicas de 2023".
+
+### GEO-PTBR 2 — desenho discutido (nada autorizado ainda)
+
+Decisões conversadas com o Du:
+- **Sai o Claude** da coleta (US$ 44,66 de US$ 66,69 do estudo 1 — 2/3 do
+  custo). Dados do estudo 1 seguem citáveis como referência.
+- **Desenho 2×2**: 2 famílias × 2 tiers — gemini-3.5-flash-lite + Gemini
+  tier-alto; gpt-5.6-luna + GPT-5.6 **Terra** (flagship padrão; Sol é
+  raciocínio pesado, caro e desnecessário). Âncoras econômicas ficam: custam
+  ~US$ 18 e seguram comparabilidade + eixo de tier (a hipótese do Du).
+- **Técnicas**: 7 novas (definition-lead, answer-first/FAQ, parágrafos
+  autossuficientes, frases citáveis, referências verificáveis, sinal de
+  atualidade, clareza de entidade) + 2 âncoras (fluency, keyword_stuffing).
+- **Guardas**: comprimento controlado (±2% — mata o confundidor do §5.7),
+  batch nos 4 braços, piloto de custo de 1 chunk antes da coleta cheia,
+  enquadramento APLICADO (2 engines dominantes; estudo 1 provou que 2 famílias
+  não licenciam claim de transferibilidade — citar).
+- **Custo com preços reais de 2026-08** (tokens medidos do estudo 1: ~42,5M
+  in + ~5M out por braço; Terra/3.1 Pro = $2/$12, batch −50%): total
+  **~US$ 160-170**; teto proposto **US$ 180**. Variante enxuta (5 técnicas
+  novas): ~US$ 130. Du achou 250 caro; 180 aguarda o ok dele.
+- **Timing**: Gemini 3.5 Pro ainda "coming soon" — se sair enquanto o arXiv
+  não destrava, o par de família fica perfeito (3.5-flash-lite vs 3.5-pro).
+  Ordem combinada: fechar o arXiv do estudo 1 antes de abrir a coleta do 2.
+
+**Próxima sessão**: (a) se o endorsement chegou → submeter arXiv
+(docs/submissao.md §2, tudo pronto) e adicionar o link do preprint na página
+do site + CITATION.cff (`preferred-citation`); (b) se Du aprovar o teto →
+escrever TASK.md do GEO-PTBR 2; (c) LinkedIn/X: rascunhos entregues, postagem
+é do Du.
+
+---
+
 ## Sessão 2026-08-13 (cont. 12) — revisão externa nº 8: o .tex tinha a mesma doença do README
 
 Registro do orquestrador. A pedido do Du, um agente revisor (Opus) leu o paper
