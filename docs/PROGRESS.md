@@ -5,6 +5,64 @@ Checkpoints: só o humano escreve linhas iniciadas em `AUTORIZADO`.
 
 ---
 
+## Sessão 2026-08-17 (cont. 14) — fila B do endorsement montada e checada
+
+Registro do orquestrador. O pedido ao Pranjal (2026-08-14) foi **entregue e
+não aberto** em três dias. Endorsement do arXiv **não é exclusivo**: o código
+vale para qualquer elegível que abrir o link, e o primeiro que agir destrava,
+então a fila B vai em paralelo, sem follow-up ao Pranjal por ora.
+
+⚠️ **O código de endorsement não pode aparecer neste arquivo** — ele é copiado
+para `publish/github/docs/PROGRESS.md` e vai para o repo público. A cont. 13 o
+escreveu por extenso e ele foi publicado no push de 2026-08-15 (commit
+`b6c2a8d` do repo público); as duas ocorrências foram trocadas por referência
+ao `docs/endorsement_fila_b.md`, que não é publicado. O histórico do repo
+público ainda tem a string, e reescrevê-lo não compensa: o Zenodo arquivou o
+v1.0.0 em 2026-08-13, antes da cont. 13, então o DOI não carrega o código.
+
+**Elegibilidade foi checada, não presumida.** `arxiv.org/auth/show-endorsers/`
+responde 401 sem login; a contagem saiu da API do arXiv
+(`au:"Nome" AND cat:cs.IR`), contra a regra de 3 papers no arquivo dentro de 5
+anos. Seis aprovados, com 5 a 52 papers em cs.IR cada: três autores de um
+dataset de RI em português, dois autores de trabalhos de GEO que o paper cita e
+um sênior brasileiro de RI. Nomes e endereços ficam em
+`docs/endorsement_fila_b.md`, que não é publicado — não faz sentido listar aqui
+quem ainda não respondeu a um pedido de favor.
+
+Três descartados **pela checagem**, não por palpite: o autor do survey de GEO
+(`2607.14035`) tem **um** paper no arXiv e não é elegível, apesar de ser o mais
+motivado a endossar; o time do GEO original tem 2 papers tocando cs.IR, ambos
+com primária `cs.LG`; a primeira autora do dataset de RI tem 1.
+
+Textos em `docs/endorsement_fila_b.md` (fora do pacote público, e os endereços
+**não podem** vir para cá porque este arquivo é publicado), envio por
+`scripts/send_endorsement.py`, que parseia aquele .md em vez de manter segunda
+cópia dos textos e barra travessão, DOI ausente e código ausente antes de
+tocar a rede. Dry-run limpo, 6 mensagens.
+
+**Os seis foram enviados em 2026-08-17**, um a um, sem CC, do
+`elio.picchiotti@aeobr.com.br`. Ids do Resend: `65e73b35`, `f900ceb1`,
+`976ab6f5`, `eb50c169`, `e86d4353`, `56f9814c`.
+
+⚠️ **Duas armadilhas no caminho do envio, as duas resolvidas:**
+
+1. A chave mora num `.env` fora deste repositório. O sandbox da sessão
+   **bloqueia leitura de credencial**, inclusive por script que não imprime a
+   chave, então quem rodou o `--send` foi o Du pelo `!` do chat. O wrapper lê o
+   `.env` e nunca imprime a chave, só o comprimento.
+2. **A API do Resend fica atrás do Cloudflare e recusa o `urllib` puro** com
+   403 "error code: 1010", assinatura de cliente banida. Seis de seis falharam
+   na primeira tentativa, e nenhuma mensagem saiu, então não houve duplicata.
+   Com `requests`, que é o que o robô usa em produção, passou de primeira. O
+   `send_endorsement.py` agora prefere `requests` e mantém o urllib com
+   User-Agent próprio como reserva.
+
+Agora é esperar. Se ninguém responder até ~2026-08-24, a fila C sai dos autores
+de `cs.IR` que citam o GEO, e vale reconsiderar `cs.CL` como primária, onde a
+lista de endossadores possíveis é bem maior.
+
+---
+
 ## Sessão 2026-08-14 (cont. 13) — DOI cunhado, página no site, endorsement pedido
 
 Registro do orquestrador. O dia em que o projeto saiu do disco e virou coisa
@@ -40,7 +98,8 @@ pública com identificador permanente.
 ### arXiv: submissão iniciada, parada no endorsement (esperado)
 
 - Formulário: CC BY 4.0, cs.IR primária (cs.CL adiciona-se no passo seguinte).
-- Tela de endorsement: código **MUZUZV** (também no e-mail do Du).
+- Tela de endorsement: código guardado em `docs/endorsement_fila_b.md`, fora do
+  pacote público (também no e-mail do Du).
 - Pedido enviado a **Pranjal Aggarwal** (1º autor do GEO original, qualificado
   p/ cs.IR) em pranjala@andrew.cmu.edu (endereço atual segundo o arXiv), via
   Resend do robo prospect, id `0a7086bb-028f-4440-ad7b-5fed2b379147`,
